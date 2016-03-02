@@ -1,0 +1,15 @@
+{
+    "name": "expandonline/klipfolio-api-php",
+    "description": "Integrate Klipfolio with your PHP project with this easy library!",
+    "type": "library",
+    "license": "GNU",
+    "authors": [
+        {
+            "name": "Peter Vaassens",
+            "email": "pvaassens@expandonline.nl"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "~6.0"
+    }
+}
