@@ -3,7 +3,9 @@
 namespace ExpandOnline\KlipfolioApi\Object;
 
 use ExpandOnline\KlipfolioApi\Client;
+use ExpandOnline\KlipfolioApi\Exceptions\NotYetImplementedException;
 use ExpandOnline\KlipfolioApi\Request;
+use ExpandOnline\KlipfolioApi\Exceptions\KlipfolioApiException;
 
 /**
  * Class AbstractCrudObject
@@ -12,6 +14,9 @@ use ExpandOnline\KlipfolioApi\Request;
 abstract class AbstractCrudObject extends AbstractObject
 {
 
+    /**
+     * The name of the ID field of this CRUD object
+     */
     const FIELD_ID = 'id';
 
     /**
@@ -24,7 +29,7 @@ abstract class AbstractCrudObject extends AbstractObject
      * @param null $id
      * @param Client|null $client
      */
-    public function __construct($id = null, Client $client = null)
+    public function __construct($id = null, Client $client)
     {
         parent::__construct();
         $this->_data[static::FIELD_ID] = $id;
@@ -41,17 +46,9 @@ abstract class AbstractCrudObject extends AbstractObject
 
 
     /**
-     * @param Client $client The Client instance this object should use to make calls
-     */
-    public function setClient(Client $client)
-    {
-        $this->client = $client;
-    }
-
-    /**
      * @return Client
      */
-    public function getClient()
+    protected function getClient()
     {
         return $this->client;
     }
@@ -70,21 +67,14 @@ abstract class AbstractCrudObject extends AbstractObject
      */
     public function create(array $params = array())
     {
+        throw new NotYetImplementedException();
+
         if ($this->_data[static::FIELD_ID]) {
-            throw new \Exception("Can't create object that already exists");
+            throw new KlipfolioApiException("Can't create object that already exists");
         }
 
-        $request = ''; // TODO: Request voor shit posten
-
-        $response = $this->getClient()->sendRequest(new Request(
-            $path = $this->getEndpoint(),
-            $method = 'POST'
-        ));
-
         $data = $response->getContent();
-
-
-        $id = is_string($data) ? $data : $data[static::FIELD_ID];
+        $id = $data[static::FIELD_ID];
         $this->_data[static::FIELD_ID] = $id;
 
         return $this;
@@ -121,6 +111,8 @@ abstract class AbstractCrudObject extends AbstractObject
      */
     public function update(array $params = array())
     {
+        throw new NotYetImplementedException();
+
         $response = $this->getClient()->sendRequest(new Request(
             $path = $this->getEndpoint() . '/' . $this->_data[static::FIELD_ID],
             $method = 'GET'
@@ -136,6 +128,8 @@ abstract class AbstractCrudObject extends AbstractObject
      */
     public function delete(array $params = array())
     {
+        throw new NotYetImplementedException();
+
         $response = $this->getClient()->sendRequest(new Request(
             $path = $this->getEndpoint() . '/' . $this->_data[static::FIELD_ID],
             $method = 'GET'

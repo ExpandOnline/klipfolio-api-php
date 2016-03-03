@@ -53,7 +53,7 @@ abstract class AbstractObject
      */
     public function __isset($name)
     {
-        return array_key_exists($name, $this->data);
+        return array_key_exists($name, $this->_data);
     }
 
     /**
@@ -74,13 +74,5 @@ abstract class AbstractObject
     public function getData()
     {
         return $this->_data;
-    }
-
-    /**
-     * @return string
-     */
-    public static function className()
-    {
-        return get_called_class();
     }
 }
