@@ -32,7 +32,7 @@ abstract class AbstractCrudObject extends AbstractObject
     public function __construct($id = null, Client $client)
     {
         parent::__construct();
-        $this->_data[static::FIELD_ID] = $id;
+        $this->data[static::FIELD_ID] = $id;
         $this->client = $client;
     }
 
@@ -41,7 +41,7 @@ abstract class AbstractCrudObject extends AbstractObject
      */
     public function setId($id)
     {
-        $this->_data[static::FIELD_ID] = $id;
+        $this->data[static::FIELD_ID] = $id;
     }
 
 
@@ -69,13 +69,13 @@ abstract class AbstractCrudObject extends AbstractObject
     {
         throw new NotYetImplementedException();
 
-        if ($this->_data[static::FIELD_ID]) {
+        if ($this->data[static::FIELD_ID]) {
             throw new KlipfolioApiException("Can't create object that already exists");
         }
 
         $data = $response->getContent();
         $id = $data[static::FIELD_ID];
-        $this->_data[static::FIELD_ID] = $id;
+        $this->data[static::FIELD_ID] = $id;
 
         return $this;
     }
@@ -92,7 +92,7 @@ abstract class AbstractCrudObject extends AbstractObject
     {
 
         $response = $this->getClient()->sendRequest(new Request(
-            $path = $this->getEndpoint() . '/' . $this->_data[static::FIELD_ID],
+            $path = $this->getEndpoint() . '/' . $this->data[static::FIELD_ID],
             $method = 'GET'
         ));
 
@@ -114,7 +114,7 @@ abstract class AbstractCrudObject extends AbstractObject
         throw new NotYetImplementedException();
 
         $response = $this->getClient()->sendRequest(new Request(
-            $path = $this->getEndpoint() . '/' . $this->_data[static::FIELD_ID],
+            $path = $this->getEndpoint() . '/' . $this->data[static::FIELD_ID],
             $method = 'GET'
         )); // TODO: Request voor shit updaten
         return $this;
@@ -131,7 +131,7 @@ abstract class AbstractCrudObject extends AbstractObject
         throw new NotYetImplementedException();
 
         $response = $this->getClient()->sendRequest(new Request(
-            $path = $this->getEndpoint() . '/' . $this->_data[static::FIELD_ID],
+            $path = $this->getEndpoint() . '/' . $this->data[static::FIELD_ID],
             $method = 'GET'
         )); // TODO: Request voor shit deleten
     }
@@ -147,7 +147,7 @@ abstract class AbstractCrudObject extends AbstractObject
      */
     public function save(array $params = array())
     {
-        if ($this->_data[static::FIELD_ID]) {
+        if ($this->data[static::FIELD_ID]) {
             return $this->update($params);
         } else {
             return $this->create($params);

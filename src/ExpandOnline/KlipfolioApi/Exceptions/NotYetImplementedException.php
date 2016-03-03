@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: peter
- * Date: 3-3-16
- * Time: 15:59
- */
 
 namespace ExpandOnline\KlipfolioApi\Exceptions;
 

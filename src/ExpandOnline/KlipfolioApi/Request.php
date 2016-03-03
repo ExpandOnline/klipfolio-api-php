@@ -12,15 +12,15 @@ class Request
     /**
      * @var string
      */
-    protected $_path;
+    protected $path;
     /**
      * @var string
      */
-    protected $_method;
+    protected $method;
     /**
      * @var array
      */
-    protected $_data;
+    protected $data;
 
     /**
      * Request constructor.
@@ -30,9 +30,9 @@ class Request
      */
     public function __construct($path, $method, $data = [])
     {
-        $this->_path = $path;
-        $this->_method = $method;
-        $this->_data = $data;
+        $this->path = $path;
+        $this->method = $method;
+        $this->data = $data;
     }
 
     /**
@@ -40,7 +40,7 @@ class Request
      */
     public function getPath()
     {
-        return $this->_path;
+        return $this->path;
     }
 
     /**
@@ -48,7 +48,7 @@ class Request
      */
     public function getMethod()
     {
-        return $this->_method;
+        return $this->method;
     }
 
     /**
@@ -56,7 +56,7 @@ class Request
      */
     public function getData()
     {
-        return $this->_data;
+        return $this->data;
     }
 
 

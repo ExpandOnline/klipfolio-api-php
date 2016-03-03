@@ -12,11 +12,11 @@ class Response
     /**
      * @var int
      */
-    protected $_statusCode;
+    protected $statusCode;
     /**
      * @var array
      */
-    protected $_data;
+    protected $data;
 
     /**
      * Response constructor.
@@ -25,8 +25,8 @@ class Response
      */
     public function __construct($statusCode, $body)
     {
-        $this->_statusCode = $statusCode;
-        $this->_data = json_decode($body, true)["data"];
+        $this->statusCode = $statusCode;
+        $this->data = json_decode($body, true)["data"];
     }
 
     /**
@@ -34,7 +34,7 @@ class Response
      */
     public function getStatusCode()
     {
-        return $this->_statusCode;
+        return $this->statusCode;
     }
 
     /**
@@ -43,7 +43,7 @@ class Response
     public function getContent()
     {
 
-        return $this->_data;
+        return $this->data;
     }
 
 

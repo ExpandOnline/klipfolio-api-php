@@ -15,22 +15,22 @@ class Client
     /**
      * @var string
      */
-    protected $_apiKey;
+    protected $apiKey;
 
     /**
      * @var string
      */
-    protected $_base_url = "https://app.klipfolio.com/api";
+    protected $base_url = "https://app.klipfolio.com/api";
 
     /**
      * @var int
      */
-    protected $_version = 1;
+    protected $version = 1;
 
     /**
      * @var GuzzleClient
      */
-    protected $_client;
+    protected $client;
 
 
     /**
@@ -40,8 +40,8 @@ class Client
      */
     public function __construct($apiKey, GuzzleClient $guzzleClient)
     {
-        $this->_apiKey = $apiKey;
-        $this->_client = $guzzleClient;
+        $this->apiKey = $apiKey;
+        $this->client = $guzzleClient;
     }
 
     /**
@@ -57,12 +57,12 @@ class Client
                 $request->getMethod(),
                 $url,
                 $headers = [
-                    'kf-api-key' => $this->_apiKey
+                    'kf-api-key' => $this->apiKey
                 ],
                 $request->getData()
             );
 
-            $guzzleResponse = $this->_client->send($guzzleRequest);
+            $guzzleResponse = $this->client->send($guzzleRequest);
 
             $response = new Response(
                 $guzzleResponse->getStatusCode(),
@@ -94,7 +94,7 @@ class Client
      */
     private function getUrl()
     {
-        return $this->_base_url . '/' . $this->_version . '/';
+        return $this->base_url . '/' . $this->version . '/';
     }
 
 }
