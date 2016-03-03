@@ -12,14 +12,14 @@ abstract class AbstractObject
     /**
      * @var array
      */
-    protected $_data = array();
+    protected $data = array();
 
     /**
      * @var mixed[] set of key value pairs representing data
      */
     public function __construct()
     {
-        $this->_data = [];
+        $this->data = [];
     }
 
     /**
@@ -30,8 +30,8 @@ abstract class AbstractObject
     public function __get($name)
     {
 
-        if (array_key_exists($name, $this->_data)) {
-            return $this->_data[$name];
+        if (array_key_exists($name, $this->data)) {
+            return $this->data[$name];
         } else {
             throw new \InvalidArgumentException(
                 $name . ' is not a field of ' . get_class($this));
@@ -44,7 +44,7 @@ abstract class AbstractObject
      */
     public function __set($name, $value)
     {
-        $this->_data[$name] = $value;
+        $this->data[$name] = $value;
     }
 
     /**
@@ -53,7 +53,7 @@ abstract class AbstractObject
      */
     public function __isset($name)
     {
-        return array_key_exists($name, $this->_data);
+        return array_key_exists($name, $this->data);
     }
 
     /**
@@ -73,6 +73,6 @@ abstract class AbstractObject
      */
     public function getData()
     {
-        return $this->_data;
+        return $this->data;
     }
 }
