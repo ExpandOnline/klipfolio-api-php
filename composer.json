@@ -16,6 +16,6 @@
         "phpunit/phpunit": "4.8.*"
     },
     "autoload": {
-        "psr-0": {"ExpandOnline\\": "src/"}
+        "psr-4": {"ExpandOnline\\KlipfolioApi\\": "src/"}
     }
 }
