@@ -2,7 +2,6 @@
 
 namespace ExpandOnline\KlipfolioApi;
 
-
 /**
  * Class Response
  * @package ExpandOnline\KlipfolioApi
@@ -19,6 +18,11 @@ class Response
     protected $data;
 
     /**
+     * @var array
+     */
+    protected $meta;
+
+    /**
      * Response constructor.
      * @param $statusCode
      * @param $body
@@ -26,7 +30,22 @@ class Response
     public function __construct($statusCode, $body)
     {
         $this->statusCode = $statusCode;
-        $this->data = json_decode($body, true)["data"];
+        print_r($body);
+
+        $bodyObj = json_decode($body, true);
+
+
+
+        if (array_key_exists('data', $bodyObj)) {
+            $this->data = $bodyObj["data"];
+        }
+
+        if (array_key_exists('meta', $bodyObj)) {
+            $this->meta = $bodyObj["meta"];
+
+            // Klipfolio should do this automatically but you never know
+            $this->statusCode = array_key_exists('status', $bodyObj["meta"]) ? $this->meta['status'] : $statusCode;
+        }
     }
 
     /**

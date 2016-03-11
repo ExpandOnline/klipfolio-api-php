@@ -1,7 +1,9 @@
 <?php
 
-namespace ExpandOnline\KlipfolioApi\Exceptions;
+namespace ExpandOnline\KlipfolioApi\Exception;
 
+
+use Exception;
 
 class KlipfolioApiException extends \Exception
 {
