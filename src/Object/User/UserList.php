@@ -1,8 +1,4 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Object\User;
-
+<?php namespace ExpandOnline\KlipfolioApi\Object\User;
 
 use ExpandOnline\KlipfolioApi\Object\BaseApiCollection;
 
@@ -12,7 +8,6 @@ use ExpandOnline\KlipfolioApi\Object\BaseApiCollection;
  */
 class UserList extends BaseApiCollection
 {
-
     /**
      * @var array
      */
@@ -43,12 +38,10 @@ class UserList extends BaseApiCollection
         }
     }
 
-
     /**
      * @return bool
      */
     public function canRead(){
         return true;
     }
-
 }

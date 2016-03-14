@@ -1,6 +1,4 @@
-<?php
-
-namespace ExpandOnline\KlipfolioApi;
+<?php namespace ExpandOnline\KlipfolioApi;
 
 /**
  * Class Response
@@ -64,6 +62,4 @@ class Response
 
         return $this->data;
     }
-
-
 }

@@ -1,8 +1,4 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Object\User;
-
+<?php namespace ExpandOnline\KlipfolioApi\Object\User;
 
 use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
 
@@ -12,7 +8,6 @@ use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
  */
 class User extends BaseApiResource
 {
-
     protected $readOnlyFieldNames = [
         'id', 'date_last_login', 'date_created'
     ];
@@ -38,7 +33,6 @@ class User extends BaseApiResource
         return $this->data['id'];
     }
 
-
     /**
      * @return bool
      */
@@ -62,5 +56,4 @@ class User extends BaseApiResource
     {
         return true;
     }
-
 }

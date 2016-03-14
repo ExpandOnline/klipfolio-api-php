@@ -1,8 +1,4 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Object\Client;
-
+<?php namespace ExpandOnline\KlipfolioApi\Object\Client;
 
 use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
 
@@ -12,7 +8,6 @@ use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
  */
 class Client extends BaseApiResource
 {
-
     /**
      * @param string $option
      * @return string
@@ -26,12 +21,10 @@ class Client extends BaseApiResource
         return 'clients';
     }
 
-
     /**
      * @return bool
      */
     public function canRead(){
         return true;
     }
-
 }

@@ -1,7 +1,4 @@
-<?php
-
-namespace ExpandOnline\KlipfolioApi;
-
+<?php namespace ExpandOnline\KlipfolioApi;
 
 use ExpandOnline\KlipfolioApi\Exception\KlipfolioApiException;
 use ExpandOnline\KlipfolioApi\Object\BaseApiObject;

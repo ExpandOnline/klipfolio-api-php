@@ -1,8 +1,4 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Object\Klip;
-
+<?php namespace ExpandOnline\KlipfolioApi\Object\Klip;
 
 use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
 
@@ -45,5 +41,4 @@ class Klip extends BaseApiResource
     public function canUpdate(){
         return true;
     }
-
 }

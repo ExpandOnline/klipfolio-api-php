@@ -1,8 +1,4 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Object;
-
+<?php namespace ExpandOnline\KlipfolioApi\Object;
 
 /**
  * Class BaseApiOperation
@@ -10,7 +6,6 @@ namespace ExpandOnline\KlipfolioApi\Object;
  */
 abstract class BaseApiOperation extends BaseApiObject
 {
-
     /**
      * @var
      */
@@ -29,5 +24,4 @@ abstract class BaseApiOperation extends BaseApiObject
      * @return mixed
      */
     abstract public function getOperation();
-
 }

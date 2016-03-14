@@ -1,8 +1,4 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Object\Klip;
-
+<?php namespace ExpandOnline\KlipfolioApi\Object\Klip;
 
 use ExpandOnline\KlipfolioApi\Object\BaseApiCollection;
 
@@ -41,5 +37,4 @@ class KlipList extends BaseApiCollection
     public function canRead(){
         return true;
     }
-
 }

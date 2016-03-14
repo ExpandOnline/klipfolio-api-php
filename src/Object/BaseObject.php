@@ -1,7 +1,4 @@
-<?php
-
-namespace ExpandOnline\KlipfolioApi\Object;
-
+<?php namespace ExpandOnline\KlipfolioApi\Object;
 
 abstract class BaseObject
 {

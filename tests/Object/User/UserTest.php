@@ -1,10 +1,7 @@
-<?php
-
-namespace ExpandOnline\KlipfolioApi\Tests\Object;
+<?php namespace ExpandOnline\KlipfolioApi\Tests\Object;
 
 use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
 use ExpandOnline\KlipfolioApi\Object\User\User;
-
 
 class UserTest extends BaseApiResourceTest
 {

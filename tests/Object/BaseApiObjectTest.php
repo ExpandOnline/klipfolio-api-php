@@ -1,8 +1,4 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Tests\Object;
-
+<?php namespace ExpandOnline\KlipfolioApi\Tests\Object;
 
 use ExpandOnline\KlipfolioApi\Object\BaseApiObject;
 use ExpandOnline\KlipfolioApi\Tests\KlipfolioApiTestCase;

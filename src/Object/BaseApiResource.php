@@ -1,9 +1,4 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Object;
-
-
+<?php namespace ExpandOnline\KlipfolioApi\Object;
 
 /**
  * Class BaseApiResource
@@ -47,7 +42,6 @@ abstract class BaseApiResource extends BaseApiObject
         return $this->data[static::FIELD_ID];
     }
 
-
     /**
      * @param string $name
      * @param mixed $value
@@ -67,5 +61,4 @@ abstract class BaseApiResource extends BaseApiObject
     {
         return isset($this->data[static::FIELD_ID]);
     }
-
 }

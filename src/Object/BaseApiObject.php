@@ -1,8 +1,4 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Object;
-
+<?php namespace ExpandOnline\KlipfolioApi\Object;
 
 use ExpandOnline\KlipfolioApi\Exception\KlipfolioApiException;
 
@@ -99,5 +95,4 @@ abstract class BaseApiObject extends BaseObject
     {
         return $this->readOnlyFieldNames;
     }
-
 }

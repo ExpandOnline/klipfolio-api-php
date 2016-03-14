@@ -1,7 +1,4 @@
-<?php
-
-namespace ExpandOnline\KlipfolioApi\Exception;
-
+<?php namespace ExpandOnline\KlipfolioApi\Exception;
 
 use Exception;
 

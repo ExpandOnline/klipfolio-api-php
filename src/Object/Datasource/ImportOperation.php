@@ -1,13 +1,9 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Object\Datasource;
+<?php namespace ExpandOnline\KlipfolioApi\Object\Datasource;
 
 use ExpandOnline\KlipfolioApi\Object\BaseApiOperation;
 
 class ImportOperation extends BaseApiOperation
 {
-
     public function __construct($id, $clientId)
     {
         parent::__construct($id);

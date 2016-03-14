@@ -1,8 +1,4 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Object\Klip;
-
+<?php namespace ExpandOnline\KlipfolioApi\Object\Klip;
 
 use ExpandOnline\KlipfolioApi\Object\BaseApiCollection;
 use ExpandOnline\KlipfolioApi\Object\Datasource\Datasource;
@@ -13,7 +9,6 @@ use ExpandOnline\KlipfolioApi\Object\Datasource\Datasource;
  */
 class DatasourceList extends BaseApiCollection
 {
-
     /**
      * @param null $option
      * @return string
@@ -39,8 +34,8 @@ class DatasourceList extends BaseApiCollection
     /**
      * @return bool
      */
-    public function canRead(){
+    public function canRead()
+    {
         return true;
     }
-
 }

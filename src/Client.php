@@ -1,5 +1,4 @@
-<?php
-namespace ExpandOnline\KlipfolioApi;
+<?php namespace ExpandOnline\KlipfolioApi;
 
 use GuzzleHttp\Client as GuzzleClient;
 
@@ -9,7 +8,6 @@ use GuzzleHttp\Client as GuzzleClient;
  */
 class Client
 {
-
     /**
      * @var string
      */
@@ -18,7 +16,7 @@ class Client
     /**
      * @var string
      */
-    protected $base_url = "https://sandbox.klipfolio.com/api";
+    protected $base_url;
 
     /**
      * @var int
@@ -40,8 +38,10 @@ class Client
      * @param string $apiKey
      * @param GuzzleClient $guzzleClient
      */
-    public function __construct($apiKey, GuzzleClient $guzzleClient)
+    public function __construct($baseUrl, $apiKey, GuzzleClient $guzzleClient)
     {
+        $this->base_url = $baseUrl;
+
         $this->headers = array_merge($this->headers, [
             'kf-api-key' => $apiKey
         ]);
@@ -79,5 +79,4 @@ class Client
     {
         return $this->base_url . '/' . $this->version . '/';
     }
-
 }

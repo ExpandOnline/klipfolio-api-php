@@ -1,8 +1,4 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Tests\Object\User;
-
+<?php namespace ExpandOnline\KlipfolioApi\Tests\Object\User;
 
 use ExpandOnline\KlipfolioApi\Object\User\ResendInviteOperation;
 use ExpandOnline\KlipfolioApi\Response;
@@ -19,6 +15,5 @@ class ResendInviteOperationTest extends KlipfolioApiTestCase
         );
 
         $this->assertInstanceOf(Response::class, $response);
-
     }
 }

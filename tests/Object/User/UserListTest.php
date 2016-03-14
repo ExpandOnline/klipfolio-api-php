@@ -1,15 +1,10 @@
-<?php
-
-
-namespace Object\User;
-
+<?php namespace Object\User;
 
 use ExpandOnline\KlipfolioApi\Object\User\UserList;
 use ExpandOnline\KlipfolioApi\Tests\KlipfolioApiTestCase;
 
 class UserListTest extends KlipfolioApiTestCase
 {
-
     public function testUserListRead()
     {
 

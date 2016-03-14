@@ -1,8 +1,4 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Object;
-
+<?php namespace ExpandOnline\KlipfolioApi\Object;
 
 /**
  * Class BaseApiCollection
@@ -10,12 +6,12 @@ namespace ExpandOnline\KlipfolioApi\Object;
  */
 abstract class BaseApiCollection extends BaseApiObject
 {
-
     /**
      * @param $limit
      * @return $this
      */
-    public function setLimit($limit){
+    public function setLimit($limit)
+    {
         $this->apiParams['limit'] = $limit;
         return $this;
     }
@@ -24,9 +20,9 @@ abstract class BaseApiCollection extends BaseApiObject
      * @param $offset
      * @return $this
      */
-    public function setOffset($offset){
+    public function setOffset($offset)
+    {
         $this->apiParams['offset'] = $offset;
         return $this;
     }
-
 }

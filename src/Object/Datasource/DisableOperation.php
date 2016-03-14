@@ -1,13 +1,9 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Object\Datasource;
+<?php namespace ExpandOnline\KlipfolioApi\Object\Datasource;
 
 use ExpandOnline\KlipfolioApi\Object\BaseApiOperation;
 
 class DisableOperation extends BaseApiOperation
 {
-
     /**
      * @param null $option
      * @return mixed

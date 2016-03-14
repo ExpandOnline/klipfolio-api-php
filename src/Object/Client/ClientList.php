@@ -1,8 +1,4 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Object\Klip;
-
+<?php namespace ExpandOnline\KlipfolioApi\Object\Klip;
 
 use ExpandOnline\KlipfolioApi\Object\BaseApiCollection;
 use ExpandOnline\KlipfolioApi\Object\Client\Client;
@@ -42,5 +38,4 @@ class ClientList extends BaseApiCollection
     public function canRead(){
         return true;
     }
-
 }

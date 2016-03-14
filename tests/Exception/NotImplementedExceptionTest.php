@@ -1,7 +1,4 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Tests\Exception;
+<?php namespace ExpandOnline\KlipfolioApi\Tests\Exception;
 
 use ExpandOnline\KlipfolioApi\Exception\NotImplementedException;
 
@@ -12,5 +9,4 @@ class NotImplementedExceptionTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(NotImplementedException::class);
         throw new NotImplementedException('test');
     }
-
 }

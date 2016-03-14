@@ -1,16 +1,10 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Tests\Object;
-
+<?php namespace ExpandOnline\KlipfolioApi\Tests\Object;
 
 use ExpandOnline\KlipfolioApi\Object\Klip\Klip;
 use ExpandOnline\KlipfolioApi\Object\Klip\KlipList;
-use ExpandOnline\KlipfolioApi\Tests\KlipfolioApiTestCase;
 
 class KlipTest extends BaseApiResourceTest
 {
-
     protected $testData = [
         "id" => "test.id",
         "name" => "test.name",
@@ -24,7 +18,6 @@ class KlipTest extends BaseApiResourceTest
             ->get((new KlipList())->setLimit(1)->setOffset(1))
             ->getData());
     }
-
 
     protected function getObjectToTest($id = null)
     {

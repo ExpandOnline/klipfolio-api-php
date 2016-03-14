@@ -1,8 +1,4 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Tests\Exception;
-
+<?php namespace ExpandOnline\KlipfolioApi\Tests\Exception;
 
 use ExpandOnline\KlipfolioApi\Exception\KlipfolioApiException;
 
@@ -13,5 +9,4 @@ class KlipfolioApiExceptionTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(KlipfolioApiException::class);
         throw new KlipfolioApiException('test');
     }
-
 }

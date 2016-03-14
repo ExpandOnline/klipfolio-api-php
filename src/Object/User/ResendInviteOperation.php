@@ -1,8 +1,4 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Object\User;
-
+<?php namespace ExpandOnline\KlipfolioApi\Object\User;
 
 use ExpandOnline\KlipfolioApi\Object\BaseApiOperation;
 
