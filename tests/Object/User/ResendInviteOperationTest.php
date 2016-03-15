@@ -11,7 +11,7 @@ class ResendInviteOperationTest extends KlipfolioApiTestCase
         $this->setMock([]);
 
         $response = $this->kp->operate(
-            new ResendInviteOperation('a10b1be727996ea48965e1f66b580924')
+            new ResendInviteOperation('test-id')
         );
 
         $this->assertInstanceOf(Response::class, $response);

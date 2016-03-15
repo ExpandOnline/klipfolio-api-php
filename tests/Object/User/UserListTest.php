@@ -12,12 +12,12 @@ class UserListTest extends KlipfolioApiTestCase
         $this->setMock([
             'users' => [
                 [
-                    'id' => 'db55bc08f2be1bf753353fb8a0ae66bc',
+                    'id' => 'test.id',
                     'first_name' => 'test.first_name',
                     'last_name' => 'test.last_name',
                     'email' => 'test@email.com',
-                    'roles' => ['26a3d3fb4cd6bf23d35b4126be26e5f3'],
-                    'groups' => ['6e81c1944082bde3e527b9cc016c9144']
+                    'roles' => ['test.role_id'],
+                    'groups' => ['test.group_id']
                 ]
             ]
         ]);

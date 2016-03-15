@@ -1,8 +1,4 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Connector\User;
-
+<?php namespace ExpandOnline\KlipfolioApi\Connector\User;
 
 use ExpandOnline\KlipfolioApi\Connector\BaseApiCollectionConnector;
 use ExpandOnline\KlipfolioApi\Object\User\UserList;

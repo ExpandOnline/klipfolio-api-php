@@ -2,7 +2,6 @@
 
 use ExpandOnline\KlipfolioApi\Connector\Klip\KlipListConnector;
 use ExpandOnline\KlipfolioApi\Object\Klip\Klip;
-use ExpandOnline\KlipfolioApi\Object\Klip\KlipList;
 use ExpandOnline\KlipfolioApi\Tests\KlipfolioApiTestCase;
 
 class KlipListTest extends KlipfolioApiTestCase

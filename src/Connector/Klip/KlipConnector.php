@@ -1,8 +1,4 @@
-<?php
-
-
-namespace ExpandOnline\KlipfolioApi\Connector\Klip;
-
+<?php namespace ExpandOnline\KlipfolioApi\Connector\Klip;
 
 use ExpandOnline\KlipfolioApi\Connector\BaseApiResourceConnector;
 use ExpandOnline\KlipfolioApi\Object\Klip\Klip;

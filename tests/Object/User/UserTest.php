@@ -7,7 +7,7 @@ use ExpandOnline\KlipfolioApi\Object\User\User;
 class UserTest extends BaseApiResourceTest
 {
     protected $testData = [
-        'id' => 'b303a150d6ea30cc9ead4a9c6fac7bf8',
+        'id' => 'test.id',
         'company' => 'test.company',
         'first_name' => 'test.first_name',
         'last_name' => 'test.last_name',
@@ -15,9 +15,9 @@ class UserTest extends BaseApiResourceTest
         'date_last_login' => '2016-03-03T09:59:02Z',
         'data_created' => '2015-02-16T13:35:00Z',
         'is_locked_out' => 'false',
-        'roles' => ['26a3d3fb4cd6bf23d35b4126be26e5f3'],
-        'client_id' => 'c43b0d13e63b5116a955711b4106d284',
-        'groups' => ['6e81c1944082bde3e527b9cc016c9144']
+        'roles' => ['test.role_id'],
+        'client_id' => 'test.client_id',
+        'groups' => ['test.group_id']
     ];
 
     protected function getConnectorToTest($params = [])
