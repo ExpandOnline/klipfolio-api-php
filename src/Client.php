@@ -1,8 +1,5 @@
-<?php
-namespace ExpandOnline\KlipfolioApi;
+<?php namespace ExpandOnline\KlipfolioApi;
 
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\Request as GuzzleRequest;
 use GuzzleHttp\Client as GuzzleClient;
 
 /**
@@ -11,7 +8,6 @@ use GuzzleHttp\Client as GuzzleClient;
  */
 class Client
 {
-
     /**
      * @var string
      */
@@ -20,7 +16,7 @@ class Client
     /**
      * @var string
      */
-    protected $base_url = "https://app.klipfolio.com/api";
+    protected $base_url;
 
     /**
      * @var int
@@ -32,61 +28,48 @@ class Client
      */
     protected $client;
 
+    protected $headers = [
+        'Content-Type' => 'application/json'
+    ];
+
 
     /**
      * Client constructor.
-     * @param $apiKey
+     * @param string $apiKey
      * @param GuzzleClient $guzzleClient
      */
-    public function __construct($apiKey, GuzzleClient $guzzleClient)
+    public function __construct($baseUrl, $apiKey, GuzzleClient $guzzleClient)
     {
-        $this->apiKey = $apiKey;
+        $this->base_url = $baseUrl;
+
+        $this->headers = array_merge($this->headers, [
+            'kf-api-key' => $apiKey
+        ]);
+
         $this->client = $guzzleClient;
     }
 
     /**
-     * @param Request $request
+     * @param string $method
+     * @param string $path
+     * @param array $options
      * @return Response
      */
-    public function sendRequest(Request $request)
+    public function sendRequest($method, $path, array $options = [])
     {
-        $url = $this->getUrl() . $request->getPath();
+        $url = $this->getUrl() . $path;
 
-        try {
-            $guzzleRequest = new GuzzleRequest(
-                $request->getMethod(),
-                $url,
-                $headers = [
-                    'kf-api-key' => $this->apiKey
-                ],
-                $request->getData()
-            );
+        $options['body'] = array_key_exists('body', $options) ? \GuzzleHttp\Psr7\stream_for(json_encode($options['body'])) : null;
+        $options['headers'] = $this->headers;
 
-            $guzzleResponse = $this->client->send($guzzleRequest);
+        $guzzleResponse = $this->client->request($method, $url, $options);
 
-            $response = new Response(
-                $guzzleResponse->getStatusCode(),
-                (string)$guzzleResponse->getBody()
-            );
-
-        } catch (RequestException $e) {
-
-            $response = Response(
-                500,
-                $body = json_encode([
-                    'meta' => [
-                        'success' => false,
-                        'status' => 500
-                    ],
-                    'data' => ['error' => 'Invalid request']
-                ])
-            );
-
-
-        }
+        $response = new Response(
+            $guzzleResponse->getStatusCode(),
+            (string)$guzzleResponse->getBody()
+        );
 
         return $response;
-
     }
 
     /**
@@ -96,5 +79,4 @@ class Client
     {
         return $this->base_url . '/' . $this->version . '/';
     }
-
 }

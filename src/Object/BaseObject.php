@@ -1,18 +1,15 @@
-<?php
-
-namespace ExpandOnline\KlipfolioApi\Object;
-
+<?php namespace ExpandOnline\KlipfolioApi\Object;
 
 /**
- * Class AbstractObject
+ * Class BaseObject
  * @package ExpandOnline\KlipfolioApi\Object
  */
-abstract class AbstractObject
+abstract class BaseObject
 {
     /**
      * @var array
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * @var mixed[] set of key value pairs representing data
@@ -63,7 +60,7 @@ abstract class AbstractObject
     public function setData(array $data)
     {
         foreach ($data as $key => $value) {
-            $this->{$key} = $value;
+            $this->data[$key] = $value;
         }
         return $this;
     }

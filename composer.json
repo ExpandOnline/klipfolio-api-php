@@ -17,5 +17,8 @@
     },
     "autoload": {
         "psr-4": {"ExpandOnline\\KlipfolioApi\\": "src/"}
+    },
+    "autoload-dev": {
+        "psr-4": {"ExpandOnline\\KlipfolioApi\\Tests\\": "tests/"}
     }
 }
