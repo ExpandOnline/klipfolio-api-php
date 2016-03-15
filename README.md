@@ -8,15 +8,15 @@ Install the latest version using [Composer](http://getcomposer.org/) by running 
 ## Usage
 ```php
 <?php
-
+use ExpandOnline\KlipfolioApi\Klipfolio;
 use ExpandOnline\KlipfolioApi\Client;
-use ExpandOnline\KlipfolioApi\Objects\User;
-use GuzzleHttp\Client as GuzzleClient;
 
-$client = new Client('api_key', new GuzzleClient());
-$user = new User('user_id', $client);
+// Get a user from klipfolio with id 123abc
 
-$user = $user->read();
+$client = new Client('api_url', 'api_key', new GuzzleClient());
+$klipfolio = new Klipfolio($client);
+
+$user = $klipfolio->get((new UserConnector())->setId('123abc'));
 
 echo $user->company;
 // Output: Expand Online
