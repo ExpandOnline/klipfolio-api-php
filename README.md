@@ -10,6 +10,7 @@ Install the latest version using [Composer](http://getcomposer.org/) by running 
 <?php
 use ExpandOnline\KlipfolioApi\Klipfolio;
 use ExpandOnline\KlipfolioApi\Client;
+use ExpandOnline\KlipfolioApi\Connector\User\UserConnector;
 
 // Get a user from klipfolio with id 123abc
 
