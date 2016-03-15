@@ -1,7 +1,7 @@
 <?php namespace ExpandOnline\KlipfolioApi\Tests\Object;
 
+use ExpandOnline\KlipfolioApi\Connector\Klip\KlipConnector;
 use ExpandOnline\KlipfolioApi\Object\Klip\Klip;
-use ExpandOnline\KlipfolioApi\Object\Klip\KlipList;
 
 class KlipTest extends BaseApiResourceTest
 {
@@ -11,17 +11,9 @@ class KlipTest extends BaseApiResourceTest
         "description" => null
     ];
 
-    public function testKlipList()
-    {
-
-        print_r($this->kp
-            ->get((new KlipList())->setLimit(1)->setOffset(1))
-            ->getData());
-    }
-
     protected function getObjectToTest($id = null)
     {
-        return new Klip($id);
+        return new Klip();
     }
 
     protected function getTestData()
@@ -37,5 +29,10 @@ class KlipTest extends BaseApiResourceTest
     public function testValidDelete()
     {
         // TODO: Implement testValidDelete() method.
+    }
+
+    protected function getConnectorToTest($params = [])
+    {
+        return new KlipConnector($params);
     }
 }

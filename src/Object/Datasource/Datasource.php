@@ -8,24 +8,5 @@ use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
  */
 class Datasource extends BaseApiResource
 {
-    /**
-     * @param string $option
-     * @return string
-     */
-    public function getEndpoint($option = '')
-    {
-        if ($option == 'id') {
-            return 'datasources/' . $this->getId();
-        }
 
-        return 'datasources';
-    }
-
-    /**
-     * @return bool
-     */
-    public function canRead()
-    {
-        return true;
-    }
 }

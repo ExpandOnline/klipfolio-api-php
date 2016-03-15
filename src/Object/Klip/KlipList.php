@@ -8,16 +8,6 @@ use ExpandOnline\KlipfolioApi\Object\BaseApiCollection;
  */
 class KlipList extends BaseApiCollection
 {
-
-    /**
-     * @param null $option
-     * @return string
-     */
-    public function getEndpoint($option = null)
-    {
-        return 'klips';
-    }
-
     /**
      * @param array $data
      * @return $this|void
@@ -29,12 +19,5 @@ class KlipList extends BaseApiCollection
             $user->setData($item);
             $this->data[] = $user;
         }
-    }
-
-    /**
-     * @return bool
-     */
-    public function canRead(){
-        return true;
     }
 }

@@ -10,15 +10,6 @@ use ExpandOnline\KlipfolioApi\Object\Datasource\Datasource;
 class DatasourceList extends BaseApiCollection
 {
     /**
-     * @param null $option
-     * @return string
-     */
-    public function getEndpoint($option = null)
-    {
-        return 'datasources';
-    }
-
-    /**
      * @param array $data
      * @return $this|void
      */
@@ -29,13 +20,5 @@ class DatasourceList extends BaseApiCollection
             $user->setData($item);
             $this->data[] = $user;
         }
-    }
-
-    /**
-     * @return bool
-     */
-    public function canRead()
-    {
-        return true;
     }
 }

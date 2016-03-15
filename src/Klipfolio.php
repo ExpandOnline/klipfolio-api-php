@@ -1,5 +1,7 @@
 <?php namespace ExpandOnline\KlipfolioApi;
 
+use ExpandOnline\KlipfolioApi\Connector\BaseApiConnector;
+use ExpandOnline\KlipfolioApi\Connector\BaseApiResourceConnector;
 use ExpandOnline\KlipfolioApi\Exception\KlipfolioApiException;
 use ExpandOnline\KlipfolioApi\Object\BaseApiObject;
 use ExpandOnline\KlipfolioApi\Object\BaseApiOperation;
@@ -27,62 +29,77 @@ class Klipfolio
     }
 
     /**
-     * @param BaseApiObject $object
+     * @param BaseApiConnector $connector
      * @return BaseApiObject
      * @throws KlipfolioApiException
      */
-    public function get(BaseApiObject $object)
+    public function get(BaseApiConnector $connector)
     {
-        if (!$object->canRead()) {
-            throw new KlipfolioApiException('Read is not allowed on object of type ' . get_class($object));
+        if (!$connector->canRead()) {
+            throw new KlipfolioApiException('Read is not allowed on object of type ' . get_class($connector));
         }
 
-        $response = $this->client->sendRequest('GET', $object->getEndpoint('id'), ['query' => $object->getParams()]);
-        $object->setData($response->getContent());
+        $response = $this->client->sendRequest('GET', $connector->getEndpoint('id'), ['query' => $connector->getParams()]);
 
-        return $object;
 
+        return $connector->resolveResponse($response);
     }
 
     /**
-     * @param BaseApiResource $object
+     * @param BaseApiResourceConnector $connector
      * @return Response
      * @throws KlipfolioApiException
      */
-    protected function create(BaseApiResource $object)
+    protected function create(BaseApiResourceConnector $connector)
     {
-        if (!$object->canCreate()) {
-            throw new KlipfolioApiException('Create is not allowed on object of type ' . get_class($object));
+        if (!$connector->canCreate()) {
+            throw new KlipfolioApiException('Create is not allowed on object of type ' . get_class($connector));
         }
-        return $this->client->sendRequest('POST', $object->getEndpoint(), ['body' => $object->getUpdatedDataForPost()]);
 
+        if(empty($connector->getResource()->getUpdatedDataForPost())){
+            throw new KlipfolioApiException('Object in ' . get_class($connector) . ' has no fields to create');
+        }
+
+        return $this->client->sendRequest(
+            'POST',
+            $connector->getEndpoint(),
+            ['body' => $connector->getResource()->getUpdatedDataForPost()]
+        );
     }
 
     /**
-     * @param BaseApiResource $object
+     * @param BaseApiResourceConnector $connector
      * @return Response
      * @throws KlipfolioApiException
      */
-    protected function update(BaseApiResource $object)
+    protected function update(BaseApiResourceConnector $connector)
     {
-        if (!$object->canUpdate()) {
-            throw new KlipfolioApiException('Update is not allowed on object of type ' . get_class($object));
+        if (!$connector->canUpdate()) {
+            throw new KlipfolioApiException('Update is not allowed on object of type ' . get_class($connector));
         }
-        return $this->client->sendRequest('PUT', $object->getEndpoint('id'), ['body' => $object->getUpdatedDataForPost()]);
+
+        if(empty($connector->getResource()->getUpdatedDataForPost())){
+            throw new KlipfolioApiException('Object in ' . get_class($connector) . ' has no changed fields to update');
+        }
+
+        return $this->client->sendRequest(
+            'PUT',
+            $connector->getEndpoint('id'),
+            ['body' => $connector->getResource()->getUpdatedDataForPost()]
+        );
     }
 
     /**
-     * @param BaseApiObject $object
+     * @param BaseApiResourceConnector $connector
      * @return Response
      * @throws KlipfolioApiException
      */
-    public function delete(BaseApiObject $object)
+    public function delete(BaseApiResourceConnector $connector)
     {
-        if (!$object->canDelete()) {
-            throw new KlipfolioApiException('Delete is not allowed on object of type ' . get_class($object));
+        if (!$connector->canDelete()) {
+            throw new KlipfolioApiException('Delete is not allowed on object of type ' . get_class($connector));
         }
-        return $this->client->sendRequest('DELETE', $object->getEndpoint('id'));
-
+        return $this->client->sendRequest('DELETE', $connector->getEndpoint('id'));
     }
 
     /**
@@ -95,18 +112,16 @@ class Klipfolio
     }
 
     /**
-     * @param BaseApiResource $object
+     * @param BaseApiResourceConnector $connector
      * @return Response
      * @throws KlipfolioApiException
      */
-    public function save(BaseApiResource $object)
+    public function save(BaseApiResourceConnector $connector)
     {
-        if ($object->exists()) {
-            return $this->update($object);
+        if ($connector->getResource()->exists()) {
+            return $this->update($connector);
         } else {
-            return $this->create($object);
+            return $this->create($connector);
         }
     }
-
-
 }

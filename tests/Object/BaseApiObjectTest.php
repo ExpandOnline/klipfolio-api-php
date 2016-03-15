@@ -5,7 +5,9 @@ use ExpandOnline\KlipfolioApi\Tests\KlipfolioApiTestCase;
 
 abstract class BaseApiObjectTest extends KlipfolioApiTestCase
 {
-    abstract protected function getObjectToTest($id = null);
+    abstract protected function getObjectToTest();
+
+    abstract protected function getConnectorToTest($id = null);
 
     abstract protected function getTestData();
 

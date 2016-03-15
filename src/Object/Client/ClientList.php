@@ -9,16 +9,6 @@ use ExpandOnline\KlipfolioApi\Object\Client\Client;
  */
 class ClientList extends BaseApiCollection
 {
-
-    /**
-     * @param null $option
-     * @return string
-     */
-    public function getEndpoint($option = null)
-    {
-        return 'clients';
-    }
-
     /**
      * @param array $data
      * @return $this|void
@@ -30,12 +20,5 @@ class ClientList extends BaseApiCollection
             $user->setData($item);
             $this->data[] = $user;
         }
-    }
-
-    /**
-     * @return bool
-     */
-    public function canRead(){
-        return true;
     }
 }

@@ -24,4 +24,6 @@ abstract class BaseApiOperation extends BaseApiObject
      * @return mixed
      */
     abstract public function getOperation();
+
+    abstract public function getEndpoint();
 }

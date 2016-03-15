@@ -1,5 +1,6 @@
 <?php namespace Object\User;
 
+use ExpandOnline\KlipfolioApi\Connector\User\UserListConnector;
 use ExpandOnline\KlipfolioApi\Object\User\UserList;
 use ExpandOnline\KlipfolioApi\Tests\KlipfolioApiTestCase;
 
@@ -21,10 +22,10 @@ class UserListTest extends KlipfolioApiTestCase
             ]
         ]);
 
-        $userList = new UserList();
-        $userList->setClientId('c43b0d13e63b5116a955711b4106d284');
+        $connector = new UserListConnector();
+        $connector->setClientId('c43b0d13e63b5116a955711b4106d284');
 
-        $response = $this->getKlipfolio()->get($userList);
+        $response = $this->getKlipfolio()->get($connector);
 
         $userArray = $response->getData();
 

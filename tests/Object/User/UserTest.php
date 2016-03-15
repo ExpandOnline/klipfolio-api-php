@@ -1,5 +1,6 @@
 <?php namespace ExpandOnline\KlipfolioApi\Tests\Object;
 
+use ExpandOnline\KlipfolioApi\Connector\User\UserConnector;
 use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
 use ExpandOnline\KlipfolioApi\Object\User\User;
 
@@ -19,9 +20,14 @@ class UserTest extends BaseApiResourceTest
         'groups' => ['6e81c1944082bde3e527b9cc016c9144']
     ];
 
-    protected function getObjectToTest($id = null)
+    protected function getConnectorToTest($params = [])
     {
-        return new User($id);
+        return new UserConnector($params);
+    }
+
+    protected function getObjectToTest()
+    {
+        return new User();
     }
 
     protected function getTestData()
@@ -34,12 +40,12 @@ class UserTest extends BaseApiResourceTest
         $this->setMock($this->getTestData());
 
         /** @var BaseApiResource $user */
-        $user = $this->getKlipfolio()->get(new User('23348f02a135a64b4ebcbecd66301118'));
-        $user->last_name = 'test.mutated_last_name';
+        $user = $this->getKlipfolio()->get((new UserConnector())->setId('23348f02a135a64b4ebcbecd66301118'));
+        $user->last_name = 'test.mutated_last_names';
 
         $this->setMock([]);
 
-        print_r($this->kp->save($user));
+        print_r($this->kp->save((new UserConnector())->setResource($user)));
     }
 
     public function testValidDelete()
