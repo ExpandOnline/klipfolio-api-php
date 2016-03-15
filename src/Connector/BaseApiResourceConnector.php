@@ -3,11 +3,25 @@
 use ExpandOnline\KlipfolioApi\Exception\KlipfolioApiException;
 use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
 
+/**
+ * Class BaseApiResourceConnector
+ * @package ExpandOnline\KlipfolioApi\Connector
+ */
 abstract class BaseApiResourceConnector extends BaseApiConnector
 {
+    /**
+     * @var null
+     */
     protected $id = null;
+    /**
+     * @var null
+     */
     protected $resource = null;
 
+    /**
+     * BaseApiResourceConnector constructor.
+     * @param array $params
+     */
     public function __construct(array $params = [])
     {
         if (array_key_exists('id', $params)) {
@@ -19,6 +33,11 @@ abstract class BaseApiResourceConnector extends BaseApiConnector
         }
     }
 
+    /**
+     * @param $id
+     * @return $this
+     * @throws KlipfolioApiException
+     */
     public function setId($id)
     {
         if (!empty($this->id)) {
@@ -29,11 +48,18 @@ abstract class BaseApiResourceConnector extends BaseApiConnector
         return $this;
     }
 
+    /**
+     * @return null
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @param BaseApiResource $resource
+     * @return $this
+     */
     public function setResource(BaseApiResource $resource)
     {
         if (isset($resource->id)) {

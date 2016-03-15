@@ -21,6 +21,11 @@ abstract class BaseApiObject extends BaseObject
         return $this->data;
     }
 
+    /**
+     * @param string $name
+     * @param mixed $value
+     * @throws KlipfolioApiException
+     */
     public function __set($name, $value)
     {
         if (in_array($name, $this->getReadOnlyFieldNames())) {

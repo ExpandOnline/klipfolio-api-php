@@ -4,6 +4,10 @@
  * Class BaseApiResource
  * @package ExpandOnline\KlipfolioApi\Object
  */
+/**
+ * Class BaseApiResource
+ * @package ExpandOnline\KlipfolioApi\Object
+ */
 abstract class BaseApiResource extends BaseApiObject
 {
     /**
@@ -20,7 +24,8 @@ abstract class BaseApiResource extends BaseApiObject
      * BaseApiResource constructor.
      * @param null $id
      */
-    public function __construct($id = null){
+    public function __construct($id = null)
+    {
         parent::__construct();
 
         $this->data[static::FIELD_ID] = $id;
@@ -29,7 +34,8 @@ abstract class BaseApiResource extends BaseApiObject
     /**
      * @return array
      */
-    public function getUpdatedDataForPost(){
+    public function getUpdatedDataForPost()
+    {
 
         return array_intersect_key($this->data, array_flip($this->dataChanged));
     }
@@ -48,7 +54,7 @@ abstract class BaseApiResource extends BaseApiObject
      */
     public function __set($name, $value)
     {
-        if(!array_key_exists($name, $this->data) || $this->data[$name] !== $value){
+        if (!array_key_exists($name, $this->data) || $this->data[$name] !== $value) {
             $this->dataChanged[] = $name;
             parent::__set($name, $value);
         }

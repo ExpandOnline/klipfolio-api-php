@@ -5,7 +5,6 @@ use ExpandOnline\KlipfolioApi\Connector\BaseApiResourceConnector;
 use ExpandOnline\KlipfolioApi\Exception\KlipfolioApiException;
 use ExpandOnline\KlipfolioApi\Object\BaseApiObject;
 use ExpandOnline\KlipfolioApi\Object\BaseApiOperation;
-use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
 
 /**
  * Class Klipfolio

@@ -8,6 +8,9 @@ use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
  */
 class User extends BaseApiResource
 {
+    /**
+     * @var array
+     */
     protected $readOnlyFieldNames = [
         'id', 'date_last_login', 'date_created'
     ];

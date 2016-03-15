@@ -3,6 +3,10 @@
 use ExpandOnline\KlipfolioApi\Connector\BaseApiResourceConnector;
 use ExpandOnline\KlipfolioApi\Object\Datasource\Datasource;
 
+/**
+ * Class DatasourceConnector
+ * @package ExpandOnline\KlipfolioApi\Connector\Datasource
+ */
 class DatasourceConnector extends BaseApiResourceConnector
 {
     /**
@@ -26,6 +30,9 @@ class DatasourceConnector extends BaseApiResourceConnector
         return true;
     }
 
+    /**
+     * @return mixed
+     */
     protected function getObjectName()
     {
         return Datasource::class;

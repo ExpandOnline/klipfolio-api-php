@@ -1,5 +1,9 @@
 <?php namespace ExpandOnline\KlipfolioApi\Connector;
 
+/**
+ * Class BaseApiCollectionConnector
+ * @package ExpandOnline\KlipfolioApi\Connector
+ */
 abstract class BaseApiCollectionConnector extends BaseApiConnector
 {
     /**
@@ -22,6 +26,9 @@ abstract class BaseApiCollectionConnector extends BaseApiConnector
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function canRead()
     {
         return true;

@@ -1,5 +1,9 @@
 <?php namespace ExpandOnline\KlipfolioApi\Object;
 
+/**
+ * Class BaseObject
+ * @package ExpandOnline\KlipfolioApi\Object
+ */
 abstract class BaseObject
 {
     /**

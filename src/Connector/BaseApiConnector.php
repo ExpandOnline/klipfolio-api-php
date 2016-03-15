@@ -3,6 +3,10 @@
 use ExpandOnline\KlipfolioApi\Object\BaseApiObject;
 use ExpandOnline\KlipfolioApi\Response;
 
+/**
+ * Class BaseApiConnector
+ * @package ExpandOnline\KlipfolioApi\Connector
+ */
 abstract class BaseApiConnector
 {
     /**
@@ -12,11 +16,14 @@ abstract class BaseApiConnector
 
     /**
      * @param null $option
-     * @return mixed
+     * @return string
      */
     abstract public function getEndpoint($option = null);
 
 
+    /**
+     * @return BaseApiObject
+     */
     abstract protected function getObjectName();
 
     /**
@@ -44,6 +51,10 @@ abstract class BaseApiConnector
         $this->setParam('client_id', $id);
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     protected function setParam($key, $value)
     {
         $this->apiParams[$key] = $value;

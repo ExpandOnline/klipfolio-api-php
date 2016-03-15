@@ -3,6 +3,10 @@
 use ExpandOnline\KlipfolioApi\Connector\BaseApiCollectionConnector;
 use ExpandOnline\KlipfolioApi\Object\Klip\ClientList;
 
+/**
+ * Class ClientListConnector
+ * @package ExpandOnline\KlipfolioApi\Connector\Client
+ */
 class ClientListConnector extends BaseApiCollectionConnector
 {
     /**
@@ -22,6 +26,9 @@ class ClientListConnector extends BaseApiCollectionConnector
         return true;
     }
 
+    /**
+     * @return mixed
+     */
     protected function getObjectName()
     {
         return ClientList::class;

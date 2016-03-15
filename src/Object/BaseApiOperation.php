@@ -4,6 +4,10 @@
  * Class BaseApiOperation
  * @package ExpandOnline\KlipfolioApi\Object
  */
+/**
+ * Class BaseApiOperation
+ * @package ExpandOnline\KlipfolioApi\Object
+ */
 abstract class BaseApiOperation extends BaseApiObject
 {
     /**
@@ -15,7 +19,8 @@ abstract class BaseApiOperation extends BaseApiObject
      * BaseApiOperation constructor.
      * @param $id
      */
-    public function __construct($id){
+    public function __construct($id)
+    {
         parent::__construct();
         $this->id = $id;
     }
@@ -25,5 +30,8 @@ abstract class BaseApiOperation extends BaseApiObject
      */
     abstract public function getOperation();
 
+    /**
+     * @return mixed
+     */
     abstract public function getEndpoint();
 }

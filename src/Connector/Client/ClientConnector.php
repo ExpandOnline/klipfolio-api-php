@@ -3,6 +3,10 @@
 use ExpandOnline\KlipfolioApi\Object\Client\Client;
 use ExpandOnline\KlipfolioApi\Connector\BaseApiResourceConnector;
 
+/**
+ * Class ClientConnector
+ * @package ExpandOnline\KlipfolioApi\Connector\Client
+ */
 class ClientConnector extends BaseApiResourceConnector
 {
     /**
@@ -26,6 +30,9 @@ class ClientConnector extends BaseApiResourceConnector
         return true;
     }
 
+    /**
+     * @return mixed
+     */
     protected function getObjectName()
     {
         return Client::class;
