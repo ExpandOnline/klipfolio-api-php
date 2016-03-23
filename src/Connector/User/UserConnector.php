@@ -10,17 +10,9 @@ use ExpandOnline\KlipfolioApi\Object\User\User;
 class UserConnector extends BaseApiResourceConnector
 {
     /**
-     * @param string $option
-     * @return string
+     * @var string
      */
-    public function getEndpoint($option = '')
-    {
-        if ($option == 'id') {
-            return 'users/' . $this->getId();
-        }
-
-        return 'users';
-    }
+    protected $endPoint = 'users';
 
     /**
      * @return bool

@@ -1,4 +1,4 @@
-<?php namespace Object\User;
+<?php namespace ExpandOnline\KlipfolioApi\Tests\Object\User;
 
 use ExpandOnline\KlipfolioApi\Connector\User\UserListConnector;
 use ExpandOnline\KlipfolioApi\Object\User\UserList;

@@ -36,7 +36,6 @@ abstract class BaseApiResource extends BaseApiObject
      */
     public function getUpdatedDataForPost()
     {
-
         return array_intersect_key($this->data, array_flip($this->dataChanged));
     }
 

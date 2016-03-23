@@ -9,18 +9,11 @@ use ExpandOnline\KlipfolioApi\Object\Datasource\Datasource;
  */
 class DatasourceConnector extends BaseApiResourceConnector
 {
-    /**
-     * @param string $option
-     * @return string
-     */
-    public function getEndpoint($option = '')
-    {
-        if ($option == 'id') {
-            return 'datasources/' . $this->getId();
-        }
 
-        return 'datasources';
-    }
+    /**
+     * @var string
+     */
+    protected $endPoint = 'datasources';
 
     /**
      * @return bool
