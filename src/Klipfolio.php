@@ -38,7 +38,7 @@ class Klipfolio
             throw new KlipfolioApiException('Read is not allowed on object of type ' . get_class($connector));
         }
 
-        $response = $this->client->sendRequest('GET', $connector->getEndpoint('id'), ['query' => $connector->getParams()]);
+        $response = $this->client->sendRequest('GET', $connector->getEndpoint(), ['query' => $connector->getParams()]);
 
 
         return $connector->resolveResponse($response);
@@ -83,7 +83,7 @@ class Klipfolio
 
         return $this->client->sendRequest(
             'PUT',
-            $connector->getEndpoint('id'),
+            $connector->getEndpoint(),
             ['body' => $connector->getResource()->getUpdatedDataForPost()]
         );
     }
@@ -98,7 +98,7 @@ class Klipfolio
         if (!$connector->canDelete()) {
             throw new KlipfolioApiException('Delete is not allowed on object of type ' . get_class($connector));
         }
-        return $this->client->sendRequest('DELETE', $connector->getEndpoint('id'));
+        return $this->client->sendRequest('DELETE', $connector->getEndpoint());
     }
 
     /**

@@ -10,10 +10,9 @@ use ExpandOnline\KlipfolioApi\Object\Klip\DatasourceList;
 class DatasourceListConnector extends BaseApiCollectionConnector
 {
     /**
-     * @param null $option
      * @return mixed
      */
-    public function getEndpoint($option = null)
+    public function getEndpoint()
     {
         return 'datasources';
     }

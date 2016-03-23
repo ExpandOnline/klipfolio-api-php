@@ -10,13 +10,19 @@ use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
 abstract class BaseApiResourceConnector extends BaseApiConnector
 {
     /**
-     * @var null
+     * @var string|null
      */
     protected $id = null;
+    
     /**
-     * @var null
+     * @var string|null
      */
     protected $resource = null;
+    
+    /**
+     * @var string|null
+     */
+    protected $endPoint = null;
 
     /**
      * BaseApiResourceConnector constructor.
@@ -78,5 +84,21 @@ abstract class BaseApiResourceConnector extends BaseApiConnector
     public function getResource()
     {
         return $this->resource;
+    }
+
+    /**
+     * @return null|string
+     * @throws \Exception
+     */
+    public function getEndpoint()
+    {
+        if (is_null($this->endPoint)) {
+            throw new \Exception('Endpoint not implemented of ' . static::class);
+        }
+        if (!is_null($this->getId())) {
+            return $this->endPoint . '/' . $this->getId();
+        }
+
+        return $this->endPoint;
     }
 }

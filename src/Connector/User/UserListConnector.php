@@ -18,10 +18,9 @@ class UserListConnector extends BaseApiCollectionConnector
     ];
 
     /**
-     * @param null $option
      * @return mixed
      */
-    public function getEndpoint($option = null)
+    public function getEndpoint()
     {
         return 'users';
     }

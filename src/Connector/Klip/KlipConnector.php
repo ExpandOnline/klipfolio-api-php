@@ -11,17 +11,9 @@ class KlipConnector extends BaseApiResourceConnector
 {
 
     /**
-     * @param string $option
-     * @return string
+     * @var string
      */
-    public function getEndpoint($option = '')
-    {
-        if ($option == 'id') {
-            return 'klips/' . $this->getId();
-        }
-
-        return 'klips';
-    }
+    protected $endPoint = 'klips';
 
     /**
      * @return bool

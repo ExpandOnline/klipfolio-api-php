@@ -15,10 +15,9 @@ abstract class BaseApiConnector
     protected $apiParams = [];
 
     /**
-     * @param null $option
      * @return string
      */
-    abstract public function getEndpoint($option = null);
+    abstract public function getEndpoint();
 
 
     /**

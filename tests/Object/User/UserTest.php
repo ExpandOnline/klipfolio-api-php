@@ -1,7 +1,7 @@
-<?php namespace ExpandOnline\KlipfolioApi\Tests\Object;
+<?php namespace ExpandOnline\KlipfolioApi\Tests\Object\User;
 
 use ExpandOnline\KlipfolioApi\Connector\User\UserConnector;
-use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
+use ExpandOnline\KlipfolioApi\Tests\Object\BaseApiResourceTest;
 use ExpandOnline\KlipfolioApi\Object\User\User;
 
 class UserTest extends BaseApiResourceTest
@@ -44,8 +44,6 @@ class UserTest extends BaseApiResourceTest
         $user->last_name = 'test.mutated_last_names';
 
         $this->setMock([]);
-
-        print_r($this->kp->save((new UserConnector())->setResource($user)));
     }
 
     public function testValidDelete()

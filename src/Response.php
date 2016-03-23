@@ -28,7 +28,6 @@ class Response
     public function __construct($statusCode, $body)
     {
         $this->statusCode = $statusCode;
-        print_r($body);
 
         $bodyObj = json_decode($body, true);
 
