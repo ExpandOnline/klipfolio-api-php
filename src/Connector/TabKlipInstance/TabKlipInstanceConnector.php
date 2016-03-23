@@ -1,6 +1,5 @@
 <?php namespace ExpandOnline\KlipfolioApi\Connector\TabKlipInstance;
 
-use Doctrine\Instantiator\Exception\InvalidArgumentException;
 use ExpandOnline\KlipfolioApi\Connector\BaseApiResourceConnector;
 use ExpandOnline\KlipfolioApi\Object\TabKlipInstance\TabKlipInstance;
 
@@ -11,10 +10,14 @@ use ExpandOnline\KlipfolioApi\Object\TabKlipInstance\TabKlipInstance;
 class TabKlipInstanceConnector extends BaseApiResourceConnector
 {
 
+    /**
+     * @var int
+     */
     protected $tabId;
 
     /**
-     * @return string
+     * @return mixed
+     * @throws \InvalidArgumentException
      */
     public function getEndpoint()
     {
@@ -26,7 +29,7 @@ class TabKlipInstanceConnector extends BaseApiResourceConnector
             );
         }
 
-        throw new InvalidArgumentException('KlipInstance must always have a Tab ID.');
+        throw new \InvalidArgumentException('KlipInstance must always have a Tab ID.');
     }
 
     /**
