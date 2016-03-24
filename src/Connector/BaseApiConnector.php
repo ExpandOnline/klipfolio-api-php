@@ -53,10 +53,13 @@ abstract class BaseApiConnector
     /**
      * @param $key
      * @param $value
+     * @return $this
      */
-    protected function setParam($key, $value)
+    public function setParam($key, $value)
     {
         $this->apiParams[$key] = $value;
+        
+        return $this;
     }
 
     /**
