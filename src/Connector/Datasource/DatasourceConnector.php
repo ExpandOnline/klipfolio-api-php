@@ -24,6 +24,30 @@ class DatasourceConnector extends BaseApiResourceConnector
     }
 
     /**
+     * @return bool
+     */
+    public function canDelete()
+    {
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canCreate()
+    {
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canUpdate()
+    {
+        return true;
+    }
+
+    /**
      * @return mixed
      */
     protected function getObjectName()
