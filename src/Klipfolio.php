@@ -55,14 +55,10 @@ class Klipfolio
             throw new KlipfolioApiException('Create is not allowed on object of type ' . get_class($connector));
         }
 
-        if(empty($connector->getResource()->getUpdatedDataForPost())){
-            throw new KlipfolioApiException('Object in ' . get_class($connector) . ' has no fields to create');
-        }
-
         return $this->client->sendRequest(
             'POST',
             $connector->getEndpoint(),
-            ['body' => $connector->getResource()->getUpdatedDataForPost()]
+            ['body' => $connector->getResource()->getData()]
         );
     }
 
@@ -77,14 +73,14 @@ class Klipfolio
             throw new KlipfolioApiException('Update is not allowed on object of type ' . get_class($connector));
         }
 
-        if(empty($connector->getResource()->getUpdatedDataForPost())){
+        if(empty($connector->getResource()->getUpdatedDataForUpdate())){
             throw new KlipfolioApiException('Object in ' . get_class($connector) . ' has no changed fields to update');
         }
 
         return $this->client->sendRequest(
             'PUT',
             $connector->getEndpoint(),
-            ['body' => $connector->getResource()->getUpdatedDataForPost()]
+            ['body' => $connector->getResource()->getUpdatedDataForUpdate()]
         );
     }
 
