@@ -57,7 +57,14 @@ class Response
      */
     public function getContent()
     {
-
         return $this->data;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLocation()
+    {
+        return array_key_exists('location', $this->meta) ? $this->meta['location'] : null;
     }
 }
