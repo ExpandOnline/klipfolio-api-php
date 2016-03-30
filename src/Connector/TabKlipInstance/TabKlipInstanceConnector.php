@@ -1,6 +1,7 @@
 <?php namespace ExpandOnline\KlipfolioApi\Connector\TabKlipInstance;
 
 use ExpandOnline\KlipfolioApi\Connector\BaseApiResourceConnector;
+use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
 use ExpandOnline\KlipfolioApi\Object\TabKlipInstance\TabKlipInstance;
 
 /**
@@ -14,6 +15,12 @@ class TabKlipInstanceConnector extends BaseApiResourceConnector
      * @var int
      */
     protected $tabId;
+
+
+    /**
+     * @var array
+     */
+    protected $klips = [];
 
     /**
      * @return mixed
@@ -31,6 +38,37 @@ class TabKlipInstanceConnector extends BaseApiResourceConnector
 
         throw new \InvalidArgumentException('KlipInstance must always have a Tab ID.');
     }
+
+
+    /**
+     * @param BaseApiResource $klip
+     */
+    public function addKlip(BaseApiResource $klip)
+    {
+        $this->klips[] = $klip;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDataForUpdate()
+    {
+        $klipData = ['klips' => []];
+
+        foreach ($this->klips as $klip) {
+            $klipData['klips'][] = $klip->getData();
+        }
+        return $klipData;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function resourceExists()
+    {
+        return count($this->klips) > 0;
+    }
+
 
     /**
      * The create of klip instance is actually an update (PUT).

@@ -87,6 +87,31 @@ abstract class BaseApiResourceConnector extends BaseApiConnector
     }
 
     /**
+     * @return mixed
+     */
+    public function resourceExists()
+    {
+        return $this->resource->exists();
+    }
+
+    /**
+     * @return array
+     */
+    public function getDataForUpdate()
+    {
+        return $this->resource->getChanges();
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDataForPost()
+    {
+        return $this->resource->getMutableData();
+    }
+
+    /**
      * @return null|string
      * @throws \Exception
      */

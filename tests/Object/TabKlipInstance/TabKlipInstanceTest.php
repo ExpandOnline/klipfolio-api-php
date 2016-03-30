@@ -6,8 +6,15 @@ use ExpandOnline\KlipfolioApi\Response;
 use ExpandOnline\KlipfolioApi\Tests\Object\BaseApiResourceTest;
 use ExpandOnline\KlipfolioApi\Object\TabKlipInstance\TabKlipInstance;
 
+/**
+ * Class TabKlipInstanceTest
+ * @package ExpandOnline\KlipfolioApi\Tests\Object\TabKlipInstance
+ */
 class TabKlipInstanceTest extends BaseApiResourceTest
 {
+    /**
+     * @var array
+     */
     protected $testData = [
         'id' => 'our id',
         'klip_id' => 'my id',
@@ -23,16 +30,25 @@ class TabKlipInstanceTest extends BaseApiResourceTest
         return new TabKlipInstanceConnector($params);
     }
 
+    /**
+     * @return TabKlipInstance
+     */
     protected function getObjectToTest()
     {
         return new TabKlipInstance();
     }
 
+    /**
+     * @return array
+     */
     protected function getTestData()
     {
         return $this->testData;
     }
 
+    /**
+     *
+     */
     public function testValidUpdate()
     {
         $metaData = [
@@ -41,14 +57,19 @@ class TabKlipInstanceTest extends BaseApiResourceTest
         ];
         $this->setMock([], $metaData);
 
-        $response = $this->getKlipfolio()->save($this->getConnectorToTest([
-            'resource' => (new TabKlipInstance())->setKlipId(1)->setName('My name!')
-        ])->setTabId('23348f02a135a64b4ebcbecd66301118'));
+        $connector = $this->getConnectorToTest()->setTabId('23348f02a135a64b4ebcbecd66301118');
+        $connector->addKlip($this->getObjectToTest()->setKlipId(1)->setName('test.name'));
+
+        $response = $this->getKlipfolio()->save($connector);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertEquals(200, $response->getStatusCode());
     }
 
-    public function testValidCreate() {
+    /**
+     *
+     */
+    public function testValidCreate()
+    {
         $this->setMock([]);
 
         $this->setExpectedException(KlipfolioApiException::class);
@@ -57,6 +78,9 @@ class TabKlipInstanceTest extends BaseApiResourceTest
         ])->setTabId('23348f02a135a64b4ebcbecd66301118'));
     }
 
+    /**
+     * @throws KlipfolioApiException
+     */
     public function testValidDelete()
     {
         $metaData = [
@@ -72,6 +96,9 @@ class TabKlipInstanceTest extends BaseApiResourceTest
         $this->assertEquals(200, $response->getStatusCode());
     }
 
+    /**
+     * @throws KlipfolioApiException
+     */
     public function testValidGet()
     {
         $this->setMock([]);

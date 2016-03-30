@@ -5,8 +5,15 @@ use ExpandOnline\KlipfolioApi\Exception\KlipfolioApiException;
 use ExpandOnline\KlipfolioApi\Tests\KlipfolioApiTestCase;
 use \ExpandOnline\KlipfolioApi\Object\TabKlipInstance\TabKlipInstance;
 
+/**
+ * Class TabKlipInstanceListTest
+ * @package ExpandOnline\KlipfolioApi\Tests\Object\TabKlipInstance
+ */
 class TabKlipInstanceListTest extends KlipfolioApiTestCase
 {
+    /**
+     * @throws KlipfolioApiException
+     */
     public function testListRead()
     {
         $data = [
@@ -30,7 +37,7 @@ class TabKlipInstanceListTest extends KlipfolioApiTestCase
         $response = $this->getKlipfolio()->get($connector);
 
         $tabKlipInstances = $response->getData();
-        
+
         /**
          * @var TabKlipInstance $tabKlipInstance
          */
@@ -39,13 +46,4 @@ class TabKlipInstanceListTest extends KlipfolioApiTestCase
             $this->assertEquals($data['klip_instances'][$index], $tabKlipInstance->getData());
         }
     }
-
-    public function testListReadNoData() {
-        $this->setExpectedException(KlipfolioApiException::class);
-        $this->setMock([]);
-        $connector = new TabKlipInstanceListConnector();
-        $connector->setTabId('8iy4hjsdf');
-        $response = $this->getKlipfolio()->get($connector);
-    }
-
 }
