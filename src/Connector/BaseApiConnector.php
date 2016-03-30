@@ -36,8 +36,7 @@ abstract class BaseApiConnector
         $objectName = $this->getObjectName();
 
         /** @var BaseApiObject $object */
-        $object = new $objectName();
-        $object->setData($content);
+        $object = new $objectName($content);
 
         return $object;
     }
@@ -58,7 +57,7 @@ abstract class BaseApiConnector
     public function setParam($key, $value)
     {
         $this->apiParams[$key] = $value;
-        
+
         return $this;
     }
 

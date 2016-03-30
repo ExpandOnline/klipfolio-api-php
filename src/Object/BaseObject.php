@@ -54,13 +54,21 @@ abstract class BaseObject
     }
 
     /**
+     * @param $name
+     */
+    public function __unset($name)
+    {
+        unset($this->data[$name]);
+    }
+
+    /**
      * @param array
      * @return $this
      */
     public function setData(array $data)
     {
         foreach ($data as $key => $value) {
-            $this->data[$key] = $value;
+            $this->{$key} = $value;
         }
         return $this;
     }

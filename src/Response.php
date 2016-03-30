@@ -67,4 +67,12 @@ class Response
     {
         return array_key_exists('location', $this->meta) ? $this->meta['location'] : null;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getLocationId()
+    {
+        return array_key_exists('location', $this->meta) ? explode('/', $this->meta['location'])[2] : null;
+    }
 }
