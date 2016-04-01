@@ -66,9 +66,7 @@ abstract class BaseObject
      */
     public function setData(array $data)
     {
-        foreach ($data as $key => $value) {
-            $this->{$key} = $value;
-        }
+        $this->data = $data;
         return $this;
     }
 

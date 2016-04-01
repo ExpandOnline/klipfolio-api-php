@@ -54,6 +54,18 @@ abstract class BaseApiResource extends BaseApiObject
     }
 
     /**
+     * @param array
+     * @return $this
+     */
+    public function setData(array $data)
+    {
+        foreach ($data as $key => $value) {
+            $this->{$key} = $value;
+        }
+        return $this;
+    }
+
+    /**
      * @return bool
      */
     public function exists()
