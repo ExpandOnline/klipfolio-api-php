@@ -16,7 +16,7 @@ class Client
     /**
      * @var string
      */
-    protected $base_url;
+    protected $baseUrl;
 
     /**
      * @var int
@@ -35,12 +35,13 @@ class Client
 
     /**
      * Client constructor.
+     * @param $baseUrl
      * @param string $apiKey
      * @param GuzzleClient $guzzleClient
      */
     public function __construct($baseUrl, $apiKey, GuzzleClient $guzzleClient)
     {
-        $this->base_url = $baseUrl;
+        $this->baseUrl = $baseUrl;
 
         $this->headers = array_merge($this->headers, [
             'kf-api-key' => $apiKey
@@ -64,12 +65,10 @@ class Client
 
         $guzzleResponse = $this->client->request($method, $url, $options);
 
-        $response = new Response(
+        return new Response(
             $guzzleResponse->getStatusCode(),
             (string)$guzzleResponse->getBody()
         );
-
-        return $response;
     }
 
     /**
@@ -77,6 +76,6 @@ class Client
      */
     private function getUrl()
     {
-        return $this->base_url . '/' . $this->version . '/';
+        return $this->baseUrl . '/' . $this->version . '/';
     }
 }

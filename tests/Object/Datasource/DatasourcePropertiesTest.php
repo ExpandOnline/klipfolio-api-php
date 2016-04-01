@@ -110,6 +110,7 @@ class DatasourcePropertiesTest extends BaseApiResourceTest
     {
         $this->setMock($this->getTestData());
 
+        /** @var DataSourceProperties $response */
         $response = $this->getKlipfolio()->get($this->getConnectorToTest()->setId('23348f02a135a64b4ebcbecd66301118'));
         $this->assertInstanceOf(DatasourceProperties::class, $response);
         $this->assertEquals(count($this->testData['properties']), count($response->getProperties()));

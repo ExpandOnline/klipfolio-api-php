@@ -17,7 +17,7 @@ class TabKlipInstanceListConnector extends BaseApiCollectionConnector
 
     /**
      * @return mixed
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function getEndpoint()
     {
@@ -28,7 +28,7 @@ class TabKlipInstanceListConnector extends BaseApiCollectionConnector
             );
         }
 
-        throw new InvalidArgumentException('KlipInstance must always have a Tab ID.');
+        throw new \InvalidArgumentException('KlipInstance must always have a Tab ID.');
     }
 
     /**

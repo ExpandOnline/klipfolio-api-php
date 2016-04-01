@@ -15,7 +15,7 @@ class DatasourceProperties extends BaseApiResource
      * @return mixed
      */
     public function getProperties() {
-        return $this->data[self::FIELD_PROPERTIES];
+        return $this->data[static::FIELD_PROPERTIES];
     }
 
     /**
@@ -23,14 +23,14 @@ class DatasourceProperties extends BaseApiResource
      * @return $this
      */
     public function setProperties($properties) {
-        $this->{self::FIELD_PROPERTIES} = $properties;
+        $this->{static::FIELD_PROPERTIES} = $properties;
 
         return $this;
     }
     
     /**
-     * A DatasourceProprerty always exists because the PUT creates it if it does not exist or
-     * updates it if it existss.
+     * A DatasourceProperty always exists because the PUT creates it if it does not exist or
+     * updates it if it exists.
      * @return bool
      */
     public function exists()

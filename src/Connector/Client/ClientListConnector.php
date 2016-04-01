@@ -10,10 +10,9 @@ use ExpandOnline\KlipfolioApi\Object\Klip\ClientList;
 class ClientListConnector extends BaseApiCollectionConnector
 {
     /**
-     * @param null $option
      * @return string
      */
-    public function getEndpoint($option = null)
+    public function getEndpoint()
     {
         return 'clients';
     }

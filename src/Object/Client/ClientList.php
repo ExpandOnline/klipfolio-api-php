@@ -1,4 +1,4 @@
-<?php namespace ExpandOnline\KlipfolioApi\Object\Klip;
+<?php namespace ExpandOnline\KlipfolioApi\Object\Client;
 
 use ExpandOnline\KlipfolioApi\Object\BaseApiCollection;
 use ExpandOnline\KlipfolioApi\Object\Client\Client;

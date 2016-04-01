@@ -13,12 +13,12 @@ abstract class BaseApiResourceConnector extends BaseApiConnector
      * @var string|null
      */
     protected $id = null;
-    
+
     /**
      * @var string|null
      */
     protected $resource = null;
-    
+
     /**
      * @var string|null
      */
@@ -87,18 +87,52 @@ abstract class BaseApiResourceConnector extends BaseApiConnector
     }
 
     /**
+     * @return mixed
+     */
+    public function resourceExists()
+    {
+        return $this->resource->exists();
+    }
+
+    /**
+     * @return array
+     */
+    public function getDataForUpdate()
+    {
+        return $this->resource->getChanges();
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDataForPost()
+    {
+        return $this->resource->getMutableData();
+    }
+
+    /**
      * @return null|string
      * @throws \Exception
      */
     public function getEndpoint()
     {
         if (is_null($this->endPoint)) {
-            throw new \Exception('Endpoint not implemented of ' . static::class);
-        }
-        if (!is_null($this->getId())) {
-            return $this->endPoint . '/' . $this->getId();
+            throw new KlipfolioApiException('Endpoint of ' . static::class . ' is not implemented');
         }
 
-        return $this->endPoint;
+        return $this->formatEndpoint($this->endPoint);
+    }
+
+    /**
+     * @return string
+     */
+    protected function formatEndpoint($endPoint)
+    {
+        if (!is_null($this->getId())) {
+            return $endPoint . '/' . $this->getId();
+        }
+
+        return $endPoint;
     }
 }

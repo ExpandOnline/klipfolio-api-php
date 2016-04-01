@@ -1,12 +1,18 @@
 <?php namespace ExpandOnline\KlipfolioApi\Tests\Object;
 
+use ExpandOnline\KlipfolioApi\Connector\BaseApiConnector;
 use ExpandOnline\KlipfolioApi\Object\BaseApiObject;
 use ExpandOnline\KlipfolioApi\Tests\KlipfolioApiTestCase;
 
 abstract class BaseApiObjectTest extends KlipfolioApiTestCase
 {
+    /** @return BaseApiObject */
     abstract protected function getObjectToTest();
 
+    /**
+     * @param null $id
+     * @return BaseApiConnector
+     */
     abstract protected function getConnectorToTest($id = null);
 
     abstract protected function getTestData();

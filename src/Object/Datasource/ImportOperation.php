@@ -21,10 +21,9 @@ class ImportOperation extends BaseApiOperation
     }
 
     /**
-     * @param null $option
      * @return mixed
      */
-    public function getEndpoint($option = null)
+    public function getEndpoint()
     {
         return 'datasources';
     }
