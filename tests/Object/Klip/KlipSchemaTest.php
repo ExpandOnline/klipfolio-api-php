@@ -102,6 +102,7 @@ class KlipSchemaTest extends BaseApiResourceTest
     {
         $this->setMock($this->getTestData());
 
+        /** @var KlipSchema $response */
         $response = $this->getKlipfolio()->get($this->getConnectorToTest([])->setId('23348f02a135a64b4ebcbecd66301118'));
         $this->assertInstanceOf(KlipSchema::class, $response);
         $this->assertEquals($this->testData['components'], $response->getComponents());

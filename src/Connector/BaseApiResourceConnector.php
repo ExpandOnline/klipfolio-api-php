@@ -118,7 +118,7 @@ abstract class BaseApiResourceConnector extends BaseApiConnector
     public function getEndpoint()
     {
         if (is_null($this->endPoint)) {
-            throw new \Exception('Endpoint not implemented of ' . static::class);
+            throw new KlipfolioApiException('Endpoint of ' . static::class . ' is not implemented');
         }
         if (!is_null($this->getId())) {
             return $this->endPoint . '/' . $this->getId();

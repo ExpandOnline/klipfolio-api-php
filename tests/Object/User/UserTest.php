@@ -1,6 +1,7 @@
 <?php namespace ExpandOnline\KlipfolioApi\Tests\Object\User;
 
 use ExpandOnline\KlipfolioApi\Connector\User\UserConnector;
+use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
 use ExpandOnline\KlipfolioApi\Tests\Object\BaseApiResourceTest;
 use ExpandOnline\KlipfolioApi\Object\User\User;
 

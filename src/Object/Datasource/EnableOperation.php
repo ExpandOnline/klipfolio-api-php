@@ -2,13 +2,16 @@
 
 use ExpandOnline\KlipfolioApi\Object\BaseApiOperation;
 
+/**
+ * Class EnableOperation
+ * @package ExpandOnline\KlipfolioApi\Object\Datasource
+ */
 class EnableOperation extends BaseApiOperation
 {
     /**
-     * @param null $option
      * @return mixed
      */
-    public function getEndpoint($option = null)
+    public function getEndpoint()
     {
         return 'datasources';
     }

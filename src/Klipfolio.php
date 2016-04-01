@@ -69,6 +69,22 @@ class Klipfolio
      */
     protected function update(BaseApiResourceConnector $connector)
     {
+        $this->isValidUpdate($connector);
+        return $this->client->sendRequest(
+            'PUT',
+            $connector->getEndpoint(),
+            ['body' => $connector->getDataForUpdate()]
+        );
+    }
+
+
+    /**
+     * @param BaseApiResourceConnector $connector
+     * @return bool
+     * @throws KlipfolioApiException
+     */
+    protected function isValidUpdate(BaseApiResourceConnector $connector)
+    {
         if (!$connector->canUpdate()) {
             throw new KlipfolioApiException('Update is not allowed on object of type ' . get_class($connector));
         }
@@ -77,11 +93,7 @@ class Klipfolio
             throw new KlipfolioApiException('Object in ' . get_class($connector) . ' has no changed fields to update');
         }
 
-        return $this->client->sendRequest(
-            'PUT',
-            $connector->getEndpoint(),
-            ['body' => $connector->getDataForUpdate()]
-        );
+        return true;
     }
 
     /**
@@ -115,8 +127,8 @@ class Klipfolio
     {
         if ($connector->resourceExists()) {
             return $this->update($connector);
-        } else {
-            return $this->create($connector);
         }
+
+        return $this->create($connector);
     }
 }

@@ -1,7 +1,6 @@
 <?php namespace ExpandOnline\KlipfolioApi\Tests\Object\User;
 
 use ExpandOnline\KlipfolioApi\Connector\User\UserListConnector;
-use ExpandOnline\KlipfolioApi\Object\User\UserList;
 use ExpandOnline\KlipfolioApi\Tests\KlipfolioApiTestCase;
 
 class UserListTest extends KlipfolioApiTestCase

@@ -17,10 +17,9 @@ class ResetPasswordOperation extends BaseApiOperation
     }
 
     /**
-     * @param null $option
      * @return string
      */
-    public function getEndpoint($option = null)
+    public function getEndpoint()
     {
         return 'users/' . $this->id;
     }

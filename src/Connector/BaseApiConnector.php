@@ -36,9 +36,7 @@ abstract class BaseApiConnector
         $objectName = $this->getObjectName();
 
         /** @var BaseApiObject $object */
-        $object = new $objectName($content);
-
-        return $object;
+        return new $objectName($content);
     }
 
     /**

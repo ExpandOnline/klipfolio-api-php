@@ -27,12 +27,11 @@ abstract class BaseObject
     public function __get($name)
     {
 
-        if (array_key_exists($name, $this->data)) {
-            return $this->data[$name];
-        } else {
-            throw new \InvalidArgumentException(
-                $name . ' is not a field of ' . get_class($this));
+        if (!array_key_exists($name, $this->data)) {
+            throw new \InvalidArgumentException($name . ' is not a field of ' . get_class($this));
         }
+
+        return $this->data[$name];
     }
 
     /**

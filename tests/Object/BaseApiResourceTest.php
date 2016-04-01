@@ -1,6 +1,8 @@
 <?php namespace ExpandOnline\KlipfolioApi\Tests\Object;
 
+use ExpandOnline\KlipfolioApi\Connector\BaseApiResourceConnector;
 use ExpandOnline\KlipfolioApi\Object\BaseApiObject;
+use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
 use ExpandOnline\KlipfolioApi\Response;
 
 abstract class BaseApiResourceTest extends BaseApiObjectTest
@@ -12,10 +14,11 @@ abstract class BaseApiResourceTest extends BaseApiObjectTest
             'location' => '/test/0123456789abcdefabcdef'
         ]);
 
-
+        /** @var BaseApiResourceConnector $connector */
         $connector = $this->getConnectorToTest();
 
         if ($connector->canCreate()) {
+            /** @var BaseApiResource $object */
             $object = $this->getObjectToTest();
 
             foreach ($this->getTestData() as $key => $value) {
@@ -23,6 +26,7 @@ abstract class BaseApiResourceTest extends BaseApiObjectTest
                     $object->{$key} = $value;
                 };
             }
+
 
             $connector->setResource($object);
             $response = $this->getKlipfolio()->save($connector);
