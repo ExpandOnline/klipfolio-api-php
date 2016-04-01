@@ -13,12 +13,12 @@ abstract class BaseApiResourceConnector extends BaseApiConnector
      * @var string|null
      */
     protected $id = null;
-    
+
     /**
      * @var string|null
      */
     protected $resource = null;
-    
+
     /**
      * @var string|null
      */
@@ -120,10 +120,19 @@ abstract class BaseApiResourceConnector extends BaseApiConnector
         if (is_null($this->endPoint)) {
             throw new KlipfolioApiException('Endpoint of ' . static::class . ' is not implemented');
         }
+
+        return $this->formatEndpoint($this->endPoint);
+    }
+
+    /**
+     * @return string
+     */
+    protected function formatEndpoint($endPoint)
+    {
         if (!is_null($this->getId())) {
-            return $this->endPoint . '/' . $this->getId();
+            return $endPoint . '/' . $this->getId();
         }
 
-        return $this->endPoint;
+        return $endPoint;
     }
 }

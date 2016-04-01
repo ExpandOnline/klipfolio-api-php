@@ -29,16 +29,11 @@ class TabKlipInstanceConnector extends BaseApiResourceConnector
     public function getEndpoint()
     {
         if (!is_null($this->getTabId())) {
-            return sprintf(
-                'tabs/%s/klip-instances%s',
-                $this->getTabId(),
-                !is_null($this->getId()) ? '/' . $this->getId() : ''
-            );
+            throw new \InvalidArgumentException('KlipInstance must always have a Tab ID.');
         }
 
-        throw new \InvalidArgumentException('KlipInstance must always have a Tab ID.');
+        return $this->formatEndpoint('tabs' . '/' . $this->getTabId() . '/' . 'klip-instances');
     }
-
 
     /**
      * @param BaseApiResource $klip

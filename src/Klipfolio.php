@@ -69,6 +69,10 @@ class Klipfolio
      */
     protected function update(BaseApiResourceConnector $connector)
     {
+        if (!$connector->canUpdate()) {
+            throw new KlipfolioApiException('Update is not allowed on object of type ' . get_class($connector));
+        }
+
         $this->isValidUpdate($connector);
         return $this->client->sendRequest(
             'PUT',
@@ -85,10 +89,6 @@ class Klipfolio
      */
     protected function isValidUpdate(BaseApiResourceConnector $connector)
     {
-        if (!$connector->canUpdate()) {
-            throw new KlipfolioApiException('Update is not allowed on object of type ' . get_class($connector));
-        }
-
         if (empty($connector->getDataForUpdate())) {
             throw new KlipfolioApiException('Object in ' . get_class($connector) . ' has no changed fields to update');
         }
