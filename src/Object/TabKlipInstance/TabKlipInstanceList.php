@@ -14,7 +14,7 @@ class TabKlipInstanceList extends BaseApiCollection
      * @return $this|void
      * @throws KlipfolioApiException
      */
-    public function setData($data)
+    public function setData(array $data)
     {
         if (!array_key_exists('klip_instances', $data)) {
             throw new KlipfolioApiException('No klip instances found in data! Data array: ' . json_encode($data));
