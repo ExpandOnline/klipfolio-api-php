@@ -28,7 +28,7 @@ class TabKlipInstanceConnector extends BaseApiResourceConnector
      */
     public function getEndpoint()
     {
-        if (!is_null($this->getTabId())) {
+        if (is_null($this->getTabId())) {
             throw new \InvalidArgumentException('KlipInstance must always have a Tab ID.');
         }
 
