@@ -18,33 +18,9 @@ class TabConnector extends BaseApiResourceConnector
     /**
      * @return bool
      */
-    public function canRead()
-    {
-        return false;
-    }
-
-    /**
-     * @return bool
-     */
-    public function canDelete()
-    {
-        return false;
-    }
-
-    /**
-     * @return bool
-     */
     public function canCreate()
     {
         return true;
-    }
-
-    /**
-     * @return bool
-     */
-    public function canUpdate()
-    {
-        return false;
     }
 
     /**
