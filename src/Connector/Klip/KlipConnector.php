@@ -11,6 +11,13 @@ class KlipConnector extends BaseApiResourceConnector
 {
 
     /**
+     * @var array
+     */
+    protected $apiParams = [
+        'full' => 'true'
+    ];
+
+    /**
      * @var string
      */
     protected $endPoint = 'klips';
