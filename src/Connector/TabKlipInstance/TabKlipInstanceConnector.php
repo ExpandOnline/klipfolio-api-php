@@ -37,10 +37,12 @@ class TabKlipInstanceConnector extends BaseApiResourceConnector
 
     /**
      * @param BaseApiResource $klip
+     * @return $this
      */
     public function addKlip(BaseApiResource $klip)
     {
         $this->klips[] = $klip;
+        return $this;
     }
 
     /**
