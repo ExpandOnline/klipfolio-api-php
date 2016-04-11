@@ -12,7 +12,7 @@ class KlipList extends BaseApiCollection
      * @param array $data
      * @return $this|void
      */
-    public function setData($data)
+    public function setData(array $data)
     {
         foreach ($data['klips'] as $item) {
             $user = new Klip($item[Klip::FIELD_ID]);
