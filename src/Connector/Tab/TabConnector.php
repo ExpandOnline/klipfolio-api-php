@@ -1,7 +1,7 @@
 <?php namespace ExpandOnline\KlipfolioApi\Connector\Tab;
 
 use ExpandOnline\KlipfolioApi\Connector\BaseApiResourceConnector;
-use ExpandOnline\KlipfolioApi\Object\Datasource\Datasource;
+use ExpandOnline\KlipfolioApi\Object\Tab\Tab;
 
 /**
  * Class Tab
@@ -9,7 +9,6 @@ use ExpandOnline\KlipfolioApi\Object\Datasource\Datasource;
  */
 class TabConnector extends BaseApiResourceConnector
 {
-
     /**
      * @var string
      */
@@ -24,10 +23,34 @@ class TabConnector extends BaseApiResourceConnector
     }
 
     /**
+     * @return bool
+     */
+    public function canRead()
+    {
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canUpdate()
+    {
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canDelete()
+    {
+        return true;
+    }
+
+    /**
      * @return mixed
      */
     protected function getObjectName()
     {
-        return Datasource::class;
+        return Tab::class;
     }
 }
