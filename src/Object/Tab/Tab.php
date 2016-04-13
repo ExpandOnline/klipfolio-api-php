@@ -63,26 +63,16 @@ class Tab extends BaseApiResource
     }
 
     /**
-     * @return string
+     * @return \DateTime
      */
     public function getLastUpdated() {
-        return $this->last_updated;
+        return new \DateTime($this->last_updated);
     }
 
     /**
-     * @return string
+     * @return \DateTime
      */
     public function getCreatedBy() {
-        return $this->created_by;
+        return new \DateTime($this->created_by);
     }
-
-    /**
-     * @return string
-     */
-    public function getId() {
-        return $this->id;
-    }
-
-
-
 }
