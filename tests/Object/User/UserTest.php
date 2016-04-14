@@ -40,9 +40,9 @@ class UserTest extends BaseApiResourceTest
     {
         $this->setMock($this->getTestData());
 
-        /** @var BaseApiResource $user */
+        /** @var User $user */
         $user = $this->getKlipfolio()->get((new UserConnector())->setId('23348f02a135a64b4ebcbecd66301118'));
-        $user->last_name = 'test.mutated_last_names';
+        $user->setLastName('test.mutated_last_names');
 
         $this->setMock([]);
     }
