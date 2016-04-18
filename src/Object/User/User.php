@@ -24,7 +24,7 @@ class User extends BaseApiResource
      * @var array
      */
     protected $readOnlyFieldNames = [
-        'id', 'company', 'date_created', 'date_last_login', 'groups', 'is_locked_out', 'properties', 'roles', 'tab_instances'
+        'id', 'company', 'date_created', 'date_last_login', 'groups', 'is_locked_out', 'properties', 'tab_instances'
     ];
 
     /**
