@@ -108,4 +108,20 @@ abstract class BaseApiResource extends BaseApiObject
         return array_intersect_key($this->getMutableData(), array_flip($this->dataChanged));
     }
 
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        $data = parent::getData();
+
+        foreach ($data as &$value) {
+            if ($value instanceof BaseApiResource) {
+                /** @var BaseApiResource $value */
+                $value = $value->getData();
+            }
+        }
+
+        return $data;
+    }
 }

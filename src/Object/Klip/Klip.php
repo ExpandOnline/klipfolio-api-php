@@ -21,6 +21,20 @@ class Klip extends BaseApiResource
         'id', 'company', 'date_created', 'last_updated', 'created_by', 'share_rights'
     ];
 
+
+    /**
+     * BaseApiResource constructor.
+     * @param array $data
+     */
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+
+        if (isset($this->schema)) {
+            $this->schema = new KlipSchema($this->schema);
+        }
+    }
+
     /**
      * @param $name
      * @return $this
