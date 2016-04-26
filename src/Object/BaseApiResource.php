@@ -115,8 +115,8 @@ abstract class BaseApiResource extends BaseApiObject
     {
         $data = parent::getData();
 
-        foreach($data as &$value) {
-            if($value instanceof BaseApiResource) {
+        foreach ($data as &$value) {
+            if ($value instanceof BaseApiResource) {
                 /** @var BaseApiResource $value */
                 $value = $value->getData();
             }

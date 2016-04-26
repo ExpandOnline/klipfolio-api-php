@@ -30,7 +30,7 @@ class Klip extends BaseApiResource
     {
         parent::__construct($data);
 
-        if(isset($this->schema)){
+        if (isset($this->schema)) {
             $this->schema = new KlipSchema($this->schema);
         }
     }
