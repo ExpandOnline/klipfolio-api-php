@@ -31,6 +31,13 @@ class ClientConnector extends BaseApiResourceConnector
     }
 
     /**
+     * @return bool
+     */
+    public function canCreate() {
+        return true;
+    }
+
+    /**
      * @return mixed
      */
     protected function getObjectName()
