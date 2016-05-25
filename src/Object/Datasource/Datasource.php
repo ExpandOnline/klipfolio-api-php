@@ -22,6 +22,10 @@ use ExpandOnline\KlipfolioApi\Object\Datasource\Enum\DatasourceInterval;
 class Datasource extends BaseApiResource
 {
 
+    protected $readOnlyFieldNames = [
+        'id', 'company', 'date_created', 'date_last_refresh', 'last_updated', 'created_by', 'share_rights', 'is_locked', 'is_dynamic', 'disabled',
+    ];
+
     /**
      * @return mixed
      */
@@ -142,8 +146,19 @@ class Datasource extends BaseApiResource
         if ($this->exists()) {
             throw new KlipfolioApiException("Unable to set properties on resource that already exists");
         }
+
         $this->properties = $properties;
         return $this;
+    }
+
+    /**
+     * @param $properties
+     * @return Datasource
+     * @throws KlipfolioApiException
+     */
+    public function addProperties($properties)
+    {
+        return $this->setProperties(array_merge($this->getProperties(), $properties));
     }
 
     /**
@@ -166,6 +181,23 @@ class Datasource extends BaseApiResource
         }
         $this->client_id = $clientId;
         return $this;
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        $data = parent::getData();
+
+        if (array_key_exists('properties', $data) &&
+            array_key_exists('parameters', $data['properties']) &&
+            is_array($data['properties']['parameters'])) {
+            $data['properties']['parameters'] = json_encode($data['properties']['parameters']);
+        }
+
+        return $data;
     }
 
 }
