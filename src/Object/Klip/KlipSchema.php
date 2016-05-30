@@ -111,7 +111,7 @@ class KlipSchema extends BaseApiResource
         foreach ($mapping as $old => $new) {
             $dataString = str_replace($old, $new, $dataString);
         }
-        $this->data = json_decode($dataString);
+        $this->data = json_decode($dataString, true);
     }
 
     /**
