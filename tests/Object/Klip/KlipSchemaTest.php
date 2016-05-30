@@ -18,13 +18,16 @@ class KlipSchemaTest extends BaseApiResourceTest
      */
     protected $testData = [
         'id' => 'our id',
-        'title' => 'Test title',
-        'workspace' => [
-            'datasources' => [
-                '1234'
-            ]
-        ],
-        'components' => []
+        'schema' => [
+            'id' => 'our id',
+            'title' => 'Test title',
+            'workspace' => [
+                'datasources' => [
+                    '1234'
+                ]
+            ],
+            'components' => []
+        ]
     ];
 
     /**
@@ -75,7 +78,8 @@ class KlipSchemaTest extends BaseApiResourceTest
     /**
      *
      */
-    public function testValidCreate() {
+    public function testValidCreate()
+    {
         $this->setMock([]);
 
         $this->setExpectedException(KlipfolioApiException::class);
@@ -105,9 +109,9 @@ class KlipSchemaTest extends BaseApiResourceTest
         /** @var KlipSchema $response */
         $response = $this->getKlipfolio()->get($this->getConnectorToTest([])->setId('23348f02a135a64b4ebcbecd66301118'));
         $this->assertInstanceOf(KlipSchema::class, $response);
-        $this->assertEquals($this->testData['components'], $response->getComponents());
-        $this->assertEquals($this->testData['workspace'], $response->getWorkspace());
-        $this->assertEquals($this->testData['title'], $response->getTitle());
+        $this->assertEquals($this->testData['schema']['components'], $response->getComponents());
+        $this->assertEquals($this->testData['schema']['workspace'], $response->getWorkspace());
+        $this->assertEquals($this->testData['schema']['title'], $response->getTitle());
     }
 
 
