@@ -94,6 +94,27 @@ class KlipSchema extends BaseApiResource
     }
 
     /**
+     * @param $oldDatasourceId
+     * @param $newDatasourceId
+     */
+    public function replaceDatasource($oldDatasourceId, $newDatasourceId)
+    {
+        return $this->replaceDatasources([$oldDatasourceId => $newDatasourceId]);
+    }
+
+    /**
+     * @param array $mapping A mapping of $oldValue => $newValue
+     */
+    public function replaceDatasources($mapping)
+    {
+        $dataString = json_encode($this->data);
+        foreach ($mapping as $old => $new) {
+            $dataString = str_replace($old, $new, $dataString);
+        }
+        $this->data = json_decode($dataString, true);
+    }
+
+    /**
      * @param $datasourceId
      * @return $this
      */

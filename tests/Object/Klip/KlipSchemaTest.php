@@ -150,4 +150,22 @@ class KlipSchemaTest extends BaseApiResourceTest
 
         $this->assertSame($testArr, $klipSchema->getDatasources());
     }
+    
+    public function testReplaceDatasource() {
+        $klipSchema = new KlipSchema();
+        $klipSchema->addDatasource(1);
+        $klipSchema->replaceDatasource(1, 2);
+        $this->assertEquals(2, $klipSchema->getDatasources()[0]);
+    }
+
+    public function testReplaceDatasources() {
+        $klipSchema = new KlipSchema();
+        $klipSchema->addDatasource(1);
+        $klipSchema->addDatasource(2);
+        $klipSchema->addDatasource(3);
+        $klipSchema->replaceDatasources([1 => 10, 2 => 20, 3 => 30]);
+        $this->assertEquals(10, $klipSchema->getDatasources()[0]);
+        $this->assertEquals(20, $klipSchema->getDatasources()[1]);
+        $this->assertEquals(30, $klipSchema->getDatasources()[2]);
+    }
 }
