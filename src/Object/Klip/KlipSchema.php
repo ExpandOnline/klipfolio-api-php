@@ -21,8 +21,11 @@ class KlipSchema extends BaseApiResource
      */
     public function __construct(array $data = [])
     {
-        parent::__construct($data);
+        // ## Note: Klipfolio returns different data on GET than it wants for PUT,
+        // ## so we fix it here.
+        $data = $this->getFixedData($data);
 
+        parent::__construct($data);
 
         if (!isset($this->{static::FIELD_WORKSPACE})) {
             $this->{static::FIELD_WORKSPACE} = [];
@@ -34,6 +37,16 @@ class KlipSchema extends BaseApiResource
             $workspace[static::FIELD_DATASOURCES] = [];
             $this->setWorkspace($workspace);
         }
+    }
+
+    /**
+     * @param $data
+     */
+    protected function getFixedData($data) {
+        if(array_key_exists('schema', $data)) {
+            return $data['schema'];
+        }
+        return $data;
     }
 
     /**
