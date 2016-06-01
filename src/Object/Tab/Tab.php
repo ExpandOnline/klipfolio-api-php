@@ -8,6 +8,7 @@ use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
  *
  * @property string $name
  * @property string $description
+ * @property string $client_id
  * @property-read string $company
  * @property-read string $last_updated
  * @property-read string $created_by
@@ -18,6 +19,22 @@ class Tab extends BaseApiResource
     protected $readOnlyFieldNames = [
         'id', 'company', 'last_updated', 'created_by'
     ];
+
+    /**
+     * @return string
+     */
+    public function getClientId() {
+        return $this->client_id;
+    }
+
+    /**
+     * @param string $clientId
+     * @return $this
+     */
+    public function setClientId($clientId) {
+        $this->client_id = $clientId;
+        return $this;
+    }
 
     /**
      * @param $name
