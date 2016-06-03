@@ -8,6 +8,11 @@ use ExpandOnline\KlipfolioApi\Util\Enum;
 
 /**
  * Class TabLayoutType
+ *
+ * Defines a Layout Type for use in a Tab
+ * @see http://apidocs.klipfolio.com/docs/tab-layout#put-tabsidlayout
+ *
+ *
  * @package ExpandOnline\KlipfolioApi\Object\Tab\Enum
  */
 class TabLayoutType extends Enum
