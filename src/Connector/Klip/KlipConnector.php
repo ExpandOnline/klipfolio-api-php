@@ -47,6 +47,14 @@ class KlipConnector extends BaseApiResourceConnector
     }
 
     /**
+     * @return bool
+     */
+    public function canDelete()
+    {
+        return true;
+    }
+
+    /**
      * @return mixed
      */
     protected function getObjectName()
