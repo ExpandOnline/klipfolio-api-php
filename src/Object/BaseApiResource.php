@@ -23,7 +23,7 @@ abstract class BaseApiResource extends BaseApiObject
     public function __construct($data = [])
     {
         parent::__construct();
-
+        
         $this->data[static::FIELD_ID] = array_key_exists('id', $data) ? $data['id'] : null;
 
         foreach ($data as $key => $value) {

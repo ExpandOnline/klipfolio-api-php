@@ -12,10 +12,19 @@ use ExpandOnline\KlipfolioApi\Object\Datasource\Datasource;
 class DatasourceList extends BaseApiCollection
 {
     /**
+     * BaseApiCollection constructor.
+     * @param array $data
+     */
+    public function __construct($data = []) {
+        $this->data['datasources'] = [];
+        $this->setData($data);
+    }
+
+    /**
      * @return mixed
      */
     public function getDatasources() {
-        return $this->datasources;
+        return $this->data['datasources'];
     }
 
     /**
@@ -25,9 +34,8 @@ class DatasourceList extends BaseApiCollection
     public function setData(array $data)
     {
         foreach ($data['datasources'] as $item) {
-            $user = new Datasource($item[Datasource::FIELD_ID]);
-            $user->setData($item);
-            $this->data[] = $user;
+            $user = new Datasource($item);
+            $this->data['datasources'][] = $user;
         }
     }
 }

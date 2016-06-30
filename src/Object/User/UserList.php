@@ -15,8 +15,7 @@ class UserList extends BaseApiCollection
     public function setData(array $data)
     {
         foreach ($data['users'] as $item) {
-            $user = new User($item[User::FIELD_ID]);
-            $user->setData($item);
+            $user = new User($item);
             $this->data[] = $user;
         }
     }

@@ -12,13 +12,7 @@ abstract class BaseApiCollection extends BaseApiObject
      */
     public function __construct($data = [])
     {
-        parent::__construct();
-
-        foreach ($data as $key => $value) {
-            if (!in_array($key, $this->getReadOnlyFieldNames())) {
-                $this->{$key} = $value;
-            }
-        }
+        $this->setData($data);
     }
 
 }
