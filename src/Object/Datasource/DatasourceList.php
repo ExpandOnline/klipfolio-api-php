@@ -15,7 +15,8 @@ class DatasourceList extends BaseApiCollection
      * BaseApiCollection constructor.
      * @param array $data
      */
-    public function __construct($data = []) {
+    public function __construct($data = [])
+    {
         $this->data['datasources'] = [];
         $this->setData($data);
     }
@@ -23,7 +24,8 @@ class DatasourceList extends BaseApiCollection
     /**
      * @return mixed
      */
-    public function getDatasources() {
+    public function getDatasources()
+    {
         return $this->data['datasources'];
     }
 

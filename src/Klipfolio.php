@@ -40,6 +40,10 @@ class Klipfolio
 
         $response = $this->client->sendRequest('GET', $connector->getEndpoint(), ['query' => $connector->getParams()]);
 
+        if ($response->hasError()) {
+            throw new KlipfolioApiException($response->getError());
+        }
+
         return $connector->resolveResponse($response);
     }
 
