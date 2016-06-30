@@ -40,7 +40,6 @@ class Klipfolio
 
         $response = $this->client->sendRequest('GET', $connector->getEndpoint(), ['query' => $connector->getParams()]);
 
-
         return $connector->resolveResponse($response);
     }
 
