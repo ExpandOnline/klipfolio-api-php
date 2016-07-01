@@ -48,7 +48,7 @@ class Response
             $this->statusCode = array_key_exists('status', $array["meta"]) ? $this->meta['status'] : $this->statusCode;
         }
     }
-    
+
     /**
      * @return string
      */
@@ -79,5 +79,21 @@ class Response
     public function getLocationId()
     {
         return array_key_exists('location', $this->meta) ? explode('/', $this->meta['location'])[2] : null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasError()
+    {
+        return array_key_exists('error_code', $this->meta) || array_key_exists('error_desc', $this->meta);
+    }
+
+    /**
+     * @return string
+     */
+    public function getError()
+    {
+        return $this->meta['error_desc'];
     }
 }

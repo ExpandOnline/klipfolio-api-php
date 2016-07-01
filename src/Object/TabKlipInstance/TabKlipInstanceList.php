@@ -20,8 +20,7 @@ class TabKlipInstanceList extends BaseApiCollection
             throw new KlipfolioApiException('No klip instances found in data! Data array: ' . json_encode($data));
         }
         foreach ($data['klip_instances'] as $item) {
-            $klipInstance = new TabKlipInstance($item[TabKlipInstance::FIELD_ID]);
-            $klipInstance->setData($item);
+            $klipInstance = new TabKlipInstance($item);
             $this->data[] = $klipInstance;
         }
     }

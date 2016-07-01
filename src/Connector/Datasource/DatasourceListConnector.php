@@ -1,7 +1,7 @@
 <?php namespace ExpandOnline\KlipfolioApi\Connector\Datasource;
 
 use ExpandOnline\KlipfolioApi\Connector\BaseApiCollectionConnector;
-use ExpandOnline\KlipfolioApi\Object\Klip\DatasourceList;
+use ExpandOnline\KlipfolioApi\Object\Datasource\DatasourceList;
 
 /**
  * Class DatasourceListConnector
