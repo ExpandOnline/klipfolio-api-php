@@ -45,7 +45,7 @@ abstract class BaseApiResourceTest extends BaseApiObjectTest
         if ($connector->canRead()) {
             $object = $this->getKlipfolio()->get($connector);
 
-            $this->assertInstanceOf(get_class($this->getObjectToTest()), $object);
+            $this->assertInstanceOf(get_class($this->getObjectToTest([])), $object);
         }
     }
 
