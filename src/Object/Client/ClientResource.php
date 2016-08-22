@@ -10,6 +10,30 @@ use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
  */
 class ClientResource extends BaseApiResource
 {
+    const API_REQUESTS_PER_SECOND = 'api.requests.perSecond';
+    const API_APPEND_DATA_SIZE = 'api.append.data.size';
+    const DASHBOARD_KLIPS_PER_TAB = 'dashboard.klips.perTab';
+    const DASHBOARD_TABS_PER_DASHBOARD = 'dashboard.tabs.perDashboard';
+    const DASHBOARD_TABS_TOTAL = 'dashboard.tabs.total';
+    const DATASOURCES_PER_FORMULA = 'workspace.datasources.perFormula';
+    const USERS = 'company.seats';
+    const SESSIONS_CONCURRENT = 'sessions.concurrent';
+    const PRIVATE_LINKS = 'published.private.links';
+    const PRIVATE_LINKS_VIEWERS = 'published.private.concurrent';
+
+    protected $map = [
+        self::API_REQUESTS_PER_SECOND  => 'API Calls per Second',
+        self::API_APPEND_DATA_SIZE => 'API Append Data Size (in KB)',
+        self::DASHBOARD_KLIPS_PER_TAB => 'Klips per Dashboard',
+        self::DASHBOARD_TABS_PER_DASHBOARD => 'Maximum viewable Dashboards',
+        self::DASHBOARD_TABS_TOTAL => 'Dashboards',
+        self::DATASOURCES_PER_FORMULA => 'Data Sources per Formula',
+        self::USERS => 'Users',
+        self::SESSIONS_CONCURRENT => 'Concurrent Sessions',
+        self::PRIVATE_LINKS => 'Private Links',
+        self::PRIVATE_LINKS_VIEWERS => 'Private Link Viewers'
+    ];
+
     /**
      * BaseApiResource constructor.
      * @param array $data
@@ -20,12 +44,19 @@ class ClientResource extends BaseApiResource
         if (!array_key_exists('resources', $data)) {
             $this->resources = [];
         }
+
+        // Fix ridiculous klipfolio GET/PUT difference
+        foreach ($this->data['resources'] as &$resource) {
+            if(in_array($resource['name'], $this->map)) {
+                $resource['name'] = array_search($resource['name'], $this->map);
+            }
+        }
     }
 
     /**
      * @param string $name
      * @param string $value
-     * @return $thisw
+     * @return $this
      */
     public function setResource($name, $value)
     {
@@ -53,7 +84,7 @@ class ClientResource extends BaseApiResource
      */
     public function getResource($name)
     {
-        return array_search($name, array_column($this->getResources(), 'name'));
+        return $this->data['resources'][array_search($name, array_column($this->getResources(), 'name'))]['value'];
     }
 
     /**
@@ -62,7 +93,7 @@ class ClientResource extends BaseApiResource
      */
     public function setApiCallsPerSecond($value)
     {
-        return $this->setResource('api.requests.perSecond', $value);
+        return $this->setResource(static::API_REQUESTS_PER_SECOND , $value);
     }
 
     /**
@@ -70,7 +101,7 @@ class ClientResource extends BaseApiResource
      */
     public function getApiCallsPerSecond()
     {
-        return $this->getResource('API Calls per Second');
+        return $this->getResource(static::API_REQUESTS_PER_SECOND );
     }
 
     /**
@@ -79,7 +110,7 @@ class ClientResource extends BaseApiResource
      */
     public function setApiAppendDataSize($value)
     {
-        return $this->setResource('api.append.data.size', $value);
+        return $this->setResource(static::API_APPEND_DATA_SIZE, $value);
     }
 
     /**
@@ -87,7 +118,7 @@ class ClientResource extends BaseApiResource
      */
     public function getApiAppendDataSize()
     {
-        return $this->getResource('API Append Data Size (in KB)');
+        return $this->getResource(static::API_APPEND_DATA_SIZE);
     }
 
     /**
@@ -96,7 +127,7 @@ class ClientResource extends BaseApiResource
      */
     public function setKlipsPerDashboard($value)
     {
-        return $this->setResource('dashboard.klips.perTab', $value);
+        return $this->setResource(static::DASHBOARD_KLIPS_PER_TAB, $value);
     }
 
     /**
@@ -104,7 +135,7 @@ class ClientResource extends BaseApiResource
      */
     public function getKlipsPerDashboard()
     {
-        return $this->getResource('Klips per Dashboard');
+        return $this->getResource(static::DASHBOARD_KLIPS_PER_TAB);
     }
 
     /**
@@ -113,7 +144,7 @@ class ClientResource extends BaseApiResource
      */
     public function setViewableDashboards($value)
     {
-        return $this->setResource('dashboard.tabs.perDashboard', $value);
+        return $this->setResource(static::DASHBOARD_TABS_PER_DASHBOARD, $value);
     }
 
     /**
@@ -121,7 +152,7 @@ class ClientResource extends BaseApiResource
      */
     public function getViewableDashboards()
     {
-        return $this->getResource('Maximum viewable Dashboards');
+        return $this->getResource(static::DASHBOARD_TABS_PER_DASHBOARD);
     }
 
     /**
@@ -130,7 +161,7 @@ class ClientResource extends BaseApiResource
      */
     public function setTotalDashboards($value)
     {
-        return $this->setResource('dashboard.tabs.total', $value);
+        return $this->setResource(static::DASHBOARD_TABS_TOTAL, $value);
     }
 
     /**
@@ -138,7 +169,7 @@ class ClientResource extends BaseApiResource
      */
     public function getTotalDashboards()
     {
-        return $this->getResource('Dashboards');
+        return $this->getResource(static::DASHBOARD_TABS_TOTAL);
     }
 
     /**
@@ -147,7 +178,7 @@ class ClientResource extends BaseApiResource
      */
     public function setDatasourcesPerFormula($value)
     {
-        return $this->setResource('workspace.datasources.perFormula', $value);
+        return $this->setResource(static::DATASOURCES_PER_FORMULA, $value);
     }
 
     /**
@@ -155,7 +186,7 @@ class ClientResource extends BaseApiResource
      */
     public function getDatasourcesPerFormula()
     {
-        return $this->getResource('Data Sources per Formula');
+        return $this->getResource(static::DATASOURCES_PER_FORMULA);
     }
 
     /**
@@ -164,7 +195,7 @@ class ClientResource extends BaseApiResource
      */
     public function setUsers($value)
     {
-        return $this->setResource('company.seats', $value);
+        return $this->setResource(static::USERS, $value);
     }
 
     /**
@@ -172,7 +203,7 @@ class ClientResource extends BaseApiResource
      */
     public function getUsers()
     {
-        return $this->getResource('Users');
+        return $this->getResource(static::USERS);
     }
 
     /**
@@ -181,7 +212,7 @@ class ClientResource extends BaseApiResource
      */
     public function setConcurrentSessions($value)
     {
-        return $this->setResource('sessions.concurrent', $value);
+        return $this->setResource(static::SESSIONS_CONCURRENT, $value);
     }
 
     /**
@@ -189,7 +220,7 @@ class ClientResource extends BaseApiResource
      */
     public function getConcurrentSessions()
     {
-        return $this->getResource('Concurrent Sessions');
+        return $this->getResource(static::SESSIONS_CONCURRENT);
     }
 
     /**
@@ -198,7 +229,7 @@ class ClientResource extends BaseApiResource
      */
     public function setPrivateLinks($value)
     {
-        return $this->setResource('published.private.links', $value);
+        return $this->setResource(static::PRIVATE_LINKS, $value);
     }
 
     /**
@@ -206,7 +237,7 @@ class ClientResource extends BaseApiResource
      */
     public function getPrivateLinks()
     {
-        return $this->getResource('Private Links');
+        return $this->getResource(static::PRIVATE_LINKS);
     }
 
     /**
@@ -215,7 +246,7 @@ class ClientResource extends BaseApiResource
      */
     public function setPrivateLinkViewers($value)
     {
-        return $this->setResource('published.private.concurrent', $value);
+        return $this->setResource(static::PRIVATE_LINKS_VIEWERS, $value);
     }
 
     /**
@@ -223,6 +254,6 @@ class ClientResource extends BaseApiResource
      */
     public function getPrivateLinkViewers()
     {
-        return $this->getResource('Private Link Viewers');
+        return $this->getResource(static::PRIVATE_LINKS_VIEWERS);
     }
 }

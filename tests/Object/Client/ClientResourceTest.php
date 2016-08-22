@@ -16,7 +16,7 @@ use ExpandOnline\KlipfolioApi\Object\Klip\KlipSchema;
  */
 class ClientResourceTest extends BaseApiResourceTest
 {
-    
+
     /**
      * @param array $params
      * @return ClientResourceConnector
@@ -38,7 +38,8 @@ class ClientResourceTest extends BaseApiResourceTest
     /**
      * @return array
      */
-    protected function getTestData() {
+    protected function getTestData()
+    {
         return [
             'id' => 'test.id',
             'properties' => [
@@ -48,11 +49,13 @@ class ClientResourceTest extends BaseApiResourceTest
         ];
     }
 
-    public function testValidCreate() {
+    public function testValidCreate()
+    {
         $this->assertFalse($this->getConnectorToTest()->canCreate());
     }
 
-    public function testValidUpdate() {
+    public function testValidUpdate()
+    {
         $this->setMock([], [
             'status' => 200,
             'success' => true
@@ -71,7 +74,22 @@ class ClientResourceTest extends BaseApiResourceTest
         $this->assertInstanceOf(Response::class, $response);
     }
 
-    public function testValidDelete() {
+    public function testValidDelete()
+    {
         $this->assertFalse($this->getConnectorToTest()->canDelete());
+    }
+
+    public function testResourceMap()
+    {
+        $resource = new ClientResource([
+            'resources' => [
+                [
+                    'name' => 'Dashboards',
+                    'value' => -1
+                ]
+            ]
+        ]);
+
+        $this->assertSame(-1, $resource->getTotalDashboards());
     }
 }
