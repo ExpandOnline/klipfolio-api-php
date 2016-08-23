@@ -4,6 +4,10 @@ use ExpandOnline\KlipfolioApi\Connector\BaseApiConnector;
 use ExpandOnline\KlipfolioApi\Object\BaseApiObject;
 use ExpandOnline\KlipfolioApi\Tests\KlipfolioApiTestCase;
 
+/**
+ * Class BaseApiObjectTest
+ * @package ExpandOnline\KlipfolioApi\Tests\Object
+ */
 abstract class BaseApiObjectTest extends KlipfolioApiTestCase
 {
     /** @return BaseApiObject */
