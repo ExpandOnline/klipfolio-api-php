@@ -11,12 +11,46 @@ class TabKlipInstance extends BaseApiResource
 
     const FIELD_KLIP_ID = 'klip_id';
     const FIELD_NAME = 'name';
+    const FIELD_POSITION = 'position';
+    const FIELD_REGION = 'region';
+
+    /**
+     * @return mixed
+     */
+    public function getPosition() {
+        return $this->data[static::FIELD_POSITION];
+    }
+
+    /**
+     * @param $position
+     * @return $this
+     */
+    public function setPosition($position) {
+        $this->{static::FIELD_POSITION} = $position;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRegion() {
+        return $this->data[static::FIELD_REGION];
+    }
+
+    /**
+     * @param $region
+     * @return $this
+     */
+    public function setRegion($region) {
+        $this->{static::FIELD_REGION} = $region;
+        return $this;
+    }
 
     /**
      * @return mixed
      */
     public function getKlipId() {
-        return $this->data[self::FIELD_KLIP_ID];
+        return $this->data[static::FIELD_KLIP_ID];
     }
 
     /**
@@ -24,7 +58,7 @@ class TabKlipInstance extends BaseApiResource
      * @return $this
      */
     public function setKlipId($klipId) {
-        $this->{self::FIELD_KLIP_ID} = $klipId;
+        $this->{static::FIELD_KLIP_ID} = $klipId;
         
         return $this;
     }
@@ -33,7 +67,7 @@ class TabKlipInstance extends BaseApiResource
      * @return mixed
      */
     public function getName() {
-        return $this->data[self::FIELD_NAME];
+        return $this->data[static::FIELD_NAME];
     }
 
     /**
@@ -41,7 +75,7 @@ class TabKlipInstance extends BaseApiResource
      * @return $this
      */
     public function setName($name) {
-        $this->{self::FIELD_NAME} = $name;
+        $this->{static::FIELD_NAME} = $name;
 
         return $this;
     }
