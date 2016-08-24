@@ -24,4 +24,5 @@ class DatasourceConnector extends Enum
     const CONNECTOR_SALESFORCE = 'salesforce';
     const CONNECTOR_SIMPLE_REST = 'simple_rest';
     const CONNECTOR_XMLA = 'xmla';
+    const CONNECTOR_GOOGLE_ADWORDS = 'google_adwords';
 }
