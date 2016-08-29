@@ -10,6 +10,7 @@ use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
  */
 class ClientResource extends BaseApiResource
 {
+    const API_REQUESTS_PER_DAY = 'api.requests.perDay';
     const API_REQUESTS_PER_SECOND = 'api.requests.perSecond';
     const API_APPEND_DATA_SIZE = 'api.append.data.size';
     const DASHBOARD_KLIPS_PER_TAB = 'dashboard.klips.perTab';
@@ -22,7 +23,8 @@ class ClientResource extends BaseApiResource
     const PRIVATE_LINKS_VIEWERS = 'published.private.concurrent';
 
     protected $map = [
-        self::API_REQUESTS_PER_SECOND  => 'API Calls per Second',
+        self::API_REQUESTS_PER_DAY => 'API Calls per Day',
+        self::API_REQUESTS_PER_SECOND => 'API Calls per Second',
         self::API_APPEND_DATA_SIZE => 'API Append Data Size (in KB)',
         self::DASHBOARD_KLIPS_PER_TAB => 'Klips per Dashboard',
         self::DASHBOARD_TABS_PER_DASHBOARD => 'Maximum viewable Dashboards',
@@ -33,6 +35,28 @@ class ClientResource extends BaseApiResource
         self::PRIVATE_LINKS => 'Private Links',
         self::PRIVATE_LINKS_VIEWERS => 'Private Link Viewers'
     ];
+
+
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        $data = parent::getData();
+        for ($i = 0; $i < count($data['resources']); $i++) {
+            if ($data['resources'][$i]['name'] === 'INVALID') {
+                unset($data['resources'][$i]);
+            }
+            // KLIPFOLIO BUG, REMOVE WHEN FIXED.
+            // When value is falsey, API error.
+            elseif ($data['resources'][$i]['value'] == false) {
+                unset($data['resources'][$i]);
+            }
+        }
+
+        $data['resources'] = array_values($data['resources']);
+        return $data;
+    }
 
     /**
      * BaseApiResource constructor.
@@ -46,8 +70,8 @@ class ClientResource extends BaseApiResource
         }
 
         // Fix ridiculous klipfolio GET/PUT difference
-        foreach ($this->data['resources'] as &$resource) {
-            if(in_array($resource['name'], $this->map)) {
+        foreach ($this->data['resources'] as $index => &$resource) {
+            if (in_array($resource['name'], $this->map)) {
                 $resource['name'] = array_search($resource['name'], $this->map);
             }
         }
@@ -93,7 +117,7 @@ class ClientResource extends BaseApiResource
      */
     public function setApiCallsPerSecond($value)
     {
-        return $this->setResource(static::API_REQUESTS_PER_SECOND , $value);
+        return $this->setResource(static::API_REQUESTS_PER_SECOND, $value);
     }
 
     /**
@@ -101,7 +125,7 @@ class ClientResource extends BaseApiResource
      */
     public function getApiCallsPerSecond()
     {
-        return $this->getResource(static::API_REQUESTS_PER_SECOND );
+        return $this->getResource(static::API_REQUESTS_PER_SECOND);
     }
 
     /**

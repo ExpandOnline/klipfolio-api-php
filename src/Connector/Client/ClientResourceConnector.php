@@ -58,4 +58,12 @@ class ClientResourceConnector extends BaseApiResourceConnector
     {
         return ClientResource::class;
     }
+
+    /**
+     * @return mixed
+     */
+    public function resourceExists()
+    {
+        return !empty($this->getId());
+    }
 }
