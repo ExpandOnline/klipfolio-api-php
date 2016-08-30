@@ -60,7 +60,7 @@ class Client
     {
         $url = $this->getUrl() . $path;
 
-        $options['body'] = array_key_exists('body', $options) ? \GuzzleHttp\Psr7\stream_for(json_encode($options['body'])) : null;
+        $options['body'] = array_key_exists('body', $options) ? \GuzzleHttp\Psr7\stream_for(json_encode($options['body'], JSON_UNESCAPED_SLASHES)) : null;
         $options['headers'] = $this->headers;
 
         $guzzleResponse = $this->client->request($method, $url, $options);
