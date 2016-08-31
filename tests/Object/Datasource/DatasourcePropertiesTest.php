@@ -3,24 +3,26 @@
 use ExpandOnline\KlipfolioApi\Connector\Datasource\DatasourcePropertiesConnector;
 use ExpandOnline\KlipfolioApi\Exception\KlipfolioApiException;
 use ExpandOnline\KlipfolioApi\Object\Datasource\DatasourceProperties;
+use ExpandOnline\KlipfolioApi\Object\Datasource\DatasourcePropertiesParameters;
 use ExpandOnline\KlipfolioApi\Response;
+use ExpandOnline\KlipfolioApi\Tests\Object\BaseApiObjectTest;
 use ExpandOnline\KlipfolioApi\Tests\Object\BaseApiResourceTest;
 
 /**
  * Class DatasourcePropertiesTest
  * @package ExpandOnline\KlipfolioApi\Tests\Object\Datasource
  */
-class DatasourcePropertiesTest extends BaseApiResourceTest
+class DatasourcePropertiesTest extends BaseApiObjectTest
 {
 
     /**
      * @var array
      */
     protected $testData = [
-        'id' => 1,
-        'properties' => [
-            'my property' => 123,
-            'second property' => 321
+        'my property' => 123,
+        'second property' => 321,
+        'parameters' => [
+            ['name' => 'test', 'value' => 'oioioi', 'type' => 'header']
         ]
     ];
 
@@ -61,9 +63,7 @@ class DatasourcePropertiesTest extends BaseApiResourceTest
         $this->setMock([], $metaData);
 
         $response = $this->getKlipfolio()->save($this->getConnectorToTest([
-            'resource' => (new DatasourceProperties([
-                'id' => 1
-            ]))->setProperties($this->testData['properties'])
+            'resource' => (new DatasourceProperties())->setProperties($this->testData)
         ])->setId('23348f02a135a64b4ebcbecd66301118'));
         $this->assertInstanceOf(Response::class, $response);
         $this->assertEquals(200, $response->getStatusCode());
@@ -80,7 +80,7 @@ class DatasourcePropertiesTest extends BaseApiResourceTest
         $this->setMock([], $metaData);
 
         $response = $this->getKlipfolio()->save($this->getConnectorToTest([
-            'resource' => (new DatasourceProperties())->setProperties($this->testData['properties'])
+            'resource' => (new DatasourceProperties())->setProperties($this->testData)
         ])->setId('23348f02a135a64b4ebcbecd66301118'));
         $this->assertInstanceOf(Response::class, $response);
         $this->assertEquals(200, $response->getStatusCode());
@@ -108,12 +108,19 @@ class DatasourcePropertiesTest extends BaseApiResourceTest
      */
     public function testValidGet()
     {
-        $this->setMock($this->getTestData());
+        $this->setMock(['properties' => $this->getTestData()]);
 
         /** @var DataSourceProperties $response */
         $response = $this->getKlipfolio()->get($this->getConnectorToTest()->setId('23348f02a135a64b4ebcbecd66301118'));
         $this->assertInstanceOf(DatasourceProperties::class, $response);
-        $this->assertEquals(count($this->testData['properties']), count($response->getProperties()));
+
+        $this->assertEquals(count($this->testData), count($response->getProperties()));
+    }
+
+    public function testIfParametersIsObjectAtConstruct()
+    {
+        $props = new DatasourceProperties($this->testData);
+        $this->assertInstanceOf(DatasourcePropertiesParameters::class, $props->getParameters());
     }
 
 }

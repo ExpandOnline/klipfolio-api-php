@@ -6,6 +6,7 @@ namespace ExpandOnline\KlipfolioApi\Tests\Object\Datasource;
 use ExpandOnline\KlipfolioApi\Connector\Datasource\DatasourceConnector;
 use ExpandOnline\KlipfolioApi\Object\BaseApiObject;
 use ExpandOnline\KlipfolioApi\Object\Datasource\Datasource;
+use ExpandOnline\KlipfolioApi\Object\Datasource\DatasourceProperties;
 use ExpandOnline\KlipfolioApi\Tests\Object\BaseApiResourceTest;
 
 /**
@@ -84,5 +85,20 @@ class DatasourceTest extends BaseApiResourceTest
 
         $response = $this->getKlipfolio()->delete($this->getConnectorToTest()->setId('test.id'));
         $this->assertEquals(200, $response->getStatusCode());
+    }
+
+
+    public function testIfDatasourcePropertiesIsObjectAtConstruct()
+    {
+        $datasource = new Datasource($this->testData);
+
+        $this->assertInstanceOf(DatasourceProperties::class, $datasource->getProperties());
+    }
+
+    public function testIfSetPropertiesWithStringCreatesObject()
+    {
+        $datasource = new Datasource();
+        $datasource->setProperties($this->testData['properties']);
+        $this->assertInstanceOf(DatasourceProperties::class, $datasource->getProperties());
     }
 }

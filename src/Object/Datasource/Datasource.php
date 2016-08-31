@@ -22,9 +22,25 @@ use ExpandOnline\KlipfolioApi\Object\Datasource\Enum\DatasourceInterval;
 class Datasource extends BaseApiResource
 {
 
+    const FIELD_PROPERTIES = 'properties';
+
     protected $readOnlyFieldNames = [
         'id', 'company', 'date_created', 'date_last_refresh', 'last_updated', 'created_by', 'share_rights', 'is_locked', 'is_dynamic', 'disabled',
     ];
+
+
+    /**
+     * Extends base constructor so we can set $this->properties to an instance of DatasourceProperties
+     * @param array $data
+     */
+    public function __construct($data = [])
+    {
+        parent::__construct($data);
+
+        if (!empty($this->data[static::FIELD_PROPERTIES])) {
+            $this->data[static::FIELD_PROPERTIES] = new DatasourceProperties($this->data[static::FIELD_PROPERTIES]);
+        }
+    }
 
     /**
      * @return mixed
@@ -129,7 +145,7 @@ class Datasource extends BaseApiResource
     }
 
     /**
-     * @return mixed
+     * @return DatasourceProperties
      */
     public function getProperties()
     {
@@ -146,8 +162,10 @@ class Datasource extends BaseApiResource
         if ($this->exists()) {
             throw new KlipfolioApiException("Unable to set properties on resource that already exists");
         }
+        $properties instanceof DatasourceProperties ?
+            $this->properties = $properties
+            : $this->properties = new DatasourceProperties($properties);
 
-        $this->properties = $properties;
         return $this;
     }
 
@@ -156,7 +174,8 @@ class Datasource extends BaseApiResource
      * @return Datasource
      * @throws KlipfolioApiException
      */
-    public function addProperties($properties)
+    public
+    function addProperties($properties)
     {
         return $this->setProperties(array_merge($this->getProperties(), $properties));
     }
@@ -164,7 +183,8 @@ class Datasource extends BaseApiResource
     /**
      * @return mixed
      */
-    public function getClientId()
+    public
+    function getClientId()
     {
         return $this->client_id;
     }
@@ -174,7 +194,8 @@ class Datasource extends BaseApiResource
      * @return $this
      * @throws KlipfolioApiException
      */
-    public function setClientId($clientId)
+    public
+    function setClientId($clientId)
     {
         if ($this->exists()) {
             throw new KlipfolioApiException("Unable to set client_id on resource that already exists");
@@ -187,14 +208,16 @@ class Datasource extends BaseApiResource
     /**
      * @return array
      */
-    public function getData()
+    public
+    function getData()
     {
         $data = parent::getData();
 
-        if (array_key_exists('properties', $data) &&
-            array_key_exists('parameters', $data['properties']) &&
-            is_array($data['properties']['parameters'])) {
-            $data['properties']['parameters'] = json_encode($data['properties']['parameters']);
+        if (array_key_exists(static::FIELD_PROPERTIES, $data) &&
+            array_key_exists('parameters', $data[static::FIELD_PROPERTIES]) &&
+            is_array($data[static::FIELD_PROPERTIES]['parameters'])
+        ) {
+            $data[static::FIELD_PROPERTIES]['parameters'] = json_encode($data[static::FIELD_PROPERTIES]['parameters']);
         }
 
         return $data;
