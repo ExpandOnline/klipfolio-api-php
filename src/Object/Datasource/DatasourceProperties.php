@@ -20,8 +20,11 @@ class DatasourceProperties extends BaseApiResource
     {
         parent::__construct($data);
 
-        if (!empty($this->data[static::FIELD_PARAMETERS])) {
+        if (!empty($this->data[static::FIELD_PARAMETERS]) && !$this->data[static::FIELD_PARAMETERS] instanceof DatasourcePropertiesParameters) {
             $this->data[static::FIELD_PARAMETERS] = new DatasourcePropertiesParameters($this->data[static::FIELD_PARAMETERS]);
+        }
+        elseif(empty($this->data[static::FIELD_PARAMETERS])) {
+            $this->data[static::FIELD_PARAMETERS] = new DatasourcePropertiesParameters();
         }
     }
 
@@ -30,6 +33,7 @@ class DatasourceProperties extends BaseApiResource
      */
     public function getProperties()
     {
+        // todo : rename
         return array_diff_key($this->data, array_flip(['id']));
     }
 
@@ -40,6 +44,7 @@ class DatasourceProperties extends BaseApiResource
     public function setProperties($properties)
     {
         foreach($properties as $propertyName => $propertyValue) {
+
             $this->{$propertyName} = $propertyValue;
         }
 
@@ -60,6 +65,9 @@ class DatasourceProperties extends BaseApiResource
         return $this;
     }
 
+    /**
+     * @return DatasourcePropertiesParameters
+     */
     public function getParameters()
     {
         return $this->parameters;

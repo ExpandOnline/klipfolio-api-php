@@ -27,6 +27,11 @@ class DatasourcePropertiesParameters extends BaseObject
     public function __construct($data = [])
     {
         parent::__construct();
+
+        if(!is_array($data)) {
+            $data = json_decode($data, true);
+        }
+
         $this->setData($data);
     }
 

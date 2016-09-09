@@ -36,6 +36,10 @@ class ClientResource extends BaseApiResource
         self::PRIVATE_LINKS_VIEWERS => 'Private Link Viewers'
     ];
 
+    public function getMutableData()
+    {
+        return $this->getData();
+    }
 
     /**
      * @return array
@@ -49,7 +53,7 @@ class ClientResource extends BaseApiResource
             }
             // KLIPFOLIO BUG, REMOVE WHEN FIXED.
             // When value is falsey, API error.
-            elseif ($data['resources'][$i]['value'] == false) {
+            elseif ($data['resources'][$i]['value'] == false || $data['resources'][$i]['value'] === 0) {
                 unset($data['resources'][$i]);
             }
         }

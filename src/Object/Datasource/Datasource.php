@@ -15,7 +15,7 @@ use ExpandOnline\KlipfolioApi\Object\Datasource\Enum\DatasourceInterval;
  * @property string $format
  * @property string $connector
  * @property string $refresh_interval
- * @property array $properties
+ * @property DatasourceProperties $properties
  * @property string $client_id
  *
  */
@@ -39,6 +39,9 @@ class Datasource extends BaseApiResource
 
         if (!empty($this->data[static::FIELD_PROPERTIES])) {
             $this->data[static::FIELD_PROPERTIES] = new DatasourceProperties($this->data[static::FIELD_PROPERTIES]);
+        }
+        else {
+            $this->data[static::FIELD_PROPERTIES] = new DatasourceProperties();
         }
     }
 
@@ -174,17 +177,20 @@ class Datasource extends BaseApiResource
      * @return Datasource
      * @throws KlipfolioApiException
      */
-    public
-    function addProperties($properties)
+    public function addProperties($properties)
     {
-        return $this->setProperties(array_merge($this->getProperties(), $properties));
+        //  todo: Remove this method & Fix in david
+        if ($this->properties instanceof DatasourceProperties) {
+            foreach ($properties as $key => $value) {
+                $this->properties->setProperty($key, $value);
+            }
+        }
     }
 
     /**
      * @return mixed
      */
-    public
-    function getClientId()
+    public function getClientId()
     {
         return $this->client_id;
     }
@@ -194,8 +200,7 @@ class Datasource extends BaseApiResource
      * @return $this
      * @throws KlipfolioApiException
      */
-    public
-    function setClientId($clientId)
+    public function setClientId($clientId)
     {
         if ($this->exists()) {
             throw new KlipfolioApiException("Unable to set client_id on resource that already exists");
@@ -205,21 +210,26 @@ class Datasource extends BaseApiResource
     }
 
 
+    public function getMutableData()
+    {
+        $data = parent::getMutableData();
+        $data[static::FIELD_PROPERTIES]['parameters'] = $this->getEncodedParameters();
+        return $data;
+    }
+
+    protected function getEncodedParameters()
+    {
+        $parameters = $this->getProperties()->getParameters()->getData();
+        return json_encode($parameters);
+    }
+
     /**
      * @return array
      */
-    public
-    function getData()
+    public function getData()
     {
         $data = parent::getData();
-
-        if (array_key_exists(static::FIELD_PROPERTIES, $data) &&
-            array_key_exists('parameters', $data[static::FIELD_PROPERTIES]) &&
-            is_array($data[static::FIELD_PROPERTIES]['parameters'])
-        ) {
-            $data[static::FIELD_PROPERTIES]['parameters'] = json_encode($data[static::FIELD_PROPERTIES]['parameters']);
-        }
-
+        $data[static::FIELD_PROPERTIES]['parameters'] = $this->getEncodedParameters();
         return $data;
     }
 
