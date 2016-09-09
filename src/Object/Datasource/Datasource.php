@@ -233,4 +233,11 @@ class Datasource extends BaseApiResource
         return $data;
     }
 
+    public function setData(array $data)
+    {
+        parent::setData($data);
+        if(!is_object($this->getProperties())) {
+            $this->setProperties($this->getProperties());
+        }
+    }
 }

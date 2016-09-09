@@ -21,12 +21,7 @@ abstract class BaseApiResourceTest extends BaseApiObjectTest
             /** @var BaseApiResource $object */
             $object = $this->getObjectToTest();
 
-            foreach ($this->getTestData() as $key => $value) {
-                if (!in_array($key, $object->getReadOnlyFieldNames())) {
-                    $object->{$key} = $value;
-                };
-            }
-
+            $object->setData(array_diff_key($this->getTestData(), array_flip($object->getReadOnlyFieldNames())));
 
             $connector->setResource($object);
             $response = $this->getKlipfolio()->save($connector);
