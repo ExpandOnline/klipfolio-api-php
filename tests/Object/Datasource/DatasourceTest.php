@@ -94,11 +94,4 @@ class DatasourceTest extends BaseApiResourceTest
 
         $this->assertInstanceOf(DatasourceProperties::class, $datasource->getProperties());
     }
-
-    public function testIfSetPropertiesWithStringCreatesObject()
-    {
-        $datasource = new Datasource();
-        $datasource->setProperties($this->testData['properties']);
-        $this->assertInstanceOf(DatasourceProperties::class, $datasource->getProperties());
-    }
 }

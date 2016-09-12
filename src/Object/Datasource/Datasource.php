@@ -28,7 +28,6 @@ class Datasource extends BaseApiResource
         'id', 'company', 'date_created', 'date_last_refresh', 'last_updated', 'created_by', 'share_rights', 'is_locked', 'is_dynamic', 'disabled',
     ];
 
-
     /**
      * Extends base constructor so we can set $this->properties to an instance of DatasourceProperties
      * @param array $data
@@ -36,13 +35,25 @@ class Datasource extends BaseApiResource
     public function __construct($data = [])
     {
         parent::__construct($data);
+        $this->transformProperties();
+    }
 
-        if (!empty($this->data[static::FIELD_PROPERTIES])) {
-            $this->data[static::FIELD_PROPERTIES] = new DatasourceProperties($this->data[static::FIELD_PROPERTIES]);
-        }
-        else {
-            $this->data[static::FIELD_PROPERTIES] = new DatasourceProperties();
-        }
+    /**
+     * Transforms properties from array to DatasourceProperties object
+     */
+    protected function transformProperties()
+    {
+        $properties = empty($this->data[static::FIELD_PROPERTIES]) ? [] : $this->data[static::FIELD_PROPERTIES];
+        $this->data[static::FIELD_PROPERTIES] = $this->createDatasourceProperties($properties);
+    }
+
+    /**
+     * @param $properties
+     * @return DatasourceProperties
+     */
+    protected function createDatasourceProperties($properties)
+    {
+        return new DatasourceProperties($properties);
     }
 
     /**
@@ -160,31 +171,14 @@ class Datasource extends BaseApiResource
      * @return $this
      * @throws KlipfolioApiException
      */
-    public function setProperties($properties)
+    public function setProperties(DatasourceProperties $properties)
     {
         if ($this->exists()) {
             throw new KlipfolioApiException("Unable to set properties on resource that already exists");
         }
-        $properties instanceof DatasourceProperties ?
-            $this->properties = $properties
-            : $this->properties = new DatasourceProperties($properties);
+        $this->properties = $properties;
 
         return $this;
-    }
-
-    /**
-     * @param $properties
-     * @return Datasource
-     * @throws KlipfolioApiException
-     */
-    public function addProperties($properties)
-    {
-        //  todo: Remove this method & Fix in david
-        if ($this->properties instanceof DatasourceProperties) {
-            foreach ($properties as $key => $value) {
-                $this->properties->setProperty($key, $value);
-            }
-        }
     }
 
     /**
@@ -210,17 +204,12 @@ class Datasource extends BaseApiResource
     }
 
 
-    public function getMutableData()
+    public function setData(array $data)
     {
-        $data = parent::getMutableData();
-        $data[static::FIELD_PROPERTIES]['parameters'] = $this->getEncodedParameters();
-        return $data;
-    }
-
-    protected function getEncodedParameters()
-    {
-        $parameters = $this->getProperties()->getParameters()->getData();
-        return json_encode($parameters);
+        parent::setData($data);
+        if (!is_object($this->getProperties())) {
+            $this->transformProperties();
+        }
     }
 
     /**
@@ -228,16 +217,14 @@ class Datasource extends BaseApiResource
      */
     public function getData()
     {
-        $data = parent::getData();
-        $data[static::FIELD_PROPERTIES]['parameters'] = $this->getEncodedParameters();
-        return $data;
+        return (new DatasourceHttpTransformer($this))->getTransformed(parent::getData());
     }
 
-    public function setData(array $data)
+    /**
+     * @return mixed
+     */
+    public function getMutableData()
     {
-        parent::setData($data);
-        if(!is_object($this->getProperties())) {
-            $this->setProperties($this->getProperties());
-        }
+        return (new DatasourceHttpTransformer($this))->getTransformed(parent::getMutableData());
     }
 }

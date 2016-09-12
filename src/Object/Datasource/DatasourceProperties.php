@@ -1,5 +1,6 @@
 <?php namespace ExpandOnline\KlipfolioApi\Object\Datasource;
 
+use ExpandOnline\KlipfolioApi\Exception\KlipfolioApiException;
 use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
 
 /**

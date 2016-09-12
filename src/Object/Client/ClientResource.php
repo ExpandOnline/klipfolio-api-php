@@ -1,7 +1,6 @@
 <?php namespace ExpandOnline\KlipfolioApi\Object\Client;
 
 use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
-use Object\Client\ClientResourceHttpTransformer;
 
 /**
  * Class ClientResource
@@ -41,7 +40,7 @@ class ClientResource extends BaseApiResource
             $this->resources = [];
         }
 
-        $this->data = $this->clientResourceFixer->transformGetToPut($data);
+        $this->data = $this->clientResourceFixer->transformGetToPut($this->data);
     }
 
     /**

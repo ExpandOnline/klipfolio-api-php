@@ -1,10 +1,7 @@
 <?php
 
 
-namespace Object\Client;
-
-
-use ExpandOnline\KlipfolioApi\Object\Client\ClientResource;
+namespace ExpandOnline\KlipfolioApi\Object\Client;
 
 class ClientResourceHttpTransformer
 {
