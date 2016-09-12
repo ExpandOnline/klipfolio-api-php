@@ -59,10 +59,19 @@ class DatasourceProperties extends BaseApiResource
         return $this->{$name};
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return $this
+     */
     public function setProperty($name, $value)
     {
-        $this->{$name} = $value;
+        if($name === 'parameters') {
+            $this->getParameters()->addParameters($value);
+            return $this;
+        }
 
+        $this->{$name} = $value;
         return $this;
     }
 
@@ -74,6 +83,9 @@ class DatasourceProperties extends BaseApiResource
         return $this->parameters;
     }
 
+    /**
+     * @param DatasourcePropertiesParameters $parameters
+     */
     public function setParameters(DatasourcePropertiesParameters $parameters)
     {
         $this->parameters = $parameters;

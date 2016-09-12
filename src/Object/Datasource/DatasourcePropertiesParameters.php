@@ -35,11 +35,16 @@ class DatasourcePropertiesParameters extends BaseObject
         $this->setData($data);
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return $this
+     */
     public function setHeader($name, $value)
     {
         foreach ($this->data as &$item) {
             if ($this->isHeaderArray($item) && $item[static::KEY_NAME] === $name) {
-                $item[static::KEY_NAME] = $value;
+                $item[static::KEY_VALUE] = $value;
                 return $this;
             }
         }
@@ -48,6 +53,11 @@ class DatasourcePropertiesParameters extends BaseObject
         return $this;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return array
+     */
     protected function createNewHeader($name, $value)
     {
         return [
@@ -57,6 +67,10 @@ class DatasourcePropertiesParameters extends BaseObject
         ];
     }
 
+    /**
+     * @param $name
+     * @return mixed
+     */
     public function getHeader($name)
     {
         foreach ($this->data as $item) {
@@ -68,9 +82,27 @@ class DatasourcePropertiesParameters extends BaseObject
         return null;
     }
 
+    /**
+     * @param array $array
+     * @return bool
+     */
     protected function isHeaderArray(array $array)
     {
         return array_key_exists(static::KEY_TYPE, $array)
         && $array[static::KEY_TYPE] === static::TYPE_HEADER;
+    }
+
+    /**
+     * @param $parameters
+     */
+    public function addParameters($parameters)
+    {
+        if(is_array($parameters)) {
+            foreach($parameters as $parameter) {
+                if($this->isHeaderArray($parameter)) {
+                    $this->setHeader($parameter[static::KEY_NAME], $parameter[static::KEY_VALUE]);
+                }
+            }
+        }
     }
 }

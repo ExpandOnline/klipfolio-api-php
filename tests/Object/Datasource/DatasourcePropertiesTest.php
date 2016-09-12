@@ -123,4 +123,18 @@ class DatasourcePropertiesTest extends BaseApiObjectTest
         $this->assertInstanceOf(DatasourcePropertiesParameters::class, $props->getParameters());
     }
 
+    public function testIfAddPropertySetsParameters() {
+        $props = new DatasourceProperties($this->testData);
+        $props->setProperty('parameters', [
+            [
+                DatasourcePropertiesParameters::KEY_NAME => 'test2',
+                DatasourcePropertiesParameters::KEY_VALUE => 'test_value',
+                DatasourcePropertiesParameters::KEY_TYPE => DatasourcePropertiesParameters::TYPE_HEADER
+            ]
+        ]);
+
+        $this->assertSame('test_value', $props->getParameters()->getHeader('test2'));
+        $this->assertSame('oioioi', $props->getParameters()->getHeader('test'));
+    }
+
 }
