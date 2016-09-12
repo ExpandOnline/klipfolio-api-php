@@ -1,6 +1,5 @@
 <?php namespace ExpandOnline\KlipfolioApi\Object\Datasource;
 
-use ExpandOnline\KlipfolioApi\Exception\KlipfolioApiException;
 use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
 
 /**
@@ -23,8 +22,7 @@ class DatasourceProperties extends BaseApiResource
 
         if (!empty($this->data[static::FIELD_PARAMETERS]) && !$this->data[static::FIELD_PARAMETERS] instanceof DatasourcePropertiesParameters) {
             $this->data[static::FIELD_PARAMETERS] = new DatasourcePropertiesParameters($this->data[static::FIELD_PARAMETERS]);
-        }
-        elseif(empty($this->data[static::FIELD_PARAMETERS])) {
+        } elseif (empty($this->data[static::FIELD_PARAMETERS])) {
             $this->data[static::FIELD_PARAMETERS] = new DatasourcePropertiesParameters();
         }
     }
@@ -44,13 +42,13 @@ class DatasourceProperties extends BaseApiResource
      */
     public function setProperties($properties)
     {
-        foreach($properties as $propertyName => $propertyValue) {
-
-            $this->{$propertyName} = $propertyValue;
+        foreach ($properties as $propertyName => $propertyValue) {
+            $this->setProperty($propertyName, $propertyValue);
         }
 
         return $this;
     }
+
     /**
      * @return mixed
      */
@@ -66,7 +64,7 @@ class DatasourceProperties extends BaseApiResource
      */
     public function setProperty($name, $value)
     {
-        if($name === 'parameters') {
+        if ($name === 'parameters') {
             $this->getParameters()->addParameters($value);
             return $this;
         }

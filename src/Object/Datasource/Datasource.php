@@ -44,18 +44,9 @@ class Datasource extends BaseApiResource
     protected function transformProperties()
     {
         $properties = empty($this->data[static::FIELD_PROPERTIES]) ? [] : $this->data[static::FIELD_PROPERTIES];
-        $this->data[static::FIELD_PROPERTIES] = $this->createDatasourceProperties($properties);
+        $this->data[static::FIELD_PROPERTIES] = new DatasourceProperties($properties);
     }
-
-    /**
-     * @param $properties
-     * @return DatasourceProperties
-     */
-    protected function createDatasourceProperties($properties)
-    {
-        return new DatasourceProperties($properties);
-    }
-
+    
     /**
      * @return mixed
      */

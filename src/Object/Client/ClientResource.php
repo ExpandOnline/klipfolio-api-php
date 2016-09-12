@@ -36,7 +36,7 @@ class ClientResource extends BaseApiResource
         parent::__construct($data);
         $this->clientResourceFixer = new ClientResourceHttpTransformer();
 
-        if (!array_key_exists(static::FIELD_RESOURCES, $data)) {
+        if (!array_key_exists(static::FIELD_RESOURCES, $this->data)) {
             $this->resources = [];
         }
 

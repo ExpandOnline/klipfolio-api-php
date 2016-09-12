@@ -5,32 +5,31 @@ namespace ExpandOnline\KlipfolioApi\Object\Datasource;
 
 class DatasourceHttpTransformer
 {
-
-    protected $ds;
-
-    /**
-     * DatasourceHttpTransformer constructor.
-     * @param Datasource $ds
-     */
-    public function __construct(Datasource $ds) {
-        $this->ds = $ds;
-    }
-
     /**
      * @param $data
      * @return mixed
      */
-    public function getTransformed($data) {
-        $data[Datasource::FIELD_PROPERTIES]['parameters'] = $this->getEncodedParameters();
+    public function getTransformed($data)
+    {
+        if ($this->parametersExists($data)) {
+            $data[Datasource::FIELD_PROPERTIES]['parameters'] = $this->getEncodedParameters($data[Datasource::FIELD_PROPERTIES]['parameters']);
+        }
         return $data;
     }
 
     /**
      * @return string
      */
-    protected function getEncodedParameters()
+    protected function getEncodedParameters($parameters)
     {
-        $parameters = $this->ds->getProperties()->getParameters()->getData();
         return json_encode($parameters);
+    }
+
+    protected function parametersExists($data)
+    {
+        return array_key_exists(Datasource::FIELD_PROPERTIES, $data) &&
+        is_array($data[Datasource::FIELD_PROPERTIES]) &&
+        array_key_exists('parameters', $data[Datasource::FIELD_PROPERTIES]) &&
+        is_array($data[Datasource::FIELD_PROPERTIES]['parameters']);
     }
 }

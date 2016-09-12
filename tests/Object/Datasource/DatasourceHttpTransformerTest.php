@@ -3,8 +3,6 @@
 namespace ExpandOnline\KlipfolioApi\Tests\Object\Datasource;
 
 
-use ExpandOnline\KlipfolioApi\Object\Client\ClientResource;
-use ExpandOnline\KlipfolioApi\Object\Client\ClientResourceHttpTransformer;
 use ExpandOnline\KlipfolioApi\Object\Datasource\Datasource;
 use ExpandOnline\KlipfolioApi\Object\Datasource\DatasourceHttpTransformer;
 
@@ -25,7 +23,7 @@ class DatasourceHttpTransformerTest extends \PHPUnit_Framework_TestCase
             ]
         ];
 
-        $transformer = new DatasourceHttpTransformer(new Datasource($testData['input']));
+        $transformer = new DatasourceHttpTransformer();
         $result = $transformer->getTransformed($testData['input']);
         $this->assertSame($testData['expected'], $result);
     }
