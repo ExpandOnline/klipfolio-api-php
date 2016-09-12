@@ -1,7 +1,9 @@
 <?php namespace ExpandOnline\KlipfolioApi\Connector\Datasource;
 
 use ExpandOnline\KlipfolioApi\Connector\BaseApiResourceConnector;
+use ExpandOnline\KlipfolioApi\Object\BaseApiObject;
 use ExpandOnline\KlipfolioApi\Object\Datasource\DatasourceProperties;
+use ExpandOnline\KlipfolioApi\Response;
 
 /**
  * Class DatasourcePropertiesConnector
@@ -9,6 +11,17 @@ use ExpandOnline\KlipfolioApi\Object\Datasource\DatasourceProperties;
  */
 class DatasourcePropertiesConnector extends BaseApiResourceConnector
 {
+    /**
+     * @param Response $response
+     * @return BaseApiObject
+     */
+    public function resolveResponse(Response $response)
+    {
+        $content = $response->getContent()['properties'];
+        $objectName = $this->getObjectName();
+
+        return new $objectName($content);
+    }
 
     /**
      * @return mixed

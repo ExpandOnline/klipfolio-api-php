@@ -10,6 +10,8 @@ use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
  */
 class ClientResource extends BaseApiResource
 {
+    const FIELD_RESOURCES = 'resources';
+
     const API_REQUESTS_PER_DAY = 'api.requests.perDay';
     const API_REQUESTS_PER_SECOND = 'api.requests.perSecond';
     const API_APPEND_DATA_SIZE = 'api.append.data.size';
@@ -22,41 +24,8 @@ class ClientResource extends BaseApiResource
     const PRIVATE_LINKS = 'published.private.links';
     const PRIVATE_LINKS_VIEWERS = 'published.private.concurrent';
 
-    protected $map = [
-        self::API_REQUESTS_PER_DAY => 'API Calls per Day',
-        self::API_REQUESTS_PER_SECOND => 'API Calls per Second',
-        self::API_APPEND_DATA_SIZE => 'API Append Data Size (in KB)',
-        self::DASHBOARD_KLIPS_PER_TAB => 'Klips per Dashboard',
-        self::DASHBOARD_TABS_PER_DASHBOARD => 'Maximum viewable Dashboards',
-        self::DASHBOARD_TABS_TOTAL => 'Dashboards',
-        self::DATASOURCES_PER_FORMULA => 'Data Sources per Formula',
-        self::USERS => 'Users',
-        self::SESSIONS_CONCURRENT => 'Concurrent Sessions',
-        self::PRIVATE_LINKS => 'Private Links',
-        self::PRIVATE_LINKS_VIEWERS => 'Private Link Viewers'
-    ];
+    protected $clientResourceFixer;
 
-
-    /**
-     * @return array
-     */
-    public function getData()
-    {
-        $data = parent::getData();
-        for ($i = 0; $i < count($data['resources']); $i++) {
-            if ($data['resources'][$i]['name'] === 'INVALID') {
-                unset($data['resources'][$i]);
-            }
-            // KLIPFOLIO BUG, REMOVE WHEN FIXED.
-            // When value is falsey, API error.
-            elseif ($data['resources'][$i]['value'] == false) {
-                unset($data['resources'][$i]);
-            }
-        }
-
-        $data['resources'] = array_values($data['resources']);
-        return $data;
-    }
 
     /**
      * BaseApiResource constructor.
@@ -65,16 +34,32 @@ class ClientResource extends BaseApiResource
     public function __construct(array $data = [])
     {
         parent::__construct($data);
-        if (!array_key_exists('resources', $data)) {
+        $this->clientResourceFixer = new ClientResourceHttpTransformer();
+
+        if (!array_key_exists(static::FIELD_RESOURCES, $this->data)) {
             $this->resources = [];
         }
 
-        // Fix ridiculous klipfolio GET/PUT difference
-        foreach ($this->data['resources'] as $index => &$resource) {
-            if (in_array($resource['name'], $this->map)) {
-                $resource['name'] = array_search($resource['name'], $this->map);
-            }
-        }
+        $this->data = $this->clientResourceFixer->transformGetToPut($this->data);
+    }
+
+    /**
+     * Override to return getData since everything is mutable
+     * @return array
+     */
+    public function getMutableData()
+    {
+        return $this->getData();
+    }
+
+    /**
+     * Override to fix Klipfolio bug
+     * @return array
+     */
+    public function getData()
+    {
+        $data = parent::getData();
+        return $this->clientResourceFixer->withoutFalseyValues($data);
     }
 
     /**
@@ -84,13 +69,13 @@ class ClientResource extends BaseApiResource
      */
     public function setResource($name, $value)
     {
-        foreach ($this->data['resources'] as &$resource) {
+        foreach ($this->data[static::FIELD_RESOURCES] as &$resource) {
             if ($resource['name'] === $name) {
                 $resource['value'] = $value;
                 return $this;
             }
         }
-        $this->data['resources'][] = ['name' => $name, 'value' => $value];
+        $this->data[static::FIELD_RESOURCES][] = ['name' => $name, 'value' => $value];
         return $this;
     }
 
@@ -108,7 +93,7 @@ class ClientResource extends BaseApiResource
      */
     public function getResource($name)
     {
-        return $this->data['resources'][array_search($name, array_column($this->getResources(), 'name'))]['value'];
+        return $this->data[static::FIELD_RESOURCES][array_search($name, array_column($this->getResources(), 'name'))]['value'];
     }
 
     /**

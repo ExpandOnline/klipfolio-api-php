@@ -97,7 +97,17 @@ abstract class BaseApiResource extends BaseApiObject
      */
     public function getMutableData()
     {
-        return array_diff_key($this->getData(), array_flip($this->getReadOnlyFieldNames()));
+        $data = parent::getData();
+
+        foreach ($data as &$value) {
+            if ($value instanceof BaseApiResource) {
+                $value = $value->getMutableData();
+            } elseif ($value instanceof BaseObject) {
+                $value = $value->getData();
+            }
+        }
+
+        return array_diff_key($data, array_flip($this->getReadOnlyFieldNames()));
     }
 
     /**
@@ -116,8 +126,7 @@ abstract class BaseApiResource extends BaseApiObject
         $data = parent::getData();
 
         foreach ($data as &$value) {
-            if ($value instanceof BaseApiResource) {
-                /** @var BaseApiResource $value */
+            if ($value instanceof BaseObject) {
                 $value = $value->getData();
             }
         }

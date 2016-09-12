@@ -15,17 +15,38 @@ use ExpandOnline\KlipfolioApi\Object\Datasource\Enum\DatasourceInterval;
  * @property string $format
  * @property string $connector
  * @property string $refresh_interval
- * @property array $properties
+ * @property DatasourceProperties $properties
  * @property string $client_id
  *
  */
 class Datasource extends BaseApiResource
 {
 
+    const FIELD_PROPERTIES = 'properties';
+
     protected $readOnlyFieldNames = [
         'id', 'company', 'date_created', 'date_last_refresh', 'last_updated', 'created_by', 'share_rights', 'is_locked', 'is_dynamic', 'disabled',
     ];
 
+    /**
+     * Extends base constructor so we can set $this->properties to an instance of DatasourceProperties
+     * @param array $data
+     */
+    public function __construct($data = [])
+    {
+        parent::__construct($data);
+        $this->transformProperties();
+    }
+
+    /**
+     * Transforms properties from array to DatasourceProperties object
+     */
+    protected function transformProperties()
+    {
+        $properties = empty($this->data[static::FIELD_PROPERTIES]) ? [] : $this->data[static::FIELD_PROPERTIES];
+        $this->data[static::FIELD_PROPERTIES] = new DatasourceProperties($properties);
+    }
+    
     /**
      * @return mixed
      */
@@ -129,7 +150,7 @@ class Datasource extends BaseApiResource
     }
 
     /**
-     * @return mixed
+     * @return DatasourceProperties
      */
     public function getProperties()
     {
@@ -141,24 +162,14 @@ class Datasource extends BaseApiResource
      * @return $this
      * @throws KlipfolioApiException
      */
-    public function setProperties($properties)
+    public function setProperties(DatasourceProperties $properties)
     {
         if ($this->exists()) {
             throw new KlipfolioApiException("Unable to set properties on resource that already exists");
         }
-
         $this->properties = $properties;
-        return $this;
-    }
 
-    /**
-     * @param $properties
-     * @return Datasource
-     * @throws KlipfolioApiException
-     */
-    public function addProperties($properties)
-    {
-        return $this->setProperties(array_merge($this->getProperties(), $properties));
+        return $this;
     }
 
     /**
@@ -184,20 +195,27 @@ class Datasource extends BaseApiResource
     }
 
 
+    public function setData(array $data)
+    {
+        parent::setData($data);
+        if (!is_object($this->getProperties())) {
+            $this->transformProperties();
+        }
+    }
+
     /**
      * @return array
      */
     public function getData()
     {
-        $data = parent::getData();
-
-        if (array_key_exists('properties', $data) &&
-            array_key_exists('parameters', $data['properties']) &&
-            is_array($data['properties']['parameters'])) {
-            $data['properties']['parameters'] = json_encode($data['properties']['parameters']);
-        }
-
-        return $data;
+        return (new DatasourceHttpTransformer($this))->getTransformed(parent::getData());
     }
 
+    /**
+     * @return mixed
+     */
+    public function getMutableData()
+    {
+        return (new DatasourceHttpTransformer($this))->getTransformed(parent::getMutableData());
+    }
 }
