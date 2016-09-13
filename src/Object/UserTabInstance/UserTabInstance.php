@@ -37,7 +37,7 @@ class UserTabInstance extends BaseApiResource
         if (!array_key_exists(static::FIELD_TAB_IDS, $this)) {
             $this->{static::FIELD_TAB_IDS} = [];
         }
-        $this->{static::FIELD_TAB_IDS}[] = $tabId;
+        $this->data[static::FIELD_TAB_IDS][] = $tabId;
         return $this;
     }
 

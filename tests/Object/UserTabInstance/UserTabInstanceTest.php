@@ -59,10 +59,10 @@ class UserTabInstanceTest extends BaseApiResourceTest
     {
         $this->setMock($this->getTestData());
 
-        $this->setExpectedException(KlipfolioApiException::class);
+        $this->setExpectedException(\InvalidArgumentException::class);
         $this->getKlipfolio()->save($this->getConnectorToTest([
             'resource' => $this->getObjectToTest()->addTabId(1)
-        ])->setUserId('1'));
+        ]));
     }
 
     /**
