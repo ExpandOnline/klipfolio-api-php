@@ -34,4 +34,5 @@ class TabLayoutType extends Enum
     const TYPE_100_30_60_100 = '100_30_60_100';
     const TYPE_100_60_30_100 = '100_60_30_100';
     const TYPE_100_30_30_30_100 = '100_30_30_30_100';
+    const TYPE_GRID = 'grid';
 }
