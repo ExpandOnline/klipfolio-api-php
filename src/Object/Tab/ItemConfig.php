@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Object\Tab;
+namespace ExpandOnline\KlipfolioApi\Object\Tab;
 
 
 use ExpandOnline\KlipfolioApi\Object\BaseObject;

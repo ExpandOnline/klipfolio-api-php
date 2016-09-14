@@ -1,16 +1,12 @@
 <?php namespace ExpandOnline\KlipfolioApi\Tests\Object\Tab;
 
-use ExpandOnline\KlipfolioApi\Connector\Client\ClientPropertyConnector;
 use ExpandOnline\KlipfolioApi\Connector\Klip\KlipSchemaConnector;
 use ExpandOnline\KlipfolioApi\Connector\Tab\TabLayoutConnector;
-use ExpandOnline\KlipfolioApi\Exception\KlipfolioApiException;
-use ExpandOnline\KlipfolioApi\Object\Client\ClientProperty;
 use ExpandOnline\KlipfolioApi\Object\Tab\Enum\TabLayoutType;
+use ExpandOnline\KlipfolioApi\Object\Tab\ItemConfig;
 use ExpandOnline\KlipfolioApi\Object\Tab\TabLayout;
 use ExpandOnline\KlipfolioApi\Response;
 use ExpandOnline\KlipfolioApi\Tests\Object\BaseApiResourceTest;
-use ExpandOnline\KlipfolioApi\Object\Klip\KlipSchema;
-
 /**
  * Class TabLayoutTest
  * @package ExpandOnline\KlipfolioApi\Tests\Object\Klip
@@ -42,7 +38,18 @@ class TabLayoutTest extends BaseApiResourceTest
         return [
             'id' => 'test.id',
             'type' => TabLayoutType::TYPE_100,
-            'state' => []
+            'state' => [
+                TabLayout::FIELD_DESKTOP => [
+                    TabLayout::FIELD_ITEMCONFIGS => [
+                        [
+                            'id' => 'test_itemconfig.id',
+                            'minHeight' => '300',
+                            'index' => [0, 0],
+                            'colSpan' => 2
+                        ]
+                    ]
+                ]
+            ]
         ];
     }
 
@@ -70,4 +77,11 @@ class TabLayoutTest extends BaseApiResourceTest
     public function testValidDelete() {
         $this->assertFalse($this->getConnectorToTest()->canDelete());
     }
+
+    public function testIfItemConfigIsObjectAtConstruct()
+    {
+        $tabLayout = new TabLayout($this->getTestData());
+        $this->assertInstanceOf(ItemConfig::class, $tabLayout->getState()[TabLayout::FIELD_DESKTOP][TabLayout::FIELD_ITEMCONFIGS][0]);
+    }
+
 }

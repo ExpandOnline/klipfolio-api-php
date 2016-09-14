@@ -2,7 +2,6 @@
 
 use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
 use ExpandOnline\KlipfolioApi\Object\Tab\Enum\TabLayoutType;
-use Object\Tab\ItemConfig;
 
 /**
  * Class TabLayout
@@ -29,6 +28,9 @@ class TabLayout extends BaseApiResource
         $this->transformItemConfigs();
     }
 
+    /**
+     *
+     */
     public function transformItemConfigs() {
         if (array_key_exists('state', $this->data) && $this->hasItemConfigs($this->data['state'])) {
             foreach ($this->data['state'][static::FIELD_DESKTOP][static::FIELD_ITEMCONFIGS] as &$itemConfig) {
