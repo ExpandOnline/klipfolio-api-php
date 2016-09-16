@@ -1,5 +1,6 @@
 <?php namespace ExpandOnline\KlipfolioApi\Object\User;
 
+use AppBundle\Lib\Klipfolio\Exception\ResourceAlreadyExistsException;
 use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
 
 /**
@@ -17,6 +18,8 @@ use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
  * @property-read array $roles
  * @property-read array $tab_instances
  * @property      string $external_id
+ * @property      string $password
+ * @property      array $roles
  */
 class User extends BaseApiResource
 {
@@ -26,6 +29,42 @@ class User extends BaseApiResource
     protected $readOnlyFieldNames = [
         'id', 'company', 'date_created', 'date_last_login', 'groups', 'is_locked_out', 'properties', 'tab_instances'
     ];
+
+    /**
+     * @param $password
+     * @throws ResourceAlreadyExistsException
+     */
+    public function setPassword($password)
+    {
+        if($this->exists()) {
+            throw new ResourceAlreadyExistsException();
+        }
+        $this->password = $password;
+    }
+
+    /**
+     * @param $roles
+     * @throws ResourceAlreadyExistsException
+     */
+    public function setRoles($roles)
+    {
+        if($this->exists()) {
+            throw new ResourceAlreadyExistsException();
+        }
+        $this->roles = $roles;
+    }
+
+    /**
+     * @param $clientId
+     * @throws ResourceAlreadyExistsException
+     */
+    public function setClient($clientId)
+    {
+        if($this->exists()) {
+            throw new ResourceAlreadyExistsException();
+        }
+        $this->client_id = $clientId;
+    }
 
     /**
      * @param $firstName
