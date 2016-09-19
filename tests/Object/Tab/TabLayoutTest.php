@@ -7,13 +7,14 @@ use ExpandOnline\KlipfolioApi\Object\Tab\ItemConfig;
 use ExpandOnline\KlipfolioApi\Object\Tab\TabLayout;
 use ExpandOnline\KlipfolioApi\Response;
 use ExpandOnline\KlipfolioApi\Tests\Object\BaseApiResourceTest;
+
 /**
  * Class TabLayoutTest
  * @package ExpandOnline\KlipfolioApi\Tests\Object\Klip
  */
 class TabLayoutTest extends BaseApiResourceTest
 {
-    
+
     /**
      * @param array $params
      * @return KlipSchemaConnector
@@ -34,7 +35,8 @@ class TabLayoutTest extends BaseApiResourceTest
     /**
      * @return array
      */
-    protected function getTestData() {
+    protected function getTestData()
+    {
         return [
             'id' => 'test.id',
             'type' => TabLayoutType::TYPE_100,
@@ -53,11 +55,13 @@ class TabLayoutTest extends BaseApiResourceTest
         ];
     }
 
-    public function testValidCreate() {
+    public function testValidCreate()
+    {
         $this->assertFalse($this->getConnectorToTest()->canCreate());
     }
 
-    public function testValidUpdate() {
+    public function testValidUpdate()
+    {
         $this->setMock([], [
             'status' => 200,
             'success' => true
@@ -74,7 +78,8 @@ class TabLayoutTest extends BaseApiResourceTest
         $this->assertInstanceOf(Response::class, $response);
     }
 
-    public function testValidDelete() {
+    public function testValidDelete()
+    {
         $this->assertFalse($this->getConnectorToTest()->canDelete());
     }
 
@@ -84,4 +89,12 @@ class TabLayoutTest extends BaseApiResourceTest
         $this->assertInstanceOf(ItemConfig::class, $tabLayout->getState()[TabLayout::FIELD_DESKTOP][TabLayout::FIELD_ITEMCONFIGS][0]);
     }
 
+    public function testIfItemConfigIsArrayOnGetData()
+    {
+        $tabLayout = new TabLayout($this->getTestData());
+        $this->assertInternalType(
+            'array',
+            $tabLayout->getData()['state'][TabLayout::FIELD_DESKTOP][TabLayout::FIELD_ITEMCONFIGS][0]
+        );
+    }
 }

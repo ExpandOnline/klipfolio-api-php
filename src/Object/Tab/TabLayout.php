@@ -28,10 +28,32 @@ class TabLayout extends BaseApiResource
         $this->transformItemConfigs();
     }
 
+    public function getData()
+    {
+        $data = parent::getData();
+        if ($this->hasItemConfigs($data['state'])) {
+            foreach ($data['state'][static::FIELD_DESKTOP][static::FIELD_ITEMCONFIGS] as &$itemConfig) {
+                /** @var ItemConfig $itemConfig */
+                $itemConfig = $itemConfig->getData();
+            }
+        }
+        return $data;
+    }
+
+    /**
+     * No ID in this resource -> Always return true.
+     * @return bool
+     */
+    public function exists()
+    {
+        return true;
+    }
+
     /**
      *
      */
-    public function transformItemConfigs() {
+    public function transformItemConfigs()
+    {
         if (array_key_exists('state', $this->data) && $this->hasItemConfigs($this->data['state'])) {
             foreach ($this->data['state'][static::FIELD_DESKTOP][static::FIELD_ITEMCONFIGS] as &$itemConfig) {
                 $itemConfig = new ItemConfig($itemConfig);
@@ -68,7 +90,7 @@ class TabLayout extends BaseApiResource
      */
     public function getState()
     {
-        return $this->state;
+        return array_key_exists('state', $this->data) ? $this->state : null;
     }
 
     /**
@@ -91,6 +113,17 @@ class TabLayout extends BaseApiResource
         return $this;
     }
 
+    /**
+     * @return ItemConfig[]
+     */
+    public function getItemConfigs()
+    {
+        if (!$this->hasItemConfigs($this->getState())) {
+            return null;
+        }
+        return $this->getState()[static::FIELD_DESKTOP][static::FIELD_ITEMCONFIGS];
+    }
+
     protected function initItemConfigs()
     {
         $this->setState([
@@ -103,15 +136,8 @@ class TabLayout extends BaseApiResource
 
     protected function hasItemConfigs($state)
     {
-        return array_key_exists(static::FIELD_DESKTOP, $state)
+        return !empty($state) && array_key_exists(static::FIELD_DESKTOP, $state)
         && array_key_exists(static::FIELD_ITEMCONFIGS, $state[static::FIELD_DESKTOP])
         && is_array($state[static::FIELD_DESKTOP][static::FIELD_ITEMCONFIGS]);
-    }
-
-    public function getData()
-    {
-        $data = parent::getData();
-        $data['id'] = 'gridklip-' . $data['id'];
-        return $data;
     }
 }
