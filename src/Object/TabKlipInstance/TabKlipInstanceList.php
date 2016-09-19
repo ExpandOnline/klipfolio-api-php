@@ -24,4 +24,11 @@ class TabKlipInstanceList extends BaseApiCollection
             $this->data[] = $klipInstance;
         }
     }
+
+    /**
+     * @return TabKlipInstance[]
+     */
+    public function getTabKlipInstances() {
+        return $this->data;
+    }
 }

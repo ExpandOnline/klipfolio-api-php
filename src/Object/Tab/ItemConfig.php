@@ -17,13 +17,41 @@ class ItemConfig extends BaseObject
     public function __construct($data = ['index' => [0, 0]])
     {
         parent::__construct();
-        $this->data = $data;
+        $this->setData($data);
     }
 
 
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        $data = $this->data;
+        $data['id'] = 'gridklip-' . $data['id'];
+        return $data;
+    }
+
+    public function setData(array $data)
+    {
+        if (array_key_exists('id', $data)) {
+            $data['id'] = substr($data['id'], 9);
+        }
+        return parent::setData($data);
+    }
+
+    /**
+     * @param $id
+     * @return $this
+     */
     public function setKlipInstanceId($id)
     {
         $this->id = $id;
+        return $this;
+    }
+
+    public function getKlipInstanceId()
+    {
+        return $this->id;
     }
 
     /**
