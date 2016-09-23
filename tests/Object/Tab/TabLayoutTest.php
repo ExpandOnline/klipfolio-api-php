@@ -92,9 +92,21 @@ class TabLayoutTest extends BaseApiResourceTest
     public function testIfItemConfigIsArrayOnGetData()
     {
         $tabLayout = new TabLayout($this->getTestData());
+        var_dump($tabLayout->getData()['state'][TabLayout::FIELD_DESKTOP][TabLayout::FIELD_ITEMCONFIGS]);
         $this->assertInternalType(
             'array',
             $tabLayout->getData()['state'][TabLayout::FIELD_DESKTOP][TabLayout::FIELD_ITEMCONFIGS][0]
         );
     }
+
+    public function testIfItemConfigCanBeAdded()
+    {
+        $tabLayout = new TabLayout();
+        $tabLayout->addItemConfig((new ItemConfig())->setColumnSpan(1)->setKlipInstanceId(1));
+        $this->assertInternalType(
+            'array',
+            $tabLayout->getData()['state'][TabLayout::FIELD_DESKTOP][TabLayout::FIELD_ITEMCONFIGS][0]
+        );
+    }
+
 }
