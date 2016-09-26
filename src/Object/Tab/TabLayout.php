@@ -28,10 +28,21 @@ class TabLayout extends BaseApiResource
         $this->transformItemConfigs();
     }
 
+    /**
+     * @return mixed
+     */
+    public function getMutableData()
+    {
+        return $this->getData();
+    }
+
+    /**
+     * @return array
+     */
     public function getData()
     {
         $data = parent::getData();
-        if ($this->hasItemConfigs($data['state'])) {
+        if (array_key_exists('state', $data) && $this->hasItemConfigs($data['state'])) {
             foreach ($data['state'][static::FIELD_DESKTOP][static::FIELD_ITEMCONFIGS] as &$itemConfig) {
                 /** @var ItemConfig $itemConfig */
                 $itemConfig = $itemConfig->getData();
@@ -111,6 +122,18 @@ class TabLayout extends BaseApiResource
         $state[static::FIELD_DESKTOP][static::FIELD_ITEMCONFIGS][] = $itemConfig;
         $this->setState($state);
         return $this;
+    }
+
+    public function setColumns($columns)
+    {
+        if (array_key_exists('state', $this->data)) {
+            $state = $this->getState();
+            $desktop = array_key_exists(static::FIELD_DESKTOP, $state) ? $state[static::FIELD_DESKTOP] : [];
+            $desktop['cols'] = $columns;
+            $desktop['colWidths'] = array_fill(0, $columns, 'auto');
+            $state[static::FIELD_DESKTOP] = $desktop;
+            $this->setState($state);
+        }
     }
 
     /**
