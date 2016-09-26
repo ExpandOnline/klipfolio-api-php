@@ -2,7 +2,6 @@
 
 use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
 use ExpandOnline\KlipfolioApi\Object\Tab\Enum\TabLayoutType;
-use SendGrid\Exception;
 
 /**
  * Class TabLayout
