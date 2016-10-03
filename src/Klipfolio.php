@@ -92,8 +92,8 @@ class Klipfolio
      */
     protected function isValidUpdate(BaseApiResourceConnector $connector)
     {
-        if (empty($connector->getDataForUpdate())) {
-            throw new KlipfolioApiException('Object in ' . get_class($connector) . ' has no changed fields to update');
+        if (!$connector->isValidUpdate()) {
+            throw new KlipfolioApiException('Object in ' . get_class($connector) . ' is not a valid object to be updated.');
         }
 
         return true;
