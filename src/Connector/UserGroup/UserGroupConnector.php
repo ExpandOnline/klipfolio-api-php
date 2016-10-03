@@ -1,6 +1,7 @@
 <?php
 namespace ExpandOnline\KlipfolioApi\Connector\UserGroup;
 use ExpandOnline\KlipfolioApi\Connector\BaseApiResourceConnector;
+use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
 use ExpandOnline\KlipfolioApi\Object\UserGroup\UserGroup;
 
 /**
@@ -28,11 +29,18 @@ class UserGroupConnector extends BaseApiResourceConnector
             . (!is_null($this->getGroupId()) ? '/' . $this->getGroupId() : '');
     }
 
-    public function setResource(UserGroup $resource) {
+    public function setResource(BaseApiResource $resource) {
         $this->resource = $resource;
         $this->id = $resource->getUserId();
         $this->groupId = $resource->getGroupId();
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isValidUpdate() {
+        return !is_null($this->getId()) && !is_null($this->getGroupId());
     }
 
     /**

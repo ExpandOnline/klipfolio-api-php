@@ -104,6 +104,13 @@ abstract class BaseApiResourceConnector extends BaseApiConnector
     }
 
     /**
+     * @return bool
+     */
+    public function isValidUpdate() {
+        return !empty($this->getDataForUpdate());
+    }
+
+    /**
      * @return mixed
      */
     public function getDataForPost()
