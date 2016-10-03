@@ -24,8 +24,8 @@ class UserGroupConnector extends BaseApiResourceConnector
             throw new \InvalidArgumentException('UserGroup must always have a User ID.');
         }
 
-        return $this->formatEndpoint('users' . '/' . $this->getId() . '/' . 'groups'
-            . (!is_null($this->getId()) ? '/' . $this->getGroupId() : ''));
+        return 'users' . '/' . $this->getId() . '/' . 'groups'
+            . (!is_null($this->getGroupId()) ? '/' . $this->getGroupId() : '');
     }
 
     public function setResource(UserGroup $resource) {
