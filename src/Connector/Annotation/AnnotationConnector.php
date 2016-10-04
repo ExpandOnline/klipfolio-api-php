@@ -1,9 +1,8 @@
-<?php namespace ExpandOnline\KlipfolioApi\Connector\Client;
+<?php namespace ExpandOnline\KlipfolioApi\Connector\Annotation;
 
 use ExpandOnline\KlipfolioApi\Connector\BaseApiResourceConnector;
 use ExpandOnline\KlipfolioApi\Object\Annotation\Annotation;
 use ExpandOnline\KlipfolioApi\Object\BaseApiObject;
-
 
 class AnnotationConnector extends BaseApiResourceConnector {
 
