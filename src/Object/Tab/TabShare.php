@@ -7,11 +7,11 @@ use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
  * @package ExpandOnline\KlipfolioApi\Object\Tab
  *
  * @property bool $can_edit
- * @property string $tabId
  * @property array $groups
  */
 class TabShare extends BaseApiResource
 {
+    private $tabId;
     /**
      * @return boolean
      */

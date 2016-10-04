@@ -29,6 +29,13 @@ class TabShareConnector extends BaseApiResourceConnector
     }
 
     /**
+     * @return bool
+     */
+    public function isValidUpdate() {
+        return !empty($this->resource->getShares());
+    }
+
+    /**
      * @return BaseApiObject
      */
     protected function getObjectName() {
@@ -84,5 +91,14 @@ class TabShareConnector extends BaseApiResourceConnector
     {
         //There is no POST endpoint for TabShareRights, only PUT, so we always want to return true
         return true;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDataForUpdate()
+    {
+        return ['groups' => $this->resource->getShares()];
+
     }
 }
