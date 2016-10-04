@@ -11,6 +11,7 @@ use ExpandOnline\KlipfolioApi\Object\BaseObject;
  * @property int minHeight
  * @property array index
  * @property int colSpan
+ * @property int height
  */
 class ItemConfig extends BaseObject
 {
@@ -59,7 +60,7 @@ class ItemConfig extends BaseObject
      */
     public function getHeight()
     {
-        return $this->minHeight;
+        return $this->height;
     }
 
     /**
@@ -68,7 +69,8 @@ class ItemConfig extends BaseObject
      */
     public function setHeight($height)
     {
-        $this->minHeight = $height;
+        $this->height = $height;
+        $this->minHeight = $height - 1;
         return $this;
     }
 
