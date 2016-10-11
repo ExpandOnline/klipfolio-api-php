@@ -29,6 +29,7 @@ class Klip extends BaseApiResource
     public function __construct(array $data = [])
     {
         parent::__construct($data);
+        $this->setDataWithoutTracking($data);
 
         if (isset($this->schema)) {
             $this->schema = new KlipSchema($this->schema);
@@ -68,7 +69,7 @@ class Klip extends BaseApiResource
      */
     public function getDescription()
     {
-        return $this->description;
+        return !empty($this->description) ? $this->description : '';
     }
 
     /**
