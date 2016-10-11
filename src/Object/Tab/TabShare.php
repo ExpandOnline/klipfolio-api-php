@@ -11,6 +11,11 @@ use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
  */
 class TabShare extends BaseApiResource
 {
+
+    const VISIBILITY_PERMANENT = 'permanent';
+    const VISIBILITY_DASHBOARD = 'dashboard';
+    const VISIBILITY_LIBRARY = 'library';
+
     private $tabId;
     /**
      * @return boolean
@@ -31,11 +36,13 @@ class TabShare extends BaseApiResource
     /**
      * @param $groupId
      * @param $canEdit
+     * @param string $visibility
      */
-    public function addShare($groupId, $canEdit) {
+    public function addShare($groupId, $canEdit, $visibility) {
         $this->data['groups'][] = [
             'group_id' => $groupId,
-            'can_edit' => $canEdit
+            'can_edit' => $canEdit,
+            'visibility' => $visibility
         ];
     }
 
