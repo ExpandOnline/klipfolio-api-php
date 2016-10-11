@@ -22,7 +22,7 @@ class KlipShareConnector extends BaseApiResourceConnector
      */
     public function getEndpoint($option = '')
     {
-        return 'Klips' . '/' . $this->getId() . '/' . 'share-rights'
+        return 'klips' . '/' . $this->getId() . '/' . 'share-rights'
         . (!is_null($this->getGroupId()) ? '/' . $this->getGroupId() : '');
     }
 
