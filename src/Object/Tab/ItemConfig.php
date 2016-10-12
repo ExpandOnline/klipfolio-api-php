@@ -60,7 +60,10 @@ class ItemConfig extends BaseObject
      */
     public function getHeight()
     {
-        return $this->height;
+        if(array_key_exists('height', $this->data)) {
+            return $this->height;
+        }
+        return $this->minHeight;
     }
 
     /**
