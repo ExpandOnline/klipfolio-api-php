@@ -29,7 +29,11 @@ class Klip extends BaseApiResource
     public function __construct(array $data = [])
     {
         parent::__construct($data);
-        $this->setDataWithoutTracking($data);
+
+        if(array_key_exists('id', $data)) {
+            unset($data['id']);
+            $this->setDataWithoutTracking($data);
+        }
 
         if (isset($this->schema)) {
             $this->schema = new KlipSchema($this->schema);

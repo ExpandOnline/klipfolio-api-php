@@ -78,7 +78,9 @@ abstract class BaseApiResource extends BaseApiObject
      */
     public function setDataWithoutTracking($data)
     {
-        $this->data = $data;
+        foreach($data as $key => $value ){
+            $this->data[$key] = $value;
+        }
     }
 
     /**
