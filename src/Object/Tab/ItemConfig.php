@@ -17,6 +17,10 @@ class ItemConfig extends BaseObject
 {
     public function __construct($data = ['index' => [0, 0]])
     {
+        if (!array_key_exists('index', $data)) {
+            $data['index'] = [0, 0];
+        }
+
         parent::__construct();
         $this->setData($data);
     }
@@ -60,7 +64,7 @@ class ItemConfig extends BaseObject
      */
     public function getHeight()
     {
-        if(array_key_exists('height', $this->data)) {
+        if (array_key_exists('height', $this->data)) {
             return $this->height;
         }
         return $this->minHeight;
