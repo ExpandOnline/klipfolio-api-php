@@ -48,6 +48,13 @@ class TabKlipInstanceConnector extends BaseApiResourceConnector
     /**
      * @return array
      */
+    public function getKlips() {
+        return $this->klips;
+    }
+
+    /**
+     * @return array
+     */
     public function getDataForUpdate()
     {
         $klipData = ['klips' => []];
