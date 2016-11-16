@@ -1,25 +1,27 @@
 <?php
 
 
-namespace SSO;
+namespace ExpandOnline\KlipfolioApi\SSO;
 
 
+/**
+ * Class SingleSignOn
+ * @package ExpandOnline\KlipfolioApi\SSO
+ */
 class SingleSignOn
 {
     protected $company;
     protected $key;
-    protected $userData;
 
     const GET_URL_APP = 'https://app.klipfolio.com/users/sso_auth?sso=%s&company=%s&redirect=true';
     const GET_URL_SB = 'https://sandbox.klipfolio.com/users/sso_auth?sso=%s&company=%s&redirect=true';
 
-    public function __construct($company, $key, $userData) {
+    public function __construct($company, $key) {
         $this->company = $company;
         $this->key = $key;
-        $this->userData = $userData;
     }
 
-    public function generateToken()
+    public function generateToken($userData)
     {
         $salted = $this->key . $this->company;
         $hash = hash('sha1', $salted, true);
@@ -27,7 +29,7 @@ class SingleSignOn
 
         $iv = substr(md5(microtime()), rand(0, 16), 16); //Generate random 16 bit string
 
-        $data = json_encode($this->userData);
+        $data = json_encode($userData);
         $data = $iv . $data;
 
         $pad = 16 - (strlen($data) % 16);
@@ -39,6 +41,10 @@ class SingleSignOn
         mcrypt_generic_deinit($cipher);
 
         return base64_encode($encryptedData);
+    }
+
+    public function getCompany(){
+        return $this->company;
     }
 
     public function getGetUrl($env = 'app') {
