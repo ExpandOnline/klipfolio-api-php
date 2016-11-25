@@ -1,5 +1,8 @@
 <?php namespace ExpandOnline\KlipfolioApi;
 
+use ExpandOnline\KlipfolioApi\Exception\KlipfolioApiException;
+use Symfony\Component\Config\Definition\Exception\Exception;
+
 /**
  * Class Response
  * @package ExpandOnline\KlipfolioApi
@@ -37,6 +40,10 @@ class Response
      */
     protected function mapResponse($array)
     {
+        if (empty($array)) {
+            throw new KlipfolioApiException('Empty response received from Klipfolio.');
+        }
+
         if (array_key_exists('data', $array)) {
             $this->data = $array["data"];
         }
