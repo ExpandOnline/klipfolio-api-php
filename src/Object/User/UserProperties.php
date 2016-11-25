@@ -8,14 +8,16 @@ use ExpandOnline\KlipfolioApi\Object\BaseApiResource;
  *
  * @property array properties
  */
-class UserProperties extends BaseApiResource {
+class UserProperties extends BaseApiResource
+{
 
 
     /**
      * @param array $properties
      * @return $this
      */
-    public function setProperties(array $properties) {
+    public function setProperties(array $properties)
+    {
         $this->properties = $properties;
         return $this;
     }
@@ -25,15 +27,20 @@ class UserProperties extends BaseApiResource {
      * @param string $value
      * @return $this
      */
-    public function addProperty($name, $value) {
-        $this->properties[$name] = $value;
+    public function addProperty($name, $value)
+    {
+        if (!array_key_exists('properties', $this->data)) {
+            $this->data['properties'] = [];
+        }
+        $this->data['properties'][$name] = $value;
         return $this;
     }
 
     /**
      * @return array
      */
-    public function getProperties() {
+    public function getProperties()
+    {
         return $this->properties;
     }
 }
