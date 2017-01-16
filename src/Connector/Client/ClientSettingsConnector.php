@@ -6,7 +6,7 @@ use ExpandOnline\KlipfolioApi\Object\Client\ClientResource;
 use ExpandOnline\KlipfolioApi\Object\Client\ClientSettings;
 
 /**
- * Class ClientResourceConnector
+ * Class ClientSettingsConnector
  * @package ExpandOnline\KlipfolioApi\Connector\Client
  *
  */

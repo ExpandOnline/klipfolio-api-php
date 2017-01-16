@@ -18,9 +18,13 @@ class ClientSettings extends BaseApiResource
     const FIRSTRUN_SHOW_EDITOR_TOUR = 'firstrun.editorTour.show';
     const LOCALE = 'dpn.env.date.language.tag';
 
+    private function setProperty($property, $value) {
+        $this->{$property} = $value;
+    }
+
     public function setBrandEnabled($enabled)
     {
-        $this->data[static::BRAND_ENABLED] = $enabled;
+        $this->setProperty(static::BRAND_ENABLED, $enabled);
     }
 
     public function isBrandEnabled()
@@ -30,7 +34,7 @@ class ClientSettings extends BaseApiResource
 
     public function setDatasourceBlacklist($blacklist)
     {
-        $this->data[static::DATASOURCE_BLACKLIST] = $blacklist;
+        $this->setProperty(static::DATASOURCE_BLACKLIST, $blacklist);
     }
 
     public function getDatasourceBlacklist($blacklist)
@@ -40,7 +44,7 @@ class ClientSettings extends BaseApiResource
 
     public function setShowTrialTour($enabled)
     {
-        $this->data[static::FIRSTRUN_SHOW_TRIAL_TOUR] = $enabled;
+        $this->setProperty(static::FIRSTRUN_SHOW_TRIAL_TOUR, $enabled);
     }
 
     public function getShowTrialTour()
@@ -50,7 +54,7 @@ class ClientSettings extends BaseApiResource
 
     public function setShowKlipTour($enabled)
     {
-        $this->data[static::FIRSTRUN_SHOW_KLIP_TOUR] = $enabled;
+        $this->setProperty(static::FIRSTRUN_SHOW_KLIP_TOUR, $enabled);
     }
 
     public function getShowKlipTour()
@@ -60,7 +64,7 @@ class ClientSettings extends BaseApiResource
 
     public function setShowEditorTour($enabled)
     {
-        $this->data[static::FIRSTRUN_SHOW_EDITOR_TOUR] = $enabled;
+        $this->setProperty(static::FIRSTRUN_SHOW_EDITOR_TOUR, $enabled);
     }
 
     public function getShowEditorTour()
@@ -70,7 +74,7 @@ class ClientSettings extends BaseApiResource
 
     public function setLocale($locale)
     {
-        $this->data[static::LOCALE] = $locale;
+        $this->setProperty(static::LOCALE, $locale);
     }
 
     public function getLocale()
