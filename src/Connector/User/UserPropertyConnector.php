@@ -57,12 +57,4 @@ class UserPropertyConnector extends BaseApiResourceConnector
     {
         return UserProperties::class;
     }
-
-    /**
-     * @return bool
-     */
-    public function resourceExists()
-    {
-        return !empty($this->getId()) || (!empty($this->getResource() && $this->getResource()->exists()));
-    }
 }
