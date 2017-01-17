@@ -33,6 +33,11 @@ class UserProperties extends BaseApiResource
             $this->data['properties'] = [];
         }
         $this->data['properties'][$name] = $value;
+
+        if (!in_array('properties', $this->dataChanged)) {
+            $this->dataChanged[] = 'properties';
+        }
+
         return $this;
     }
 
