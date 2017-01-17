@@ -42,14 +42,14 @@ class ClientSettingsConnector extends BaseApiResourceConnector
      * @return bool
      */
     public function canUpdate() {
-        return true;
+        return false;
     }
 
     /**
      * @return bool
      */
     public function canCreate() {
-        return false;
+        return true;
     }
 
     /**
@@ -65,6 +65,13 @@ class ClientSettingsConnector extends BaseApiResourceConnector
      */
     public function resourceExists()
     {
-        return !empty($this->getId());
+        // Always use POST
+        return false;
+    }
+
+
+    public function getDataForPost()
+    {
+        return parent::getDataForUpdate();
     }
 }

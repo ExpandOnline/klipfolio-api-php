@@ -30,4 +30,28 @@ class ClientSettingsConnectorTest extends \PHPUnit_Framework_TestCase
         $connector->setResource($resource);
         $connector->getEndpoint();
     }
+
+
+    public function testIfCanCreate()
+    {
+        $connector = new ClientSettingsConnector();
+        $this->assertTrue($connector->canCreate());
+    }
+
+    public function testIfCanUpdate()
+    {
+        $connector = new ClientSettingsConnector();
+        $this->assertFalse($connector->canUpdate());
+    }
+
+    public function testIfUpdateTransformsToPost()
+    {
+
+        $connector = new ClientSettingsConnector();
+        $settings = new ClientSettings(['id' => 'test']);
+        $settings->setBrandEnabled(true);
+        $connector->setResource($settings);
+
+        $this->assertSame([ClientSettings::BRAND_ENABLED => true], $connector->getDataForPost());
+    }
 }
