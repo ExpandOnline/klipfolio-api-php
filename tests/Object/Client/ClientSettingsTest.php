@@ -41,7 +41,8 @@ class ClientSettingsTest extends BaseApiResourceTest
 
     public function testValidCreate()
     {
-        $this->assertFalse($this->getConnectorToTest()->canCreate());
+
+        $this->assertTrue($this->getConnectorToTest()->canCreate());
     }
 
     public function testValidUpdate()
@@ -59,6 +60,7 @@ class ClientSettingsTest extends BaseApiResourceTest
 
         $this->assertEquals([ClientSettings::BRAND_ENABLED => true], $connector->getDataForUpdate());
         $this->assertInstanceOf(Response::class, $response);
+        $this->assertFalse($this->getConnectorToTest()->canUpdate());
     }
 
     public function testValidDelete()
