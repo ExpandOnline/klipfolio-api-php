@@ -9,6 +9,20 @@ use ExpandOnline\KlipfolioApi\Object\Datasource\Datasource;
  */
 class DatasourceConnector extends BaseApiResourceConnector
 {
+    /**
+     * @return mixed
+     */
+    public function getDataForPost()
+    {
+        $data = parent::getDataForPost();
+
+        // Klipfolio randomly adds a 'body' property to datasources created with the UI, but doesn't accept
+        // this property when creating a datasource with the API.
+        if (!empty($data['properties']) && array_key_exists('body', $data['properties'])) {
+            unset($data['properties']['body']);
+        }
+        return $data;
+    }
 
     /**
      * @var string
