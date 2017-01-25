@@ -98,5 +98,4 @@ class DatasourceProperties extends BaseApiResource
     {
         return true;
     }
-
 }
