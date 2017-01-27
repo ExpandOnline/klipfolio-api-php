@@ -18,7 +18,10 @@ class DatasourceConnector extends BaseApiResourceConnector
 
         // Klipfolio randomly adds a 'body' property to datasources created with the UI, but doesn't accept
         // this property when creating a datasource with the API.
-        if (!empty($data['properties']) && array_key_exists('body', $data['properties'])) {
+        if (!empty($data['properties'])
+            && array_key_exists('body', $data['properties'])
+            && empty($data['properties']['body'])
+        ) {
             unset($data['properties']['body']);
         }
         return $data;
