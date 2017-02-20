@@ -24,6 +24,13 @@ class DatasourceConnector extends BaseApiResourceConnector
         ) {
             unset($data['properties']['body']);
         }
+
+        // Klipfolio randomly adds a 'oauth_user_secret' property to datasources, but doesn't accept
+        // this property when creating a datasource with the API
+        if (array_key_exists('oauth_user_secret', $data) && empty($data['oauth_user_secret'])) {
+            unset($data['oauth_user_secret']);
+        }
+    
         return $data;
     }
 
