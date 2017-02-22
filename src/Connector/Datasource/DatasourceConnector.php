@@ -16,19 +16,14 @@ class DatasourceConnector extends BaseApiResourceConnector
     {
         $data = parent::getDataForPost();
 
-        // Klipfolio randomly adds a 'body' property to datasources created with the UI, but doesn't accept
-        // this property when creating a datasource with the API.
-        if (!empty($data['properties'])
-            && array_key_exists('body', $data['properties'])
-            && empty($data['properties']['body'])
-        ) {
-            unset($data['properties']['body']);
-        }
-
-        // Klipfolio randomly adds a 'oauth_user_secret' property to datasources, but doesn't accept
-        // this property when creating a datasource with the API
-        if (array_key_exists('oauth_user_secret', $data) && empty($data['oauth_user_secret'])) {
-            unset($data['oauth_user_secret']);
+        // Klipfolio sometimes adds empty values to the GET request, but doesn't accept them back.
+        // Unset all empty keys so we don't get errors.
+        if (!empty($data['properties'])) {
+            foreach ($data['properties'] as $key => $value) {
+                if (empty($value)) {
+                    unset($data['properties'][$key];
+                }
+            }
         }
     
         return $data;
