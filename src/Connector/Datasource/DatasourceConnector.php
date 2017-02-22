@@ -21,7 +21,7 @@ class DatasourceConnector extends BaseApiResourceConnector
         if (!empty($data['properties'])) {
             foreach ($data['properties'] as $key => $value) {
                 if (empty($value)) {
-                    unset($data['properties'][$key];
+                    unset($data['properties'][$key]);
                 }
             }
         }
