@@ -103,4 +103,12 @@ class Response
     {
         return $this->meta['error_desc'];
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return json_encode(['data' => $this->data, 'meta' => $this->meta]);
+    }
 }
