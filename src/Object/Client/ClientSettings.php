@@ -26,7 +26,9 @@ class ClientSettings extends BaseApiResource
     const FIRSTRUN_SHOW_KLIP_GALLERY_TOUR = 'firstrun.klipGalleryTour.show';
     const FIRSTRUN_INVITE_USERS_TOUR = 'firstrun.inviteUsersTour.show';
     const FIRSTRUN_EDITOR_FORMAT_FORMULA_TOUR = 'firstrun.editorFormatFormulaTour.show';
-    const FIRSTRUN_MOBILE_BANNER = 'firstrun.mobileBanner.show';
+
+
+    const FIRSTRUN_MOBILE_BANNER = 'firstrun.mobileBanner.show'; // never worked
 
     private function setProperty($property, $value)
     {
@@ -72,8 +74,7 @@ class ClientSettings extends BaseApiResource
                      static::FIRSTRUN_SHOW_CONNECT_DATA_TOUR,
                      static::FIRSTRUN_SHOW_KLIP_GALLERY_TOUR,
                      static::FIRSTRUN_INVITE_USERS_TOUR,
-                     static::FIRSTRUN_EDITOR_FORMAT_FORMULA_TOUR,
-                     static::FIRSTRUN_MOBILE_BANNER] as $field) {
+                     static::FIRSTRUN_EDITOR_FORMAT_FORMULA_TOUR] as $field) {
             $this->setProperty($field, $enabled);
         }
     }
