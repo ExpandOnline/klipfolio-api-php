@@ -22,5 +22,8 @@
     },
     "autoload-dev": {
         "psr-4": {"ExpandOnline\\KlipfolioApi\\Tests\\": "tests/"}
+    },
+    "suggest": {
+        "ext-mcrypt": "Required for Single Sign-On."
     }
 }
