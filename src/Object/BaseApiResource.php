@@ -84,7 +84,7 @@ abstract class BaseApiResource extends BaseApiObject
     }
 
     /**
-     * @return BaseApiResource
+     * @return $this
      */
     public function createFreshCopy()
     {

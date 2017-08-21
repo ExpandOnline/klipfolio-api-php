@@ -24,6 +24,7 @@ class KlipSchema extends BaseApiResource
         // ## Note: Klipfolio returns different data on GET than it wants for PUT,
         // ## so we fix it here.
         $data = $this->getFixedData($data);
+        $data = $this->removeMigrations($data);
 
         parent::__construct($data);
 
@@ -41,9 +42,22 @@ class KlipSchema extends BaseApiResource
 
     /**
      * @param $data
+     * @return mixed
      */
-    protected function getFixedData($data) {
-        if(array_key_exists('schema', $data)) {
+    protected function removeMigrations($data)
+    {
+        if (array_key_exists('appliedMigrations', $data)) {
+            unset($data['appliedMigrations']);
+        }
+        return $data;
+    }
+
+    /**
+     * @param $data
+     */
+    protected function getFixedData($data)
+    {
+        if (array_key_exists('schema', $data)) {
             return $data['schema'];
         }
         return $data;
