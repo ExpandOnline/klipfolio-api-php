@@ -35,10 +35,10 @@ class SingleSignOn
         $pad = 16 - (strlen($data) % 16);
         $data = $data . str_repeat(chr($pad), $pad);
 
-        $cipher = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', 'cbc', '');
-        mcrypt_generic_init($cipher, $saltedHash, $iv);
-        $encryptedData = mcrypt_generic($cipher, $data);
-        mcrypt_generic_deinit($cipher);
+        $cipher = @mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', 'cbc', '');
+        @mcrypt_generic_init($cipher, $saltedHash, $iv);
+        $encryptedData = @mcrypt_generic($cipher, $data);
+        @mcrypt_generic_deinit($cipher);
 
         return base64_encode($encryptedData);
     }
