@@ -27,12 +27,18 @@ class Response
      * Response constructor.
      * @param $statusCode
      * @param $body
+     * @throws KlipfolioApiException
      */
     public function __construct($statusCode, $body)
     {
         $this->statusCode = $statusCode;
 
-        $this->mapResponse(json_decode($body, true));
+        $responseArr = json_decode($body, true);
+        if (empty($responseArr)) {
+            throw new KlipfolioApiException('Invalid response received from Klipfolio: ' . $body);
+        };
+
+        $this->mapResponse($responseArr);
     }
 
     /**
@@ -40,10 +46,6 @@ class Response
      */
     protected function mapResponse($array)
     {
-        if (empty($array)) {
-            throw new KlipfolioApiException('Empty response received from Klipfolio.');
-        }
-
         if (array_key_exists('data', $array)) {
             $this->data = $array["data"];
         }
