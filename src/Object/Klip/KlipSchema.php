@@ -46,7 +46,7 @@ class KlipSchema extends BaseApiResource
      */
     protected function removeMigrations($data)
     {
-        if (array_key_exists('appliedMigrations', $data)) {
+        if (array_key_exists('appliedMigrations', $data) && empty($data['appliedMigrations'])) {
             unset($data['appliedMigrations']);
         }
         return $data;
