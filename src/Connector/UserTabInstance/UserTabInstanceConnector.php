@@ -31,8 +31,7 @@ class UserTabInstanceConnector extends BaseApiResourceConnector
             throw new \InvalidArgumentException('UserTabInstance must always have a User ID.');
         }
 
-        return $this->formatEndpoint('users' . '/' . $this->getUserId() . '/' . 'tab-instances'
-            . (!is_null($this->getId()) ? '/' . $this->getId() : ''));
+        return $this->formatEndpoint('users' . '/' . $this->getUserId() . '/' . 'tab-instances');
     }
 
     /**
